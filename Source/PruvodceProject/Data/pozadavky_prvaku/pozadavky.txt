@@ -1,0 +1,24 @@
+1.EP - DATA
+
+-Průměrná doba cesty z autobusáku/vlakáče na všechny budovy
+-Spoje MHD mezi budovami
+-Místo kebabů + menu?
+-Doba cesty na stadion
+-Předměty/učitelé - obtížnost a proč
+-Automaty na budovách
+-Nákres tříd/budov
+-Mapa kde jsou budovy
+-Vysvětlení jak se připojit na wifi
+
+1.IT - DATA
+
+-Info jídelna
+-Nástěnka na úkoly/testy
+-Mapa školy
+-Info a rozvrhy učeben
+-Seznam učitelů
+-Kde je nejlepší wifi
+-Kolik je lidí a učitelů na škole
+-Tahaký pro prváky
+-Rozpis látky na školní rok
+-Bazar učebnic
