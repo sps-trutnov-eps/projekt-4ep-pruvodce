@@ -18,7 +18,7 @@ namespace PruvodceProject.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Skolni()
         {
             return View();
         }

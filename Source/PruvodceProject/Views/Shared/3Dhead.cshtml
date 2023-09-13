@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title><%= titulek %></title>
+        <meta charset="UTF-8" />
+        <script src="/js/jquery.js"></script>
+        <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+        <script type="importmap">
+          {
+            "imports": {
+              "three": "https://unpkg.com/three@v0.149.0/build/three.module.js",
+              "three/addons/": "https://unpkg.com/three@v0.149.0/examples/jsm/"
+            }
+          }
+        </script>
+    </head>
+
+        <div id="vyber">
+            <header>
+                <a href="/">Domů</a>
+                <a href="/web/index">Index</a>
+                <a href="/web/about">About</a>
+                <a href="/web/mapaSkolni">Modely školy</a>
+                <a href="/web/skol">Try out</a>
+            </header>
+        <h1><%= titulek %></h1>
+        <!-- <button>Školní</button> -->
+        <!-- <button>Horská</button>
+        <button>Horská</button>
+        <button>Mladé buky</button> -->
+        <button id="priz">Přízemí</button>
+        <button id="1pat">1.Patro</button>
+        <button id="2pat">2.Patro</button>
+        <button id="3pat">3.Patro</button>
+        <button id="vsec">Celá budova</button>
+        <br>
+    </div>
+
+    <div id="Mistnostvyber">
+      <h1>Info o místnosti</h1>
+      <img src="/ob/logo.png" alt="">
+      <p style="word-wrap: break-word;" id="ins"></p>
+    </div>
+
+    <button id="scho" onclick="schovat()">Schovat nabídku</button>
+        
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()        
+        </main>
+    </div>
+</html>
+

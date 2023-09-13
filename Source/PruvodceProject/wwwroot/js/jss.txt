@@ -1,0 +1,63 @@
+function stul(x,y,z,w,h,d,skupina){
+  var skupina = new THREE.Group();
+  var torus = new THREE.Mesh(new THREE.TorusGeometry(2, 0.2, 10, 10, 1.6), new THREE.MeshStandardMaterial({color: 0xFEFFD7})); 
+  //torus.position.x = 1.5 * torus.position.x
+  skupina.add(torus)
+
+  //skupina.rotateZ(-1.57)
+  
+  const geometry = new THREE.TubeGeometry( new CustomSinCurve( 1 ), 20, 0.2, 10, false );
+  const mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0x00ff00 } ) );
+  mesh.position.y = torus.position.y
+  mesh.position.x = torus.position.x
+  mesh.position.z = torus.position.z
+  skupina.add(mesh);
+  
+  var torus = new THREE.Mesh(new THREE.TorusGeometry(2, 0.2, 10, 10, 1.6), new THREE.MeshStandardMaterial({color: 0xFEFFD7}));   
+  torus.rotateX(3.14)
+  torus.position.y += d
+  skupina.add(torus)
+
+  scena.add(skupina)
+}
+
+class CustomSinCurve extends THREE.Curve {
+	constructor( scale = 1 ) {
+		super();
+		this.scale = scale;
+	}
+	getPoint( t, optionalTarget = new THREE.Vector3() ) {
+
+		const tx = t * 3 - 1.5;
+		//const ty = Math.sin( 0 * Math.PI * t );
+    const ty = 0;
+		const tz = 0;
+
+		return optionalTarget.set( tx, ty, tz ).multiplyScalar( this.scale );
+	}
+}
+
+
+
+obd(true,sZ,vZ,176, 162,0,107, 0,0x858585)
+
+//zdi Boke
+//vice leva
+obd(false,sZ,vZ,107, 60,0,0, 0,0x858585)
+obd(false,sZ,vZ,80, 60,0,107, 0,0x858540)
+obd(false,sZ,vZ,107, 60+50,0,0, 0,0x858585)
+obd(false,sZ,vZ,141, 162,0,-31, 0,0x858520)
+
+//kolem vchodu
+obd(false,sZ,vZ,141, 146,0,187, 0,0x858520)
+obd(false,sZ,vZ,141, 146+68,0,187, 0,0x858520)
+
+obd(true,sZ,vZ,124, 146+68,0,187, 0,0x858520)
+
+obd(true,sZ,vZ,54, 60,0,107, 0,0x858520)
+obd(true,sZ,vZ,52, 110,0,107, 0,0x858520)
+obd(true,sZ,vZ,146, sZ,0,187, 0,0x858520)
+
+//vice prava
+obd(false,sZ,vZ,141, 162+176+sZ,0,-31, 0,0x858520)
+obd(false,sZ,vZ,94, 162+176+85+sZ,0,0, 0,0x858520)
