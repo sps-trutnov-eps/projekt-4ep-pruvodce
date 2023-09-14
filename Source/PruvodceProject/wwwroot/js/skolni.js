@@ -59,7 +59,7 @@ const loader = new GLTFLoader();
 //Načtení modelu
 loader.load(
 	// resource URL
-	'../js/skolni101.gltf',
+	'/wwwroot/soubor3D/skolni101.gltf',
 
 	function ( gltf ) {
 		scena.add( gltf.scene );

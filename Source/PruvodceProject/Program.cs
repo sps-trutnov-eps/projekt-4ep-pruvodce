@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.FileProviders;
+
 namespace PruvodceProject
 {
     public class Program
@@ -16,7 +19,22 @@ namespace PruvodceProject
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            //Je pro wwwroot soubor
             app.UseStaticFiles();
+
+            //Slouží pro možnost ASP.NET rozeznávat .gltf a .glb soubory
+            FileExtensionContentTypeProvider provider = new FileExtensionContentTypeProvider();
+                provider.Mappings[".glb"] = "model/gltf+binary";
+                provider.Mappings[".gltf"] = "model/gltf+json";
+
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(
+                        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/soubor3D")),
+                    RequestPath = "/wwwroot/soubor3D",
+                    ContentTypeProvider = provider
+                });
 
             app.UseRouting();
 
