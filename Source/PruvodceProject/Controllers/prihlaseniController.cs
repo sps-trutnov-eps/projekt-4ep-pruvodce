@@ -7,9 +7,9 @@ namespace PruvodceProject.Controllers
 {
     public class prihlaseniController : Controller
     {
-        DatovyKontext Databaze { get; }
+        PruvodceData Databaze { get; }
 
-        public prihlaseniController(DatovyKontext databaze)
+        public prihlaseniController(PruvodceData databaze)
         {
             Databaze = databaze;
         }
@@ -52,7 +52,7 @@ namespace PruvodceProject.Controllers
                 return RedirectToAction("registrace");
             }
 
-            Databaze.prihlasovaci_Udaje.Add(new prihlasovaci_udaje() { prihlas_jmeno = prezdivka, heslo = heslo,mail = e_mail});
+            Databaze.prihlasovaci_Udaje.Add(new UserModel() { prihlas_jmeno = prezdivka, heslo = heslo,mail = e_mail});
             Databaze.SaveChanges();
 
             return RedirectToAction("prihlasit");
@@ -61,7 +61,7 @@ namespace PruvodceProject.Controllers
         [HttpPost]
         public IActionResult prihlasit(string prezdivka, string heslo) 
         { 
-            prihlasovaci_udaje hledane_udaje = Databaze.prihlasovaci_Udaje.Where(n => n.prihlas_jmeno == prezdivka).FirstOrDefault();
+            UserModel hledane_udaje = Databaze.prihlasovaci_Udaje.Where(n => n.prihlas_jmeno == prezdivka).FirstOrDefault();
 
             if (hledane_udaje != null && BCrypt.Net.BCrypt.Verify(heslo, hledane_udaje.heslo))
             {
