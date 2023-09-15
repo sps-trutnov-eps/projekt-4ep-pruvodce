@@ -9,7 +9,7 @@ using PruvodceProject.Data;
 
 namespace PruvodceProject.Migrations
 {
-    [DbContext(typeof(DatovyKontext))]
+    [DbContext(typeof(PruvodceData))]
     partial class DatovyKontextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

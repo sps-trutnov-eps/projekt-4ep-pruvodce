@@ -10,7 +10,7 @@ using PruvodceProject.Data;
 
 namespace PruvodceProject.Migrations
 {
-    [DbContext(typeof(DatovyKontext))]
+    [DbContext(typeof(PruvodceData))]
     [Migration("20230913091350_zalozeni_databaze")]
     partial class zalozeni_databaze
     {
