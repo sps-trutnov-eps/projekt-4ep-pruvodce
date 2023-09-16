@@ -8,7 +8,9 @@ namespace PruvodceProject.Models
     public class UserModel
     {
         [Key]
-        public string? heslo { get; set; } //Udělat z hesla klíč databáze není dobrý nápad!!!
+        public int ID { get; set; }
+        [Required]
+        public string? heslo { get; set; }
         [Required]
         public string prihlas_jmeno { get; set; } = String.Empty;
         [Required]

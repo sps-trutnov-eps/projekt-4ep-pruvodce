@@ -71,5 +71,12 @@ namespace PruvodceProject.Controllers
             }
             return RedirectToAction("prihlasit");
         }
+
+        [HttpGet]
+        public IActionResult odhlasit()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

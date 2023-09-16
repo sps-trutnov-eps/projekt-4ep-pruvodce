@@ -5,7 +5,7 @@
 namespace PruvodceProject.Migrations
 {
     /// <inheritdoc />
-    public partial class zalozeni_databaze : Migration
+    public partial class znovu_zalozeni_databaze : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,13 +14,16 @@ namespace PruvodceProject.Migrations
                 name: "prihlasovaci_Udaje",
                 columns: table => new
                 {
-                    heslo = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    heslo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     prihlas_jmeno = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    mail = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    mail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    trida = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_prihlasovaci_Udaje", x => x.heslo);
+                    table.PrimaryKey("PK_prihlasovaci_Udaje", x => x.ID);
                 });
         }
 
