@@ -41,16 +41,18 @@ namespace PruvodceProject.Controllers
             {
                 return RedirectToAction("registrace");
             }
+            
+            if(heslo != heslo_znovu)
+            {
+                return RedirectToAction("registrace");
+            }
 
             if(heslo == heslo_znovu)
             {
                 heslo = BCrypt.Net.BCrypt.HashPassword(heslo);
             }
 
-            if(heslo != heslo_znovu)
-            {
-                return RedirectToAction("registrace");
-            }
+            
 
             if(e_mail == null || e_mail.Trim().Length == 0)
             {
