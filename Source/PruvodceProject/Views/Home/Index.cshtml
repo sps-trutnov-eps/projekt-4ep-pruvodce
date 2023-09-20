@@ -1,8 +1,20 @@
-﻿@{
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@using Microsoft.AspNetCore.Http;
+@{
     ViewData["Title"] = "Home Page";
+    HttpContext? httpContext = HttpContextAccessor.HttpContext;
+    bool pristupOveren = (httpContext != null) && (httpContext.Session.GetString("prihlasen") == "Ano");
+    string prihlaseny_uzivatel = httpContext.Session.GetString("uzivatel");
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+@if (pristupOveren)
+{
+    <p>@prihlaseny_uzivatel</p>
+    <a href="/prihlaseni/odhlasit">odhlasit se</a>
+}
+<h2><a href="/prihlaseni/registrace">Registrovat se</a></h2>
+<h2><a href="/prihlaseni/prihlasit">Přihlásit se</a></h2>

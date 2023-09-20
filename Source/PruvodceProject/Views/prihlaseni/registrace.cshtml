@@ -1,0 +1,14 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@using Microsoft.AspNetCore.Http;
+@{
+    HttpContext? httpContext = HttpContextAccessor.HttpContext;
+    string chyba = httpContext.Session.GetString("chyba");
+}
+<form>
+    <input name="prezdivka" placeholder="Zadejte svou přezdívku..." type="text"/><br />
+    <input name="e_mail" placeholder="Zadejte svůj e-mail..."/>
+    <input name="heslo" placeholder="Zadejte heslo..." type="password"/><br />
+    <input name="heslo_znovu" placeholder="Zadejte znovu heslo..." type="password"/><br />
+    <input value="Registrovat se" type="submit" formaction="/prihlaseni/registrace" formmethod="post"/>
+</form>
+<p> @chyba</p>
