@@ -8,7 +8,7 @@ namespace PruvodceProject.Models
     public class UserModel
     {
         [Key]
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         [Required]
         public string? heslo { get; set; }
         [Required]

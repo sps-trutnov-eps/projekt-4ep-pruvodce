@@ -59,6 +59,8 @@ namespace PruvodceProject.Controllers
                 return RedirectToAction("registrace");
             }
 
+            
+
             Databaze.prihlasovaci_Udaje.Add(new UserModel() { prihlas_jmeno = prezdivka, heslo = heslo,mail = e_mail});
             Databaze.SaveChanges();
 
