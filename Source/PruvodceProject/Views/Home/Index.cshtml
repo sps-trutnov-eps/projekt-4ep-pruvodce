@@ -6,7 +6,7 @@
     bool pristupOveren = (httpContext != null) && (httpContext.Session.GetString("prihlasen") == "Ano");
     string prihlaseny_uzivatel = httpContext.Session.GetString("uzivatel");
 }
-
-<h1>Welcome</h1>
-<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
+<div class="novinky"> @* Novinky, doporučené články atd.. "isic nebo aktuály školy" *@
+    <h1>tohle jsou krutý novinky</h1>
+</div> 
+<h1>Indexin'</h1>

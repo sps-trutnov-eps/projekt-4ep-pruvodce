@@ -14,10 +14,12 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin: 0px;
+  height: 100vh;
 }
 
 nav {
+    background-color: aqua;
 }
 
 nav div {
@@ -48,4 +50,22 @@ nav ul div {
 
 nav .vpravo {
     float: right;
+}
+
+.center{
+    text-align: center;
+}
+
+h1 {
+    margin: 0px;
+}
+
+.container {
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.novinky {
+    height: 20%;
+    width: 100%;
 }
