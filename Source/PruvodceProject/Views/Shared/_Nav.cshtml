@@ -1,0 +1,103 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor;
+@using Microsoft.AspNetCore.Http;
+@{
+    HttpContext? httpContext = HttpContextAccessor.HttpContext;
+    bool pristupOveren = (httpContext != null) && (httpContext.Session.GetString("prihlasen") == "Ano");
+    string prihlaseny_uzivatel = httpContext.Session.GetString("uzivatel");
+}
+
+
+<nav>
+    <a asp-controller="Home" asp-action="Index">Prváku, neztrať se!</a>
+
+    <div>
+        <a>Tutoriály</a>
+        <ul>
+            <div>
+                <li><a>Praxe</a></li>
+                <li><a>Testy</a></li>
+                <li><a>Git</a></li>
+                <li><a>Epsilon</a></li>
+                <li><a>Hesla</a></li>
+                <li><a>Autodesk</a></li>
+                <li><a>AI</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div>
+        <a>Navigace</a>
+        <ul>
+            <div>
+                <li><a>Budovy</a></li>
+                <li><a>Učebny</a></li>
+                <li><a>Tělocvičny</a></li>
+                <li><a>Jídelny</a></li>
+                <li><a>Záchody</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div>
+        <a>Jídlo</a>
+        <ul>
+            <div>
+                <li><a>Automaty</a></li>
+                <li><a>Tipy na oběd</a></li>
+                <li><a>Jídelny</a></li>
+                <li><a>Kafe</a></li>
+                <li><a>Obchody</a></li>
+                <li><a>Mikrovlnky</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div>
+        <a>Odkazy</a>
+        <ul>
+            <div>
+                <li><a>ISIC - slevy</a></li>
+                <li><a>Bakaláři</a></li>
+                <li><a>SPŠ Trutnov</a></li>
+                <li><a>Školní řád</a></li>
+                <li><a>Mail</a></li>
+                <li><a>Youtube</a></li>
+                <li><a>GitHub</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div>
+        <a>Doprava</a>
+        <ul>
+            <div>
+                <li><a>MHD</a></li>
+                <li><a>Parkoviště</a></li>
+                <li><a>Chůze</a></li>
+                <li><a>Buky</a></li>
+            </div>
+        </ul>
+    </div>
+
+
+    @if (pristupOveren)
+    {
+        <div class="vpravo">
+            <a asp-controller="prihlaseni" asp-action="odhlasit">Odhlásit se</a>
+        </div>
+
+        <div class="vpravo">
+            <a>@prihlaseny_uzivatel</a>
+        </div>
+    }
+    else
+    {
+        <div class="vpravo">
+            <a asp-controller="prihlaseni" asp-action="registrace">Registrovat se</a>
+        </div>
+
+        <div class="vpravo">
+            <a asp-controller="prihlaseni" asp-action="prihlasit">Přihlásit se</a>
+        </div>
+    }
+</nav>

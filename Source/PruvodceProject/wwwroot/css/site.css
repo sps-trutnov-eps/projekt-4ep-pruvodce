@@ -16,3 +16,36 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+nav {
+}
+
+nav div {
+    min-width: 6em;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+nav div:hover ul {
+    display: initial;
+}
+
+nav ul {
+    display: none;
+    width: 100%;
+    list-style-type: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 1em 0 0 0;
+    margin: 0;
+}
+
+nav ul div {
+    background-color: white;
+}
+
+nav .vpravo {
+    float: right;
+}
