@@ -18,8 +18,9 @@ body {
   height: 100vh;
 }
 
-header {
-    background-color: aqua;
+nav {
+    text-decoration: none;
+    text-align: center;
 }
 
 nav div {
