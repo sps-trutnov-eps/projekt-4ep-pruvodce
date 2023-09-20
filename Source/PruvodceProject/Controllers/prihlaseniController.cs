@@ -31,19 +31,24 @@ namespace PruvodceProject.Controllers
         {
             if(prezdivka == null || prezdivka.Trim().Length == 0)
             {
+                HttpContext.Session.SetString("chyba", "nebyla zadana přezdívka!");
                 return RedirectToAction("registrace");
+                
             }
             if(heslo == null || heslo.Trim().Length == 0)
             {
+                HttpContext.Session.SetString("chyba", "nebylo zadáno heslo!");
                 return RedirectToAction("registrace");
             }
             if(heslo_znovu == null || heslo_znovu.Trim().Length == 0)
             {
+                HttpContext.Session.SetString("chyba", "nebylo zadáno heslo do kolonky znovu heslo!");
                 return RedirectToAction("registrace");
             }
             
             if(heslo != heslo_znovu)
             {
+                HttpContext.Session.SetString("chyba", "hesla se liší!");
                 return RedirectToAction("registrace");
             }
 
@@ -52,10 +57,9 @@ namespace PruvodceProject.Controllers
                 heslo = BCrypt.Net.BCrypt.HashPassword(heslo);
             }
 
-            
-
             if(e_mail == null || e_mail.Trim().Length == 0)
             {
+                HttpContext.Session.SetString("chyba", "nebyl zadán e-mail!");
                 return RedirectToAction("registrace");
             }
 
