@@ -12,8 +12,6 @@ namespace PruvodceProject.Models
         [Required]
         public string? heslo { get; set; }
         [Required]
-        public string prihlas_jmeno { get; set; } = String.Empty;
-        [Required]
         public string mail { get; set; } = String.Empty;
         [Required]
         public string trida { get; set; } = String.Empty;
