@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.FileProviders;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace PruvodceProject
 {
     public class Program
@@ -12,6 +14,20 @@ namespace PruvodceProject
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<Data.PruvodceData>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.Name = ".pruvodce";
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -21,6 +37,7 @@ namespace PruvodceProject
             }
 
             //Je pro wwwroot soubor
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             //Slouží pro možnost ASP.NET rozeznávat .gltf a .glb soubory
@@ -37,9 +54,7 @@ namespace PruvodceProject
                 });
 
             app.UseRouting();
-
-            app.UseAuthorization();
-
+            app.UseSession();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
