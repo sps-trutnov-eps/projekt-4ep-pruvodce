@@ -81,7 +81,7 @@ namespace PruvodceProject.Controllers
 
             
 
-            Databaze.prihlasovaci_Udaje.Add(new UserModel() { heslo = heslo,mail = mail, trida = trida});
+            Databaze.prihlasovaci_Udaje.Add(new UserModel() { heslo = heslo, mail = mail, trida = trida});
             Databaze.SaveChanges();
 
             return RedirectToAction("prihlasit");

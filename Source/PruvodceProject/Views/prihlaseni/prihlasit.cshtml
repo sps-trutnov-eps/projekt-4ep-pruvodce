@@ -3,11 +3,12 @@
 }
 <article>
    <section>
-        <form>
-            <input name="mail" placeholder="Zadejte svůj e-mail..." type="email" /><br />
-            <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
-            <input value="Přihlásit se" type="submit" formaction="/prihlaseni/prihlasit" formmethod="post" />
-        </form>
+       <form>
+           <input name="mail" placeholder="Zadejte svůj e-mail..." type="email" /><br />
+           <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
+           <input value="Přihlásit se" type="submit" formaction="/prihlaseni/prihlasit" formmethod="post" />
+       </form>
+
         <p>Nemáš ještě účet, <a asp-action="registrace"><b>zaregistruj se</b></a></p>
     </section>
 </article>
