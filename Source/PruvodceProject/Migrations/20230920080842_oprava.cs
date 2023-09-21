@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace PruvodceProject.Migrations
 {
     /// <inheritdoc />
-    public partial class znovu_zalozeni_databaze : Migration
+    public partial class oprava : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,8 +15,7 @@ namespace PruvodceProject.Migrations
                 name: "prihlasovaci_Udaje",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     heslo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     prihlas_jmeno = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     mail = table.Column<string>(type: "nvarchar(max)", nullable: false),
