@@ -7,9 +7,10 @@
         <form>
             <input name="prezdivka" placeholder="Zadejte svou přezdívku..." type="text"/><br />
             <input name="e_mail" placeholder="zadejte svůj e-mail..." /><br />
-            <input name="heslo" placeholder="Zadejte heslo..." type="password"/>
+            <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br />
             <input name="heslo_znovu" placeholder="zadejte znovu heslo..." type="password" /><br /><br />
             <input value="Registrovat se" type="submit" formaction="/prihlaseni/registrace" formmethod="post"/>
         </form>
+        <p>Máš už účet, <a asp-action="prihlasit"><b>přihlas se</b></a></p>
     </section>
 </article>

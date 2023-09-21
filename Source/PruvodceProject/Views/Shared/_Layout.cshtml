@@ -9,15 +9,17 @@
 
 <body>
     <header>
-        <partial name="_Nav" />
+        <div class="container">
+            <partial name="_Nav"/>
+        </div>
     </header>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            <h1>@ViewData["Title"]</h1>
-            @RenderBody()
-        </main>
-    </div>
+    <main>
+        <div class="container">
+                <h1>@ViewData["Title"]</h1>
+                @RenderBody()
+        </div>
+    </main>
 
     <footer class="center">
         <div class="container">&copy; 2023 - Prváku, neztrať se!</div>

@@ -5,8 +5,9 @@
    <section>
         <form>
             <input name="prezdivka" placeholder="Zadejte svou přezdívku..." type="text" /><br />
-            <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br />
+            <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
             <input value="Prihlasit se" type="submit" formaction="/prihlaseni/prihlasit" formmethod="post" />
         </form>
+        <p>Nemáš ještě účet, <a asp-action="registrace"><b>zaregistruj se</b></a></p>
     </section>
 </article>

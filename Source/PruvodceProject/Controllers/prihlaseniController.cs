@@ -78,5 +78,15 @@ namespace PruvodceProject.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public IActionResult profil()
+        {
+            if (HttpContext.Session.GetString("prihlasen") == "Ano")
+            {
+                return View();
+            }
+            return RedirectToAction("prihlasit");
+        }
     }
 }
