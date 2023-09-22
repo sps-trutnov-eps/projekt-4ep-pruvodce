@@ -19,7 +19,7 @@ namespace PruvodceProject.Migrations
                     mail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     heslo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     trida = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    kod = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    kod = table.Column<int>(type: "int", nullable: false),
                     expirace = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

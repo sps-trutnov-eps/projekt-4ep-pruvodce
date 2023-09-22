@@ -2,6 +2,7 @@
 
 namespace PruvodceProject.Models
 {
+
     /// <summary>
     /// Model pro ukládání dat o uživateli
     /// </summary>
@@ -26,11 +27,11 @@ namespace PruvodceProject.Models
         [Required]
         public string heslo { get; set; }
         
-        public string trida { get; set; } = String.Empty;
+        public string trida { get; set; } = String.Empty; 
 
         [Required]
-        public string kod { get; set; } = new Random().Next(1000000, 9999999).ToString();
+        public int kod { get; set; }
         [Required]
-        public DateTime expirace { get; set; }
+        public DateTime expirace { get; set; } = DateTime.Now.AddMinutes(2);
     }
 }

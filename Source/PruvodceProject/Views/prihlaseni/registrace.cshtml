@@ -8,9 +8,9 @@
             <input name="trida" placeholder="Zadejte třídu..." type="text"/><br/>
             <input name="mail" placeholder="zadejte svůj e-mail..."/><br/>
             <input name="heslo" placeholder="Zadejte heslo..." type="password"/><br/>
-            <input name="heslo_znovu" placeholder="zadejte znovu heslo..." type="password"/><br/><br/>
+            <input name="hesloZnovu" placeholder="zadejte znovu heslo..." type="password"/><br/><br/>
             <input value="Registrovat se" type="submit" formaction="/prihlaseni/registrace" formmethod="post"/>
-            <p>@ViewData["chyba"]</p>
+            <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
         </form>
         
         <p>Máš už účet, <a asp-action="Prihlasit"><b>přihlas se</b></a></p>

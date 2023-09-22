@@ -58,9 +58,8 @@ namespace PruvodceProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("kod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("kod")
+                        .HasColumnType("int");
 
                     b.Property<string>("mail")
                         .IsRequired()

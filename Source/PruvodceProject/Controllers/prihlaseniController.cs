@@ -1,7 +1,10 @@
-﻿using BCrypt.Net;
+﻿using System.Text.Encodings.Web;
+using System.Web;
+using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 using PruvodceProject.Data;
+using PruvodceProject.Interfaces;
 using PruvodceProject.Models;
 
 
@@ -11,9 +14,12 @@ namespace PruvodceProject.Controllers
     {
         PruvodceData Databaze { get; }
 
-        public PrihlaseniController(PruvodceData databaze)
+        private readonly IEmailSender _emailSender;
+
+        public PrihlaseniController(PruvodceData databaze, IEmailSender emailSender)
         {
             Databaze = databaze;
+            this._emailSender = emailSender;
         }
 
         [HttpGet]
@@ -24,14 +30,15 @@ namespace PruvodceProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Registrace(string chyba = "")
+        public IActionResult Registrace(string chyba = "", string hotovo = "")
         {
+            ViewData["hotovo"] = hotovo;
             ViewData["chyba"] = chyba;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Registrace(string? heslo, string? hesloZnovu, string? mail, string trida = "")
+        public async Task<IActionResult> Registrace(string? heslo, string? hesloZnovu, string? mail, string trida = "")
         {
             if (mail == null || mail.Trim().Length == 0)
                 return RedirectToAction("Registrace", new { chyba = "Nebyl zadán e-mail!" });
@@ -55,13 +62,21 @@ namespace PruvodceProject.Controllers
             if (heslo != hesloZnovu)
                 return RedirectToAction("Registrace", new { chyba = "Hesla se liší!" });
 
-            if (heslo == hesloZnovu)
-                heslo = BCrypt.Net.BCrypt.HashPassword(heslo);
+            heslo = BCrypt.Net.BCrypt.HashPassword(heslo);
 
-            Databaze.PrihlasovaciUdaje.Add(new UserModel() { heslo = heslo, mail = mail, trida = trida });
+            int kod = new Random().Next(1000000, 9999999);
+
+            string URL = HttpContext.Request.Host.Value + "/Prihlaseni/Overit?mail=" + mail + "&kod=" + kod;
+
+            string subject = "Ověření e-mailu!";
+            string message = "Klikněte na link pro ověření účtu: " + URL;
+
+            await _emailSender.SendEmailAsync(mail, subject, message);
+
+            Databaze.OverovaciUdaje.Add(new UserVerify() { heslo = heslo, mail = mail, trida = trida, kod = kod });
             Databaze.SaveChanges();
 
-            return RedirectToAction("Prihlasit");
+            return RedirectToAction("Registrace", new { hotovo = "Byl odeslán ověřovací e-mail."});
         }
 
         [HttpPost]
@@ -144,9 +159,21 @@ namespace PruvodceProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Overit(string mail, string kod)
+        public IActionResult Overit(string? mail, int? kod)
         {
-            return RedirectToAction("Prihlasit", new { hotovo = "Úspěšně ověřeno, účet vytvořen" });
+            if (mail == null || kod == null)
+                return RedirectToAction("Registrace", new { chyba = "Špatný ověřovací token!" });
+
+            UserVerify? uzivatel = Databaze.OverovaciUdaje.FirstOrDefault(n => n != null && n.mail == mail && n.kod == kod && n.expirace > DateTime.Now);
+
+            if (uzivatel == null)
+                return RedirectToAction("Registrace", new { chyba = "Špatný ověřovací token!" });
+
+            Databaze.PrihlasovaciUdaje.Add(new UserModel() { heslo = uzivatel.heslo, mail = uzivatel.mail, trida = uzivatel.trida });
+            Databaze.OverovaciUdaje.Remove(uzivatel);
+            Databaze.SaveChanges();
+
+            return RedirectToAction("Prihlasit", new { chyba = "Úspěšně ověřeno, účet vytvořen" });
         }
     }
 }

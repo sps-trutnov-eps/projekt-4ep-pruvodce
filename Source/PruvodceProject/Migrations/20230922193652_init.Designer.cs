@@ -12,7 +12,7 @@ using PruvodceProject.Data;
 namespace PruvodceProject.Migrations
 {
     [DbContext(typeof(PruvodceData))]
-    [Migration("20230922184625_init")]
+    [Migration("20230922193652_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -61,9 +61,8 @@ namespace PruvodceProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("kod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("kod")
+                        .HasColumnType("int");
 
                     b.Property<string>("mail")
                         .IsRequired()
