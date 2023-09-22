@@ -27,15 +27,31 @@ namespace PruvodceProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult registrace(string prezdivka, string heslo, string heslo_znovu, string e_mail)
+        public IActionResult registrace(string heslo, string heslo_znovu, string mail, string trida)
         {
-            if(prezdivka == null || prezdivka.Trim().Length == 0)
+            if (!mail.Trim().EndsWith("@spstrutnov.cz"))
             {
-                HttpContext.Session.SetString("chyba", "nebyla zadana přezdívka!");
+                HttpContext.Session.SetString("chyba", "E-mail není školní e-mail.");
                 return RedirectToAction("registrace");
-                
             }
-            if(heslo == null || heslo.Trim().Length == 0)
+
+            UserModel hledane_udaje = Databaze.prihlasovaci_Udaje.Where(n => n.mail == mail.Trim()).FirstOrDefault();
+
+            if (hledane_udaje != null) {
+                HttpContext.Session.SetString("chyba", "Uživatel s tímto e-mailem už existuje.");
+                return RedirectToAction("registrace");
+            }
+
+            // To Do: 
+            // udělat list všech tříd a porovnat jestli třída existuje.
+
+            if (trida == null || trida.Trim().Length == 0)
+            {
+                HttpContext.Session.SetString("chyba", "nebyla zadána třída!");
+                return RedirectToAction("registrace");
+            }
+
+            if (heslo == null || heslo.Trim().Length == 0)
             {
                 HttpContext.Session.SetString("chyba", "nebylo zadáno heslo!");
                 return RedirectToAction("registrace");
@@ -57,7 +73,7 @@ namespace PruvodceProject.Controllers
                 heslo = BCrypt.Net.BCrypt.HashPassword(heslo);
             }
 
-            if(e_mail == null || e_mail.Trim().Length == 0)
+            if(mail == null || mail.Trim().Length == 0)
             {
                 HttpContext.Session.SetString("chyba", "nebyl zadán e-mail!");
                 return RedirectToAction("registrace");
@@ -65,21 +81,21 @@ namespace PruvodceProject.Controllers
 
             
 
-            Databaze.prihlasovaci_Udaje.Add(new UserModel() { prihlas_jmeno = prezdivka, heslo = heslo,mail = e_mail});
+            Databaze.prihlasovaci_Udaje.Add(new UserModel() { heslo = heslo,mail = mail, trida = trida});
             Databaze.SaveChanges();
 
             return RedirectToAction("prihlasit");
         }
 
         [HttpPost]
-        public IActionResult prihlasit(string prezdivka, string heslo) 
+        public IActionResult prihlasit(string mail, string heslo) 
         { 
-            UserModel hledane_udaje = Databaze.prihlasovaci_Udaje.Where(n => n.prihlas_jmeno == prezdivka).FirstOrDefault();
+            UserModel hledane_udaje = Databaze.prihlasovaci_Udaje.Where(n => n.mail == mail).FirstOrDefault();
 
             if (hledane_udaje != null && BCrypt.Net.BCrypt.Verify(heslo, hledane_udaje.heslo))
             {
                 HttpContext.Session.SetString("prihlasen", "Ano");
-                HttpContext.Session.SetString("uzivatel", prezdivka);
+                HttpContext.Session.SetString("mail", mail);
                 return RedirectToAction("Index", "Home");
             }
             return RedirectToAction("prihlasit");
