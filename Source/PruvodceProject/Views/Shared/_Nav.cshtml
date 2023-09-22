@@ -9,23 +9,14 @@
 <nav>
     <a asp-controller="Home" asp-action="Index">Prváku, neztrať se!</a>
 
-    <div>
+    <div class="menu">
         <a asp-controller="Tutorialy" asp-action="Index">Tutoriály</a>
     </div>
 
-    <div>
+    <div class="menu">
         <a>Navigace</a>
-        <ul class="menu">
-            <div>
-                <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
-                <ul class="podmenu">
-                    <li><a asp-controller="Budovy" asp-action="Skolni101">Školní 101</a></li>
-                    <li><a asp-controller="Budovy" asp-action="Horska618">Horská 618</a></li>
-                    <li><a asp-controller="Budovy" asp-action="Horska59">Horská 59</a></li>
-                    <li><a asp-controller="Budovy" asp-action="Buky">Mladé Buky</a></li>
-                </ul>
-            </div>
-
+        <ul>
+            <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
             <li><a>Učebny</a></li>
             <li><a>Tělocvičny</a></li>
             <li><a>Jídelny</a></li>
@@ -33,9 +24,9 @@
         </ul>
     </div>
 
-    <div>
+    <div class="menu">
         <a>Jídlo</a>
-        <ul class="menu">
+        <ul>
             <li><a>Automaty</a></li>
             <li><a>Tipy na oběd</a></li>
             <li><a>Jídelny</a></li>
@@ -45,9 +36,9 @@
         </ul>
     </div>
 
-    <div>
+    <div class="menu">
         <a>Odkazy</a>
-        <ul class="menu">
+        <ul>
             <li><a>ISIC - slevy</a></li>
             <li><a>Bakaláři</a></li>
             <li><a>SPŠ Trutnov</a></li>
@@ -58,9 +49,9 @@
         </ul>
     </div>
 
-    <div>
+    <div class="menu">
         <a>Doprava</a>
-        <ul class="menu">
+        <ul>
             <li><a>MHD</a></li>
             <li><a>Parkoviště</a></li>
             <li><a>Chůze</a></li>
