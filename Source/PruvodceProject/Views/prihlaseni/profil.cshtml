@@ -1,0 +1,31 @@
+﻿@model UserModel
+
+@inject IHttpContextAccessor HttpContextAccessor;
+@using Microsoft.AspNetCore.Http;
+
+@{
+    HttpContext? HttpContext = HttpContextAccessor.HttpContext;
+    string uzivatel = HttpContext.Session.GetString("jmeno");
+    ViewData["Title"] = "Správa uživatele " + uzivatel;
+}
+
+<article>
+    <section>
+        <h2>Informace o profilu</h2>
+        <div><b>Třída: <i>@Model.trida</i></b></div>
+        <div><b>E-mail: <i>@Model.mail</i></b></div>
+    </section>
+
+    <section>
+        <h2>Nastavení profilu</h2>
+        <form>
+            <input name="zmenitTrida" placeholder="Změnit třídu..." type="text"/><br/><br/>
+
+            <input name="stareHeslo" placeholder="Staré heslo..." type="password"/><br/>
+            <input name="zmenitHeslo" placeholder="Nové heslo..." type="password"/><br/><br/>
+
+            <input value="Uložit" type="submit" formaction="/prihlaseni/profil" formmethod="post"/>
+            <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
+        </form>
+    </section>
+</article>
