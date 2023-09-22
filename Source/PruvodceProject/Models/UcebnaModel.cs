@@ -13,7 +13,7 @@ namespace PruvodceProject.Models
         public Guid Id { get; set; }  
 
         [Required]
-        public string patro { get; set; } = String.Empty;
+        public string patro { get; set; } = String.Empty; //Patro v budovy, na kterém se daná uèebna nachází
         [Required]
         public string druh { get; set; } = String.Empty; //Urèuje, zda-li je uèebna odborná, èi všeobcená "kmenová"
     }
