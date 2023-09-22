@@ -7,8 +7,9 @@
            <input name="mail" placeholder="Zadejte svůj e-mail..." type="email" /><br />
            <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
            <input value="Přihlásit se" type="submit" formaction="/prihlaseni/prihlasit" formmethod="post" />
+           <p>@ViewData["chyba"]</p>
        </form>
 
-        <p>Nemáš ještě účet, <a asp-action="registrace"><b>zaregistruj se</b></a></p>
+        <p>Nemáš ještě účet, <a asp-action="Registrace"><b>zaregistruj se</b></a></p>
     </section>
 </article>

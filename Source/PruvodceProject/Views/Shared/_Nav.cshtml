@@ -2,8 +2,7 @@
 @using Microsoft.AspNetCore.Http;
 @{
     HttpContext? httpContext = HttpContextAccessor.HttpContext;
-    bool pristupOveren = (httpContext != null) && (httpContext.Session.GetString("prihlasen") == "Ano");
-    string prihlaseny_uzivatel = httpContext.Session.GetString("uzivatel");
+    string uzivatel = httpContext.Session.GetString("jmeno");
 }
 
 
@@ -70,24 +69,24 @@
     </div>
 
 
-    @if (pristupOveren)
+    @if (uzivatel != null)
     {
         <div class="vpravo">
-            <a asp-controller="prihlaseni" asp-action="odhlasit">Odhlásit se</a>
+            <a asp-controller="Prihlaseni" asp-action="Odhlasit">Odhlásit se</a>
         </div>
 
         <div class="vpravo">
-            <a asp-controller="prihlaseni" asp-action="profil">@prihlaseny_uzivatel</a>
+            <a asp-controller="Prihlaseni" asp-action="Profil">@uzivatel</a>
         </div>
     }
     else
     {
         <div class="vpravo">
-            <a asp-controller="prihlaseni" asp-action="registrace">Registrovat se</a>
+            <a asp-controller="Prihlaseni" asp-action="Registrace">Registrovat se</a>
         </div>
 
         <div class="vpravo">
-            <a asp-controller="prihlaseni" asp-action="prihlasit">Přihlásit se</a>
+            <a asp-controller="Prihlaseni" asp-action="Prihlasit">Přihlásit se</a>
         </div>
     }
 </nav>

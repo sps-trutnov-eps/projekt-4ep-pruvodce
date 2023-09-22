@@ -20,7 +20,7 @@ body{
     margin: 0;
 }
 #vyber{
-    display: hidden;
+    display: none;
     grid-template-rows: 10% 10% 10% 10% 10% 10% auto 4%;
     position: absolute;
     text-decoration: none;

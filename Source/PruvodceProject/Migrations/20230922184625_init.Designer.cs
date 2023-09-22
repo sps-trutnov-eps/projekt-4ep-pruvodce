@@ -12,7 +12,7 @@ using PruvodceProject.Data;
 namespace PruvodceProject.Migrations
 {
     [DbContext(typeof(PruvodceData))]
-    [Migration("20230921175943_init")]
+    [Migration("20230922184625_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -45,7 +45,37 @@ namespace PruvodceProject.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("prihlasovaci_Udaje");
+                    b.ToTable("PrihlasovaciUdaje");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.UserVerify", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("expirace")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("heslo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("kod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("mail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("trida")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("OverovaciUdaje");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.FileProviders;
-
 using Microsoft.EntityFrameworkCore;
+using PruvodceProject.Interfaces;
+using PruvodceProject.Models;
 
 namespace PruvodceProject
 {
@@ -10,6 +11,9 @@ namespace PruvodceProject
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Add email service
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
