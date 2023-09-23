@@ -12,6 +12,7 @@ namespace PruvodceProject.Controllers
 {
     public class PrihlaseniController : Controller
     {
+        
         PruvodceData Databaze { get; }
 
         private readonly IEmailSender _emailSender;

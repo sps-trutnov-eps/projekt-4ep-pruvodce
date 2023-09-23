@@ -12,6 +12,14 @@ namespace PruvodceProject
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Add env interpreter because .NET can not do that by default
+            //Takhle dostanete ven data: Environment.GetEnvironmentVariable("EMAIL_UCET").ToString()
+            var root = Directory.GetCurrentDirectory();
+            var dotenv = Path.Combine(root, ".env");
+            EnvInterpret.Load(dotenv);
+
+            
+
             // Add email service
             builder.Services.AddTransient<IEmailSender, EmailSender>();
 
