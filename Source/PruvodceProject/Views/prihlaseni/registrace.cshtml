@@ -4,12 +4,12 @@
 
 <article>
     <section>
-        <form>
+        <form action="/Prihlaseni/Registrace" method="post">
             <input name="trida" placeholder="Zadejte třídu..." type="text"/><br/>
             <input name="mail" placeholder="zadejte svůj e-mail..."/><br/>
             <input name="heslo" placeholder="Zadejte heslo..." type="password"/><br/>
             <input name="hesloZnovu" placeholder="zadejte znovu heslo..." type="password"/><br/><br/>
-            <input value="Registrovat se" type="submit" formaction="/prihlaseni/registrace" formmethod="post"/>
+            <input value="Registrovat se" type="submit"/>
             <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
         </form>
         

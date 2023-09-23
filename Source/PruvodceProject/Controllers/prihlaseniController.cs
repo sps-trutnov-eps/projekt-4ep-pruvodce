@@ -12,7 +12,7 @@ namespace PruvodceProject.Controllers
 {
     public class PrihlaseniController : Controller
     {
-        
+
         PruvodceData Databaze { get; }
 
         private readonly IEmailSender _emailSender;
@@ -36,6 +36,43 @@ namespace PruvodceProject.Controllers
             ViewData["hotovo"] = hotovo;
             ViewData["chyba"] = chyba;
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult ZapomenuteHeslo(string chyba = "", string hotovo = "")
+        {
+            ViewData["hotovo"] = hotovo;
+            ViewData["chyba"] = chyba;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ZapomenuteHeslo(string mail, string heslo, string hesloZnovu)
+        {
+            UserModel? hledaneUdaje = Databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.mail == mail.Trim());
+
+            if (hledaneUdaje == null)
+            {
+                return RedirectToAction("ZapomenuteHeslo", new { chyba = "Uživatel neexistuje." });
+            }
+            if (heslo != hesloZnovu)
+            {
+                return RedirectToAction("ZapomenuteHeslo", new { chyba = "Hesla se neshodují." });
+            }
+
+            int kod = new Random().Next(1000000, 9999999);
+
+            string URL = HttpContext.Request.Host.Value + "/Prihlaseni/OveritZmenaHesla?mail=" + hledaneUdaje.mail + "&kod=" + kod;
+
+            string subject = "Ověření e-mailu!";
+            string message = "Klikněte na link pro ověření účtu: " + URL;
+
+            await _emailSender.SendEmailAsync(hledaneUdaje.mail, subject, message);
+
+            Databaze.OverovaciUdaje.Add(new UserVerify() { heslo = heslo, mail = hledaneUdaje.mail, trida = hledaneUdaje.trida, kod = kod });
+            Databaze.SaveChanges();
+
+            return RedirectToAction("ZapomenuteHeslo", new { chyba = "Ověřovací email byl odeslán." });
         }
 
         [HttpPost]
@@ -89,8 +126,8 @@ namespace PruvodceProject.Controllers
             if (heslo == null || heslo.Trim().Length == 0)
                 return RedirectToAction("Prihlasit", new { chyba = "Nebylo zadáno heslo!" });
 
-            if (!mail.Contains("@"))
-                mail += "@spstrutnov.cz";
+            //if (!mail.Contains("@"))
+            //    mail += "@spstrutnov.cz";
 
             UserModel? hledaneUdaje = Databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.mail == mail);
 
@@ -126,25 +163,12 @@ namespace PruvodceProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Profil(string? zmenitTrida, string? zmenitHeslo, string? stareHeslo)
+        public IActionResult Profil(string? zmenitTrida)
         {
             UserModel? uzivatel = Databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.mail == HttpContext.Session.GetString("mail"));
 
             if (uzivatel == null)
                 return RedirectToAction("Prihlasit");
-
-            if (zmenitHeslo != null && zmenitHeslo.Trim().Length != 0)
-            {
-                //toDo: ověřit přes mail že uživatel je kdo říká a pak změnit heslo.
-
-                if (stareHeslo == null || stareHeslo.Trim().Length == 0 || !BCrypt.Net.BCrypt.Verify(stareHeslo, uzivatel.heslo))
-                    return RedirectToAction("Profil", new { chyba = "Nesprávné staré heslo!" });
-
-                uzivatel.heslo = BCrypt.Net.BCrypt.HashPassword(zmenitHeslo);
-
-                Databaze.Entry(uzivatel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                Databaze.SaveChanges();
-            }
 
             if (zmenitTrida != null)
             {
@@ -157,6 +181,60 @@ namespace PruvodceProject.Controllers
             }
 
             return RedirectToAction("Profil", new { hotovo = "Změny byly úspěšně provedeny." });
+        }
+
+        [HttpPost]
+        public IActionResult ZmenitHeslo(string? zmenitHeslo, string? stareHeslo)
+        {
+            UserModel? uzivatel = Databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.mail == HttpContext.Session.GetString("mail"));
+
+            if (uzivatel == null)
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihášeni!" });
+
+            if (zmenitHeslo == null || zmenitHeslo.Trim().Length == 0)
+                //toDo: ověřit přes mail že uživatel je kdo říká a pak změnit heslo.
+                return RedirectToAction("Profil", new { chyba = "Nové heslo není zadáno!" });
+
+            if (stareHeslo == null || stareHeslo.Trim().Length == 0 || !BCrypt.Net.BCrypt.Verify(stareHeslo, uzivatel.heslo))
+                return RedirectToAction("Profil", new { chyba = "Nesprávné staré heslo!" });
+
+            uzivatel.heslo = BCrypt.Net.BCrypt.HashPassword(zmenitHeslo);
+
+            Databaze.Entry(uzivatel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            Databaze.SaveChanges();
+
+            return RedirectToAction("Profil", new { hotovo = "Změny byly úspěšně provedeny." });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SmazatUcet(string stareHeslo)
+        {
+
+            UserModel? uzivatel = Databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.mail == HttpContext.Session.GetString("mail"));
+
+            if (uzivatel == null)
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihášeni!" });
+
+            string heslo = BCrypt.Net.BCrypt.HashPassword(stareHeslo);
+
+            if (!BCrypt.Net.BCrypt.Verify(stareHeslo, uzivatel.heslo))
+            {
+                return RedirectToAction("Profil", new { chyba = "Zadali jste špatné heslo!" });
+            }
+
+            int kod = new Random().Next(1000000, 9999999);
+
+            string URL = HttpContext.Request.Host.Value + "/Prihlaseni/OveritSmazani?mail=" + uzivatel.mail + "&kod=" + kod;
+
+            string subject = "Ověření e-mailu!";
+            string message = "Klikněte na link pro ověření účtu: " + URL;
+
+            await _emailSender.SendEmailAsync(uzivatel.mail, subject, message);
+
+            Databaze.OverovaciUdaje.Add(new UserVerify() { heslo = heslo, mail = uzivatel.mail, trida = uzivatel.trida, kod = kod });
+            Databaze.SaveChanges();
+
+            return RedirectToAction("Profil", new { chyba = "Byl odeslán ověřovací e-mail." });
         }
 
         [HttpGet]
@@ -175,6 +253,55 @@ namespace PruvodceProject.Controllers
             Databaze.SaveChanges();
 
             return RedirectToAction("Prihlasit", new { chyba = "Úspěšně ověřeno, účet vytvořen" });
+        }
+
+        [HttpGet]
+        public IActionResult OveritSmazani(string? mail, int? kod)
+        {
+            if (mail == null || kod == null)
+                return RedirectToAction("Profil", new { chyba = "Špatný ověřovací token!" });
+
+            UserVerify? uzivatel = Databaze.OverovaciUdaje.FirstOrDefault(n => n != null && n.mail == mail && n.kod == kod && n.expirace > DateTime.Now);
+            if (uzivatel == null)
+                return RedirectToAction("Profil", new { chyba = "Špatný ověřovací token!" });
+
+            UserModel? uzivatelReal = Databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.mail == mail);
+            if (uzivatelReal == null)
+                return RedirectToAction("Profil", new { chyba = "Uživatel neexisuje!" });
+
+
+            Databaze.PrihlasovaciUdaje.Remove(uzivatelReal);
+            Databaze.OverovaciUdaje.Remove(uzivatel);
+            Databaze.SaveChanges();
+
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Prihlasit", new { chyba = "Účet úspěšně smazán!" });
+        }
+
+        [HttpGet]
+        public IActionResult OveritZmenaHesla(string? mail, int? kod)
+        {
+            if (mail == null || kod == null)
+                return RedirectToAction("Profil", new { chyba = "Špatný ověřovací token!" });
+
+            UserVerify? uzivatel = Databaze.OverovaciUdaje.FirstOrDefault(n => n != null && n.mail == mail && n.kod == kod && n.expirace > DateTime.Now);
+            if (uzivatel == null)
+                return RedirectToAction("Profil", new { chyba = "Špatný ověřovací token!" });
+
+            UserModel? uzivatelReal = Databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.mail == mail);
+            if (uzivatelReal == null)
+                return RedirectToAction("Profil", new { chyba = "Uživatel neexisuje!" });
+
+            uzivatelReal.heslo = BCrypt.Net.BCrypt.HashPassword(uzivatel.heslo);
+
+            Databaze.Entry(uzivatelReal).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            Databaze.SaveChanges();
+            Databaze.OverovaciUdaje.Remove(uzivatel);
+            Databaze.SaveChanges();
+
+
+            return RedirectToAction("Prihlasit", new { chyba = "Heslo úspěšně změněno!" });
         }
     }
 }
