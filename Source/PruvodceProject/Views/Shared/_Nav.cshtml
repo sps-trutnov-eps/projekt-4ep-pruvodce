@@ -5,12 +5,11 @@
     string uzivatel = httpContext.Session.GetString("jmeno");
 }
 
-
 <nav>
     <a asp-controller="Home" asp-action="Index">Prváku, neztrať se!</a>
 
     <div class="menu">
-        <a asp-controller="Tutorialy" asp-action="Index">Tutoriály</a>
+        <a asp-controller="Tutorialy">Tutoriály</a>
     </div>
 
     <div class="menu">
@@ -25,9 +24,9 @@
     </div>
 
     <div class="menu">
-        <a>Jídlo</a>
+        <a asp-controller="Jidlo" asp-action="Index">Jídlo</a>
         <ul>
-            <li><a>Automaty</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Automaty">Automaty</a></li>
             <li><a>Tipy na oběd</a></li>
             <li><a>Jídelny</a></li>
             <li><a>Kafe</a></li>
