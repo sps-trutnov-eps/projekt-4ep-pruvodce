@@ -13,5 +13,30 @@ namespace PruvodceProject.Controllers
         {
             return View();
         }
+
+        public IActionResult TipyNaObed()
+        {
+            return View();
+        }
+
+        public IActionResult Jidelny()
+        {
+            return View();
+        }
+
+        public IActionResult Kafe()
+        {
+            return View();
+        }
+
+        public IActionResult Obchody()
+        {
+            return View();
+        }
+
+        public IActionResult Mikrovlnky()
+        {
+            return View();
+        }
     }
 }

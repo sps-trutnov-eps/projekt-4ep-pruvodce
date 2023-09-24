@@ -13,7 +13,7 @@
     </div>
 
     <div class="menu">
-        <a>Navigace</a>
+        <a asp-controller="Navigace" asp-action="Index">Navigace</a>
         <ul>
             <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
             <li><a>Učebny</a></li>
@@ -27,16 +27,16 @@
         <a asp-controller="Jidlo" asp-action="Index">Jídlo</a>
         <ul>
             <li><a asp-controller="Jidlo" asp-action="Automaty">Automaty</a></li>
-            <li><a>Tipy na oběd</a></li>
-            <li><a>Jídelny</a></li>
-            <li><a>Kafe</a></li>
-            <li><a>Obchody</a></li>
-            <li><a>Mikrovlnky</a></li>
+            <li><a asp-controller="Jidlo" asp-action="TipyNaObed">Tipy na oběd</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Jidelny">Jídelny</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Kafe">Kafe</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Obchody">Obchody</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Mikrovlnky">Mikrovlnky</a></li>
         </ul>
     </div>
 
     <div class="menu">
-        <a>Odkazy</a>
+        <a asp-controller="Odkazy" asp-action="Index">Odkazy</a>
         <ul>
             <li><a>ISIC - slevy</a></li>
             <li><a>Bakaláři</a></li>
@@ -49,7 +49,7 @@
     </div>
 
     <div class="menu">
-        <a>Doprava</a>
+        <a asp-controller="Doprava" asp-action="Index">Doprava</a>
         <ul>
             <li><a>MHD</a></li>
             <li><a>Parkoviště</a></li>
