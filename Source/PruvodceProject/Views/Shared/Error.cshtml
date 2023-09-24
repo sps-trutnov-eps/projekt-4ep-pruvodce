@@ -1,10 +1,13 @@
 ﻿@model ErrorViewModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "Chyba";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h2 class="text-danger">Při vyřizování požadavku nastala chyba.</h2>
+@if (ViewData["Code"] != null || ViewData["Code"].ToString().Length != 0 )
+{
+    <h2>@ViewData["Code"]</h2>
+}
 
 @if (Model.ShowRequestId)
 {
