@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { FlyControls } from 'three/addons/controls/FlyControls.js';
 
-
 window.addEventListener("load", (event) => {
   /////Pro objekty, bez potřeby psaní scena.add(....)
   /////Tyto objetky nemají žádnou interakci s myší (tedy teď mají ale potom nebudou)
@@ -42,15 +41,14 @@ window.addEventListener("load", (event) => {
     if(intersects[0].object.name != "" && intersects[0].object.name != undefined){
       
       variace = intersects[0].object.name.substring(0,4);
-      intersects[0].object.name = intersects[0].object.name.substring(4);
 
       if(variace == "info"){
         //Požadavek informací ze serveru
-        InfoOMistnosti(intersects[0].object.name)
+        //InfoOMistnosti(intersects[0].object.name)
         
         //Vyplnění info panelu v html
         document.getElementById("panelMistnostiPrekryvaPlatno").style.display = 'block';
-        document.getElementById("popisMistnosti").innerHTML = intersects[0].object.name;
+        document.getElementById("popisMistnosti").innerHTML = intersects[0].object.name.substring(4);
       }
     }
   }
@@ -68,13 +66,22 @@ window.addEventListener("load", (event) => {
     procentaNacitaniContainer.style.display = 'none';
   }
 
-  var l = 0
-
-  //Proměnná pro univerzální načítání jakéholiv .gltf souboru
-  const vybranamistnost = '/wwwroot/soubor3D/skolni101.gltf'
-  //const vybranamistnost = '/wwwroot/soubor3D/horska618.gltf'
-  //const vybranamistnost = '/wwwroot/soubor3D/horska59.gltf'
-  //const vybranamistnost = '/wwwroot/soubor3D/mladebuky.gltf'
+  var l = 1
+  var vybranamistnost = '';
+  switch(l){
+    case 1:
+      vybranamistnost = '/wwwroot/soubor3D/skolni101.glb'
+      break;
+    case 2:
+      vybranamistnost = '/wwwroot/soubor3D/horska618.gltf'
+      break;
+    case 3:
+      vybranamistnost = '/wwwroot/soubor3D/horska59.gltf'
+      break;
+    case 4:
+      vybranamistnost = '/wwwroot/soubor3D/mladebuky.gltf'
+      break;
+  }
 
   //Načtení modelu
   loader.load(
@@ -127,12 +134,11 @@ window.addEventListener("load", (event) => {
   //window.addEventListener('click', stop, true);
   window.addEventListener('mousemove', mysPohyb, false);
 
-  obd(20,10,20,logo,"", "infoT1");
-  obd(10,10,20,logo,"", "infoT2");
-  obd(20,10,20,logo,"", "infoT5");
+  obd(24,10,20,logo,"", "infoT1");
+  obd(8,10,20,logo,"", "infoT2");
+  obd(16,10,20,logo,"", "infoT5");
   obd(20,10,20,logo,"", "infoT6");
-  obd(18,10,20,logo,"","skskskkskskss");
-  obd(8,10,20,logo,"", "infoT15");
+  obd(0,10,20,logo,"", "infoT15");
 
   scena.add(svetlo);
   scena.background = pozadi;

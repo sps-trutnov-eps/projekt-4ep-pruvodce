@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\prihlaseni\zmenahesla.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Interfaces\NewFile.txt" />
     <None Remove="Models\NewFile.txt" />
+    <None Remove="Views\prihlaseni\NewFile.txt" />
   </ItemGroup>
 
   <ItemGroup>

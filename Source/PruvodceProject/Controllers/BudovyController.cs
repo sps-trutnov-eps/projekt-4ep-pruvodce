@@ -8,25 +8,5 @@ namespace PruvodceProject.Controllers
         {
             return View();
         }
-
-        public IActionResult Skolni101()
-        {
-            return View();
-        }
-
-        public IActionResult Horska618()
-        {
-            return View();
-        }
-
-        public IActionResult Horska59()
-        {
-            return View();
-        }
-
-        public IActionResult Buky()
-        {
-            return View();
-        }
     }
 }

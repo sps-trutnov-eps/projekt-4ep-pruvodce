@@ -1,12 +1,29 @@
 ﻿@{
-    ViewData["Title"] = "Budovy školy";
+    ViewData["Title"] = "Skolni";
+    Layout = "3Dhead";
 }
+<h1>@ViewData["Skolni"]</h1>
 
-<article>
-    <section>
-        <a asp-action="Skolni101">Školní 101</a>
-        <a asp-action="Horska618">Horská 618</a>
-        <a asp-action="Horska59">Horská 59</a>
-        <a asp-action="Buky">Mladé Buky</a>
-    </section>
-</article>
+<body>
+    @* Progres bar bude chtít trochu překopat *@
+    @* <div class="procentaNacitaniContainer">
+        <label for="procentaNacitani">Načítá se...</label>
+        <progress id="Nacteno" value="0" max="100"></progress>
+    </div> *@
+    <canvas id="bg"></canvas>
+
+<script type="module" src="/js/budovy.js"></script>
+<script>
+    var t = false;
+    function schovat(){
+        t = !t;
+        if(t){
+            document.getElementById('vyber').style.display = "none";
+            document.getElementById('scho').innerHTML = "Zobrazit nabídku"
+        }
+        else{
+            document.getElementById('vyber').style.display = "grid";
+            document.getElementById('scho').innerHTML = "Schovat nabídku"
+        }}
+</script>
+</body>
