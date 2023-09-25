@@ -1,0 +1,83 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor;
+@using Microsoft.AspNetCore.Http;
+@{
+    HttpContext? httpContext = HttpContextAccessor.HttpContext;
+    string uzivatel = httpContext.Session.GetString("jmeno");
+}
+
+
+<nav>
+    <a asp-controller="Home" asp-action="Index">Prváku, neztrať se!</a>
+
+    <div class="menu">
+        <a asp-controller="Tutorialy" asp-action="Index">Tutoriály</a>
+    </div>
+
+    <div class="menu">
+        <a>Navigace</a>
+        <ul>
+            <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
+            <li><a>Učebny</a></li>
+            <li><a>Tělocvičny</a></li>
+            <li><a>Jídelny</a></li>
+            <li><a>Záchody</a></li>
+        </ul>
+    </div>
+
+    <div class="menu">
+        <a>Jídlo</a>
+        <ul>
+            <li><a>Automaty</a></li>
+            <li><a>Tipy na oběd</a></li>
+            <li><a>Jídelny</a></li>
+            <li><a>Kafe</a></li>
+            <li><a>Obchody</a></li>
+            <li><a>Mikrovlnky</a></li>
+        </ul>
+    </div>
+
+    <div class="menu">
+        <a>Odkazy</a>
+        <ul>
+            <li><a>ISIC - slevy</a></li>
+            <li><a>Bakaláři</a></li>
+            <li><a>SPŠ Trutnov</a></li>
+            <li><a>Školní řád</a></li>
+            <li><a>Mail</a></li>
+            <li><a>Youtube</a></li>
+            <li><a>GitHub</a></li>
+        </ul>
+    </div>
+
+    <div class="menu">
+        <a>Doprava</a>
+        <ul>
+            <li><a>MHD</a></li>
+            <li><a>Parkoviště</a></li>
+            <li><a>Chůze</a></li>
+            <li><a>Buky</a></li>
+        </ul>
+    </div>
+
+
+    @if (uzivatel != null)
+    {
+        <div class="vpravo">
+            <a asp-controller="Prihlaseni" asp-action="Odhlasit">Odhlásit se</a>
+        </div>
+
+        <div class="vpravo">
+            <a asp-controller="Prihlaseni" asp-action="Profil">@uzivatel</a>
+        </div>
+    }
+    else
+    {
+        <div class="vpravo">
+            <a asp-controller="Prihlaseni" asp-action="Registrace">Registrovat se</a>
+        </div>
+
+        <div class="vpravo">
+            <a asp-controller="Prihlaseni" asp-action="Prihlasit">Přihlásit se</a>
+        </div>
+    }
+</nav>
