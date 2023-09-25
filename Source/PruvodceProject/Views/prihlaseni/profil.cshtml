@@ -10,22 +10,46 @@
 }
 
 <article>
+    <h2>Informace o profilu</h2>
     <section>
-        <h2>Informace o profilu</h2>
         <div><b>Třída: <i>@Model.trida</i></b></div>
         <div><b>E-mail: <i>@Model.mail</i></b></div>
     </section>
+</article>
+
+<article>
+    <h2>Nastavení profilu</h2>
+    <section>
+        <h3>Změna informací</h3>
+        <form action="/Prihlaseni/Profil" method="post">
+            <input value="@Model.trida" name="zmenitTrida" placeholder="Třída" type="text" /><br/><br/>
+
+            <input value="Uložit" type="submit"/>
+        </form>
+
+    </section>
 
     <section>
-        <h2>Nastavení profilu</h2>
-        <form>
-            <input name="zmenitTrida" placeholder="Změnit třídu..." type="text"/><br/><br/>
+        <h3>Změna hesla</h3>
+        <form action="/Prihlaseni/ZmenitHeslo" method="post">
+            <input name="stareHeslo" placeholder="Staré heslo..." type="password" /><br />
+            <input name="zmenitHeslo" placeholder="Nové heslo..." type="password" /><br /><br />
 
-            <input name="stareHeslo" placeholder="Staré heslo..." type="password"/><br/>
-            <input name="zmenitHeslo" placeholder="Nové heslo..." type="password"/><br/><br/>
-
-            <input value="Uložit" type="submit" formaction="/prihlaseni/profil" formmethod="post"/>
-            <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
+            <input value="Změnit heslo" type="submit" />
         </form>
     </section>
+
+    <section>
+        <h3>Smazat účet</h3>
+        <form action="/Prihlaseni/SmazatUcet" method="post">
+            <input name="stareHeslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
+
+            <input name="smazat" value="Smazat účet" type="submit" />
+        </form>
+    </section>
+
+    @if(ViewData["chyba"] != "" || ViewData["hotovo"] != "")
+    {
+        <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
+    }
 </article>
