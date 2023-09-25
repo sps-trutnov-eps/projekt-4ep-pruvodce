@@ -14,7 +14,7 @@ namespace PruvodceProject.Data
 
         public DbSet<BudovyModel> Budovy { get; set; }
         
-        public DbSet<StravovaciZarizeni> StravovaciZarizeni { get; set; }
+        public DbSet<StravovaciZarizeniModel> StravovaciZarizeni { get; set; }
 
         public DbSet<Ucebna> Ucebna { get; set; }
 
