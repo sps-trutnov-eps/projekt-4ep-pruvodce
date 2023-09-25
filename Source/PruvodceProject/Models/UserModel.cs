@@ -2,20 +2,36 @@
 
 namespace PruvodceProject.Models
 {
+
     /// <summary>
     /// Model pro ukládání dat o uživateli
     /// </summary>
     public class UserModel
     {
         [Key]
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         [Required]
-        public string? heslo { get; set; }
+        public string heslo { get; set; }
         [Required]
-        public string prihlas_jmeno { get; set; } = String.Empty;
-        [Required]
-        public string mail { get; set; } = String.Empty;
-        [Required]
+        public string mail { get; set; }
+
         public string trida { get; set; } = String.Empty;
+    }
+
+    public class UserVerify
+    {
+        [Key]
+        public Guid ID { get; set; }
+        [Required]
+        public string mail { get; set; }
+        [Required]
+        public string heslo { get; set; }
+        
+        public string trida { get; set; } = String.Empty; 
+
+        [Required]
+        public int kod { get; set; }
+        [Required]
+        public DateTime expirace { get; set; } = DateTime.Now.AddMinutes(2);
     }
 }

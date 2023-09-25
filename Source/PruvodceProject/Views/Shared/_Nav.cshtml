@@ -2,8 +2,7 @@
 @using Microsoft.AspNetCore.Http;
 @{
     HttpContext? httpContext = HttpContextAccessor.HttpContext;
-    bool pristupOveren = (httpContext != null) && (httpContext.Session.GetString("prihlasen") == "Ano");
-    string prihlaseny_uzivatel = httpContext.Session.GetString("uzivatel");
+    string uzivatel = httpContext.Session.GetString("jmeno");
 }
 
 
@@ -11,93 +10,83 @@
     <a asp-controller="Home" asp-action="Index">Prváku, neztrať se!</a>
 
     <div>
-        <a>Tutoriály</a>
-        <ul>
-            <div>
-                <li><a>Praxe</a></li>
-                <li><a>Testy</a></li>
-                <li><a>Git</a></li>
-                <li><a>Epsilon</a></li>
-                <li><a>Hesla</a></li>
-                <li><a>Autodesk</a></li>
-                <li><a>AI</a></li>
-            </div>
-        </ul>
+        <a asp-controller="Tutorialy" asp-action="Index">Tutoriály</a>
     </div>
 
     <div>
         <a>Navigace</a>
-        <ul>
+        <ul class="menu">
             <div>
                 <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
-                <li><a>Učebny</a></li>
-                <li><a>Tělocvičny</a></li>
-                <li><a>Jídelny</a></li>
-                <li><a>Záchody</a></li>
+                <ul class="podmenu">
+                    <li><a asp-controller="Budovy" asp-action="Skolni101">Školní 101</a></li>
+                    <li><a asp-controller="Budovy" asp-action="Horska618">Horská 618</a></li>
+                    <li><a asp-controller="Budovy" asp-action="Horska59">Horská 59</a></li>
+                    <li><a asp-controller="Budovy" asp-action="Buky">Mladé Buky</a></li>
+                </ul>
             </div>
+
+            <li><a>Učebny</a></li>
+            <li><a>Tělocvičny</a></li>
+            <li><a>Jídelny</a></li>
+            <li><a>Záchody</a></li>
         </ul>
     </div>
 
     <div>
         <a>Jídlo</a>
-        <ul>
-            <div>
-                <li><a>Automaty</a></li>
-                <li><a>Tipy na oběd</a></li>
-                <li><a>Jídelny</a></li>
-                <li><a>Kafe</a></li>
-                <li><a>Obchody</a></li>
-                <li><a>Mikrovlnky</a></li>
-            </div>
+        <ul class="menu">
+            <li><a>Automaty</a></li>
+            <li><a>Tipy na oběd</a></li>
+            <li><a>Jídelny</a></li>
+            <li><a>Kafe</a></li>
+            <li><a>Obchody</a></li>
+            <li><a>Mikrovlnky</a></li>
         </ul>
     </div>
 
     <div>
         <a>Odkazy</a>
-        <ul>
-            <div>
-                <li><a>ISIC - slevy</a></li>
-                <li><a>Bakaláři</a></li>
-                <li><a>SPŠ Trutnov</a></li>
-                <li><a>Školní řád</a></li>
-                <li><a>Mail</a></li>
-                <li><a>Youtube</a></li>
-                <li><a>GitHub</a></li>
-            </div>
+        <ul class="menu">
+            <li><a>ISIC - slevy</a></li>
+            <li><a>Bakaláři</a></li>
+            <li><a>SPŠ Trutnov</a></li>
+            <li><a>Školní řád</a></li>
+            <li><a>Mail</a></li>
+            <li><a>Youtube</a></li>
+            <li><a>GitHub</a></li>
         </ul>
     </div>
 
     <div>
         <a>Doprava</a>
-        <ul>
-            <div>
-                <li><a>MHD</a></li>
-                <li><a>Parkoviště</a></li>
-                <li><a>Chůze</a></li>
-                <li><a>Buky</a></li>
-            </div>
+        <ul class="menu">
+            <li><a>MHD</a></li>
+            <li><a>Parkoviště</a></li>
+            <li><a>Chůze</a></li>
+            <li><a>Buky</a></li>
         </ul>
     </div>
 
 
-    @if (pristupOveren)
+    @if (uzivatel != null)
     {
         <div class="vpravo">
-            <a asp-controller="prihlaseni" asp-action="odhlasit">Odhlásit se</a>
+            <a asp-controller="Prihlaseni" asp-action="Odhlasit">Odhlásit se</a>
         </div>
 
         <div class="vpravo">
-            <a>@prihlaseny_uzivatel</a>
+            <a asp-controller="Prihlaseni" asp-action="Profil">@uzivatel</a>
         </div>
     }
     else
     {
         <div class="vpravo">
-            <a asp-controller="prihlaseni" asp-action="registrace">Registrovat se</a>
+            <a asp-controller="Prihlaseni" asp-action="Registrace">Registrovat se</a>
         </div>
 
         <div class="vpravo">
-            <a asp-controller="prihlaseni" asp-action="prihlasit">Přihlásit se</a>
+            <a asp-controller="Prihlaseni" asp-action="Prihlasit">Přihlásit se</a>
         </div>
     }
 </nav>

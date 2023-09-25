@@ -12,6 +12,11 @@ namespace PruvodceProject.Controllers
             return View();
         }
 
+        public IActionResult Skolni()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

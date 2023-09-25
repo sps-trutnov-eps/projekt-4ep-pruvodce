@@ -1,9 +1,24 @@
 ﻿@{
-    ViewData["Title"] = "Horská 59";
+    ViewData["Title"] = "Skolni";
+    Layout = "3Dhead";
 }
+<h1>@ViewData["Skolni"]</h1>
 
-<script src="js/Budovy/Horska59.js"></script>
+<body>
+    <canvas id="bg"></canvas>
 
-<article>
-    <!-- HTML :) -->
-</article>
+<script type="module" src="/js/budovy.js"></script>
+<script>
+    var t = false;
+    function schovat(){
+        t = !t;
+        if(t){
+            document.getElementById('vyber').style.display = "none";
+            document.getElementById('scho').innerHTML = "Zobrazit nabídku"
+        }
+        else{
+            document.getElementById('vyber').style.display = "grid";
+            document.getElementById('scho').innerHTML = "Schovat nabídku"
+        }}
+</script>
+</body>
