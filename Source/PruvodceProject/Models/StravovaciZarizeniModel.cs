@@ -2,7 +2,7 @@
 
 namespace PruvodceProject.Models
 {
-    public class StravovaciZarizeni
+    public class StravovaciZarizeniModel
     {
         [Key]
         public Guid ID { get; set; }
