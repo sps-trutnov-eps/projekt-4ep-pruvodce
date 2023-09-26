@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Zapomenuté heslo";
+}
+
+<article>
+    <section>
+        <form action="/Prihlaseni/ZapomenuteHeslo" method="post">
+            <input type="email" placeholder="Zadejte e-mail..." name="mail" /><br />
+            <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br />
+            <input name="hesloZnovu" placeholder="zadejte znovu heslo..." type="password" /><br /><br />
+            <input type="submit" value="Obnovit heslo" />
+        </form>
+        <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
+    </section>
+</article>

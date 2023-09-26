@@ -9,9 +9,9 @@ namespace PruvodceProject.Models
         public Task SendEmailAsync(string email, string subject, string message)
         {
             //Sem zadat email od koho se to bude odesílat.
-            string senderMail = "skolniEmailSpsTrutnov@outlook.com";
+            string senderMail = Environment.GetEnvironmentVariable("EMAIL_UCET").ToString();
             //Sem zadat heslo od emailu.
-            string senderPassword = "=3#2moBGu4_O06==W06p9O-OR%45kaA3(+Hil7$q(!58&*$B$5j$-&T=7L)i-0c%6C8w7-zT9Y8r*)63iHv&z&3)4pM+S6c6kh%E";
+            string senderPassword = Environment.GetEnvironmentVariable("HESLO_EMAIL").ToString();
 
             var client = new SmtpClient("smtp-mail.outlook.com", 587)
             {

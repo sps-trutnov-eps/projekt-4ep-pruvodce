@@ -5,27 +5,17 @@
     string uzivatel = httpContext.Session.GetString("jmeno");
 }
 
-
 <nav>
     <a asp-controller="Home" asp-action="Index">Prváku, neztrať se!</a>
 
-    <div>
+    <div class="menu">
         <a asp-controller="Tutorialy" asp-action="Index">Tutoriály</a>
     </div>
 
-    <div>
-        <a>Navigace</a>
-        <ul class="menu">
-            <div>
-                <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
-                <ul class="podmenu">
-                    <li><a asp-controller="Budovy" asp-action="Skolni101">Školní 101</a></li>
-                    <li><a asp-controller="Budovy" asp-action="Horska618">Horská 618</a></li>
-                    <li><a asp-controller="Budovy" asp-action="Horska59">Horská 59</a></li>
-                    <li><a asp-controller="Budovy" asp-action="Buky">Mladé Buky</a></li>
-                </ul>
-            </div>
-
+    <div class="menu">
+        <a asp-controller="Navigace" asp-action="Index">Navigace</a>
+        <ul>
+            <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
             <li><a>Učebny</a></li>
             <li><a>Tělocvičny</a></li>
             <li><a>Jídelny</a></li>
@@ -33,21 +23,21 @@
         </ul>
     </div>
 
-    <div>
-        <a>Jídlo</a>
-        <ul class="menu">
-            <li><a>Automaty</a></li>
-            <li><a>Tipy na oběd</a></li>
-            <li><a>Jídelny</a></li>
-            <li><a>Kafe</a></li>
-            <li><a>Obchody</a></li>
-            <li><a>Mikrovlnky</a></li>
+    <div class="menu">
+        <a asp-controller="Jidlo" asp-action="Index">Jídlo</a>
+        <ul>
+            <li><a asp-controller="Jidlo" asp-action="Automaty">Automaty</a></li>
+            <li><a asp-controller="Jidlo" asp-action="TipyNaObed">Tipy na oběd</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Jidelny">Jídelny</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Kafe">Kafe</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Obchody">Obchody</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Mikrovlnky">Mikrovlnky</a></li>
         </ul>
     </div>
 
-    <div>
-        <a>Odkazy</a>
-        <ul class="menu">
+    <div class="menu">
+        <a asp-controller="Odkazy" asp-action="Index">Odkazy</a>
+        <ul>
             <li><a>ISIC - slevy</a></li>
             <li><a>Bakaláři</a></li>
             <li><a>SPŠ Trutnov</a></li>
@@ -58,9 +48,9 @@
         </ul>
     </div>
 
-    <div>
-        <a>Doprava</a>
-        <ul class="menu">
+    <div class="menu">
+        <a asp-controller="Doprava" asp-action="Index">Doprava</a>
+        <ul>
             <li><a>MHD</a></li>
             <li><a>Parkoviště</a></li>
             <li><a>Chůze</a></li>
