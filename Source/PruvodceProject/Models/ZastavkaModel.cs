@@ -3,17 +3,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PruvodceProject.Models
 {
-    public class Ucebna
+    public class ZastavkaModel
     {
         [Key]
         public Guid Id { get; set; }
 
         [Required]
-        public string stanice { get; set; } = String.Empty;
+        public string Stanice { get; set; } = String.Empty;
         [Required]
-        public string autobus { get; set; } = String.Empty;
+        public string Autobus { get; set; } = String.Empty;
         [Required]
-        public string cas { get; set; } = String.Empty;
+        public string Cas { get; set; } = String.Empty;
 
     }
 }
