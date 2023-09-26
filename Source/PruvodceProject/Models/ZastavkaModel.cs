@@ -7,7 +7,7 @@ namespace PruvodceProject.Models
     {
         [Key]
         public Guid Id { get; set; }
-
+        public JizdniRadModel? JizdniRad { get; set; }
         [Required]
         public string Stanice { get; set; } = String.Empty;
         [Required]
