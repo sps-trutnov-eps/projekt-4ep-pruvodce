@@ -15,12 +15,13 @@ fancy spot => Pizzeria La Piazza
 Otevírací doba Po - Pá 11 - 22h
 Lze platit kartou
 
-wtf => Pizzerie pod King Benny
+ne => Pizzerie pod King Benny
 Otevírací doba Po - Pá 11 - 1h
 Nelze platit kartou
 
+
 JÍDELNY
-Bela - za kostelem, velká porce jídla + polévka = 140,-
+Veřejná jídelna Bela - za kostelem, velká porce jídla + polévka ± 140,-
 Otevírací doba Po - Pá 7.30 - 14.30
 Nelze platit kartou
 
@@ -30,26 +31,51 @@ Potřeba se přihlásit ke stravování
 ZŠ kpt. Jaroše - je to blíž, jídlo podobné, vypadá to tam jak ve vězení a choděj tam malý děti
 Potřeba se přihlásit ke stravování
 
-TOP poměr cena/výkon => HOREGAS ul. Pražská, 10min od školy, 40,- kč za oběd ale je potřeba se do jídelny zaregistrovat u pana Šimka na budově domova mládeže ul. Úpická 160
+top poměr cena/výkon => HOREGAS ul. Pražská
+10min od školy, 40,- kč za oběd ale je potřeba se do jídelny zaregistrovat u pana Šimka na budově domova mládeže ul. Úpická 160
 
 ! Z důvodu státních dotací jídelen, je možné být přihlášen v jednu chvíli pouze k jedné jídelně !
 
+
 KAVÁRNY
-Kafírna, Volkafe - Nejlepší vnitřní prostředí, jejich pražírna, TOP výběr espressa z různých koutů světa a dobrý chai latte, cappucino, 800ml french press za asi 80,-Kč- Ulice pod UFFEM, ulice kde je BS shop a lékarna
+Kafírna, Volkafe - Nejlepší vnitřní prostředí, jejich pražírna, TOP výběr espressa z různých koutů světa a dobrý chai latte, cappucino, 800ml french press ± 80,-Kč
+Ulice pod UFFEM, ulice kde je BS shop a lékarna
 Otevírací doba Po - Pá 9 - 16.30
 Lze platit kartou
 
-Bruno - Prostředí mid ale pěkný venkovní posezení, 0 soukromí a cozy koutku na učení ale mají hodně kávových alternativ - batch brew/filtr, kávy s ledem, espresso - tonic, aeropress - kousek nad náměstím cca 10 minut, pod pohřební službou a QuickFixit
-ceny jsou podobné a dobrý internet v obou kavárnách
+Bruno - Prostředí mid ale pěkný venkovní posezení, 0 soukromí a cozy koutku na učení ale mají hodně kávových alternativ - batch brew/filtr, kávy s ledem, espresso - tonic, aeropress
+kousek nad náměstím cca 10 minut, pod pohřební službou a iQuickFix
 Otevírací doba Po - Pá 8 - 20
 Lze platit kartou
 
-OSTATNÍ BUDOVY
-Horská 59, 618
+ceny jsou podobné a dobrý internet v obou kavárnách
+
+
+POTRAVINY
+
+ul.Horská u školy
+Lze platit kartou
+
+Naproti OC Máj
+Lze platit kartou
+
+Le Mart
+Pod budovou HOREGAS
+Otevírací doba 6.10 - 20h
+Lze platit kartou
+
+Hruška
+Ještě kousek dál nad Le Martem
+Otevírací doba 6.30 - 18h
+Lze platit kartou
+
+
+BUDOVY HORSKÁ 59, 618
 Nejblíž je Penny (5min chůze) 7 - 20h
 KFC 7 - 23h a Tesco 6 - 22h (15-20min chůze)
 Lze platit kartou
 
-Mladé Buky - jedna večerka GG
+MLADÉ BUKY
+Večerka - Potraviny
 Otevírací doba Po - Ne 6.30 - 19.30
 Lze platit kartou
