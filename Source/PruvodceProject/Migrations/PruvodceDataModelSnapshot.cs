@@ -22,6 +22,97 @@ namespace PruvodceProject.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("PruvodceProject.Models.AutomatyModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("bagety")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("budova")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("patro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("typ")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Automaty");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.BudovyModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("adresa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("kodoveOznaceni")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Budovy");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.StravovaciZarizeni", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("adresa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nazev")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("odkazNaMenu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("popis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("StravovaciZarizeni");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.Ucebna", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("druh")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("patro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ucebna");
+                });
+
             modelBuilder.Entity("PruvodceProject.Models.UserModel", b =>
                 {
                     b.Property<Guid>("ID")
@@ -36,7 +127,32 @@ namespace PruvodceProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("prihlas_jmeno")
+                    b.Property<string>("trida")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("PrihlasovaciUdaje");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.UserVerify", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("expirace")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("heslo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("kod")
+                        .HasColumnType("int");
+
+                    b.Property<string>("mail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -46,7 +162,7 @@ namespace PruvodceProject.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("prihlasovaci_Udaje");
+                    b.ToTable("OverovaciUdaje");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,14 +1,18 @@
-﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
-@using Microsoft.AspNetCore.Http;
 @{
-    HttpContext? httpContext = HttpContextAccessor.HttpContext;
-    string chyba = httpContext.Session.GetString("chyba");
+    ViewData["Title"] = "Registrace";
 }
-<form>
-    <input name="prezdivka" placeholder="Zadejte svou přezdívku..." type="text"/><br />
-    <input name="e_mail" placeholder="Zadejte svůj e-mail..."/>
-    <input name="heslo" placeholder="Zadejte heslo..." type="password"/><br />
-    <input name="heslo_znovu" placeholder="Zadejte znovu heslo..." type="password"/><br />
-    <input value="Registrovat se" type="submit" formaction="/prihlaseni/registrace" formmethod="post"/>
-</form>
-<p> @chyba</p>
+
+<article>
+    <section>
+        <form action="/Prihlaseni/Registrace" method="post">
+            <input name="trida" placeholder="Zadejte třídu..." type="text"/><br/>
+            <input name="mail" placeholder="zadejte svůj e-mail..."/><br/>
+            <input name="heslo" placeholder="Zadejte heslo..." type="password"/><br/>
+            <input name="hesloZnovu" placeholder="zadejte znovu heslo..." type="password"/><br/><br/>
+            <input value="Registrovat se" type="submit"/>
+            <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
+        </form>
+        
+        <p>Máš už účet, <a asp-action="Prihlasit"><b>přihlas se</b></a></p>
+    </section>
+</article>
