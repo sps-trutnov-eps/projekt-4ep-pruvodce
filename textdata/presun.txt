@@ -1,0 +1,40 @@
+Přesun
+
+Pěšky
+	mezi budovami školy
+		Školní 101 - Horská 59		čas:
+		Školní 101 - Horská 618		čas:
+		Školní 101 - Mladé Buky 374	čas:
+		Horská 59 - Horská 618		čas:
+		Horská 59 - Mladé Buky 374	čas:
+		Horská 618 - Mladé Buky 374	čas:
+
+	mezi ostatními
+		Trutnov Hlavní nádraží - Školní 101	čas:
+		Trutnov Hlavní nádraží - Horská 59 	čas:
+		Trutnov Hlavní nádraží - Horská 618 	čas:
+
+		Trutnov autobusová stanice - Školní 101 čas:
+		Trutnov autobusová stanice - Horská 59	čas:
+		Trutnov autobusová stanice - Horská 618 čas:
+
+		Stadion - Školní 101			čas:
+		Stadion - Hosrká 59			čas:
+		Stadion - Hosrká 618			čas:
+
+		Středisko volného času - Školní 101	čas:
+		Středisko volného času - Horská 59	čas:
+		Středisko volného času - Horská 618	čas:
+
+MHD
+	Školní 101 -> Horská 618 -> Horská 59
+		MHD číslo: 1, 2, 4, 6
+			poznámky: zastávka M1 (autobusová stanice M1, stát na straně s parkovištěm před Uffem)
+
+	Horská 59 -> Horská 618 -> Školní 101
+		MHD číslo: 1, 2, 4, 6
+			poznámky: při cestě na Školní 101 vystoupíte na zastávce M2 (autobusová stanice M2, na straně s budovou Úřadu práce)
+
+	Horská 59 -> Horská 618 -> Středisko volného času -> Stadion
+		MHD číslo: 1, 4
+			poznámky: při přesunu na Středisko volného času vystoupit na autobusáku nebo u Hlavního vlakového nádraží, při přesunu na Stadion vystoupit u Lidlu/benzinky
