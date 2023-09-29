@@ -16,10 +16,10 @@
         <a asp-controller="Navigace" asp-action="Index">Navigace</a>
         <ul>
             <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
-            <li><a>Učebny</a></li>
-            <li><a>Tělocvičny</a></li>
-            <li><a>Jídelny</a></li>
-            <li><a>Záchody</a></li>
+            <li><a asp-controller="Budovy" asp-action="Ucebny">Učebny</a></li>
+            <li><a asp-controller ="Budovy" asp-action="Telocvicny">Tělocvičny</a></li>
+            <li><a asp-controller="Budovy" asp-action="Jidelny">Jídelny</a></li>
+            <li><a asp-controller="Budovy" asp-action="Zachody">Záchody</a></li>
         </ul>
     </div>
 
@@ -38,23 +38,23 @@
     <div class="menu">
         <a asp-controller="Odkazy" asp-action="Index">Odkazy</a>
         <ul>
-            <li><a>ISIC - slevy</a></li>
-            <li><a>Bakaláři</a></li>
-            <li><a>SPŠ Trutnov</a></li>
-            <li><a>Školní řád</a></li>
-            <li><a>Mail</a></li>
-            <li><a>Youtube</a></li>
-            <li><a>GitHub</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Isic">ISIC - slevy</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Bakalari">Bakaláři</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Sps">SPŠ Trutnov</a></li>
+            <li><a asp-controller ="Odkazy" asp-action="Rad">Školní řád</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Mail">Mail</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Youtube">Youtube</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Github">GitHub</a></li>
         </ul>
     </div>
 
     <div class="menu">
         <a asp-controller="Doprava" asp-action="Index">Doprava</a>
         <ul>
-            <li><a>MHD</a></li>
-            <li><a>Parkoviště</a></li>
-            <li><a>Chůze</a></li>
-            <li><a>Buky</a></li>
+            <li><a asp-controller="Doprava" asp-action="Mhd">MHD</a></li>
+            <li><a asp-controller="Doprava" asp-action="Parkoviste">Parkoviště</a></li>
+            <li><a asp-controller="Doprava" asp-action="Chuze">Chůze</a></li>
+            <li><a asp-controller="Doprava" asp-action="Buky">Buky</a></li>
         </ul>
     </div>
 
