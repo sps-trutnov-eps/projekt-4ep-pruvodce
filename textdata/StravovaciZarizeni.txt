@@ -1,3 +1,12 @@
+KEBAB
+v celku dobrý, nenaštve => Kassan Kebab
+Otevírací doba od 9h
+Lze platit jen hotově
+
+Děs, nedoporučuji => Kassan Kebab 2
+Otevírací doba Po - Stř 8 - 24h, Čtv - So  14 - 22h 
+Lze platit jen hotově
+
 KEBAB HOUSE
 chuťovka, neomrzí => Kebab House
 Otevírací doba Po - Čt 9 - 24h, Pa - So 10 - 3h, Ne 10 - 24h
@@ -35,6 +44,11 @@ Lze platit kartou
 ne => Pizzerie pod King Benny
 Otevírací doba Po - Pá 11 - 1h
 Nelze platit kartou
+
+OTHER
+v celku dobré, daleko => KFC
+Otevírací doba Po - Pá 8 - 23h, So - Ne  8 - 23h
+Lze platit kartou 
 
 
 JÍDELNY
