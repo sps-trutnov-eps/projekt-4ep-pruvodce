@@ -1,0 +1,5 @@
+prijmeni,jmeno,znamka
+Novák,Jan,3
+Nováková,Jana,2
+Dušín,Mirek,1
+Metelka,Jaromír,4
