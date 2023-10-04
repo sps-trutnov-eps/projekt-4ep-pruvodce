@@ -2,7 +2,7 @@
 
 -Průměrná doba cesty z autobusáku/vlakáče na všechny budovy
 -Spoje MHD mezi budovami
--Místo kebabů + menu?
+-Místo kebabů + menu? | ostatní
 -Doba cesty na stadion
 -Předměty/učitelé - obtížnost a proč
 -Automaty na budovách

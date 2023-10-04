@@ -1,8 +1,12 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@inject IHttpContextAccessor HttpContextAccessor;
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Úvod";
+    HttpContext? httpContext = HttpContextAccessor.HttpContext;
+    bool pristupOveren = (httpContext != null) && (httpContext.Session.GetString("prihlasen") == "Ano");
+    string prihlaseny_uzivatel = httpContext.Session.GetString("uzivatel");
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div class="novinky"> @* Novinky, doporučené články atd.. "isic nebo aktuály školy" *@
+    <h1>tohle jsou krutý novinky</h1>
+</div> 
+<h1>Indexin'</h1>
