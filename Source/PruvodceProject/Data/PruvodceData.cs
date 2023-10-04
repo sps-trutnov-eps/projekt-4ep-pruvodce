@@ -17,7 +17,6 @@ namespace PruvodceProject.Data
         
         public DbSet<StravovaciZarizeniModel> StravovaciZarizeni { get; set; }
 
-        public DbSet<Ucebna> Ucebna { get; set; }
 
 
         //Nutno doplnit vazby mezi databázemi
