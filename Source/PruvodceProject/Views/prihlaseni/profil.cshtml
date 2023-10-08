@@ -1,55 +1,50 @@
-﻿@model UserModel
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Správa uživatele</title>
+    <link rel="stylesheet" type="text/css" href="~/css/profil.css"> 
+</head>
+<body>
+    <article>
+        <h2>Informace o profilu</h2>
+        <section>
+            <div><b>Třída: <i>@Model.trida</i></b></div>
+            <div><b>E-mail: <i>@Model.mail</i></b></div>
+        </section>
+    </article>
 
-@inject IHttpContextAccessor HttpContextAccessor;
-@using Microsoft.AspNetCore.Http;
+    <article>
+        <h2>Nastavení profilu</h2>
+        <section>
+            <h3>Změna informací</h3>
+            <form action="/Prihlaseni/Profil" method="post">
+                <input value="@Model.trida" name="zmenitTrida" placeholder="Třída" type="text" /><br /><br />
+                <input value="Uložit" type="submit" />
+            </form>
+        </section>
 
-@{
-    HttpContext? HttpContext = HttpContextAccessor.HttpContext;
-    string uzivatel = HttpContext.Session.GetString("jmeno");
-    ViewData["Title"] = "Správa uživatele " + uzivatel;
-}
+        <section>
+            <h3>Změna hesla</h3>
+            <form action="/Prihlaseni/ZmenitHeslo" method="post">
+                <input name="stareHeslo" placeholder="Staré heslo..." type="password" /><br />
+                <input name="zmenitHeslo" placeholder="Nové heslo..." type="password" /><br /><br />
+                <input value="Změnit heslo" type="submit" />
+            </form>
+        </section>
 
-<article>
-    <h2>Informace o profilu</h2>
-    <section>
-        <div><b>Třída: <i>@Model.trida</i></b></div>
-        <div><b>E-mail: <i>@Model.mail</i></b></div>
-    </section>
-</article>
+        <section>
+            <h3>Smazat účet</h3>
+            <form action="/Prihlaseni/SmazatUcet" method="post">
+                <input name="stareHeslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
+                <input name="smazat" value="Smazat účet" type="submit" />
+            </form>
+        </section>
 
-<article>
-    <h2>Nastavení profilu</h2>
-    <section>
-        <h3>Změna informací</h3>
-        <form action="/Prihlaseni/Profil" method="post">
-            <input value="@Model.trida" name="zmenitTrida" placeholder="Třída" type="text" /><br/><br/>
-
-            <input value="Uložit" type="submit"/>
-        </form>
-
-    </section>
-
-    <section>
-        <h3>Změna hesla</h3>
-        <form action="/Prihlaseni/ZmenitHeslo" method="post">
-            <input name="stareHeslo" placeholder="Staré heslo..." type="password" /><br />
-            <input name="zmenitHeslo" placeholder="Nové heslo..." type="password" /><br /><br />
-
-            <input value="Změnit heslo" type="submit" />
-        </form>
-    </section>
-
-    <section>
-        <h3>Smazat účet</h3>
-        <form action="/Prihlaseni/SmazatUcet" method="post">
-            <input name="stareHeslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
-
-            <input name="smazat" value="Smazat účet" type="submit" />
-        </form>
-    </section>
-
-    @if(ViewData["chyba"] != "" || ViewData["hotovo"] != "")
-    {
-        <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
-    }
-</article>
+        @if (ViewData["chyba"] != "" || ViewData["hotovo"] != "")
+        {
+            <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
+        }
+    </article>
+</body>
+</html>
