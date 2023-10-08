@@ -37,6 +37,8 @@ nav {
     text-align: center;
 }
 
+
+
 nav div {
     min-width: 6em;
     position: relative;
@@ -89,8 +91,9 @@ nav div.podmenu > ul {
     padding: 0;
 }
 
-.center{
+.center {
     text-align: center;
+    background-color: #223974
 }
 
 h1 {
@@ -100,6 +103,7 @@ h1 {
 .container {
     width: 80vw;
     margin: 0 auto;
+    color: white;
 }
 
 .novinky {
