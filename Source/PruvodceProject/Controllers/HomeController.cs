@@ -15,6 +15,7 @@ namespace PruvodceProject.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         [Route("/Home/Error/{code:int}")]
         [Route("/Error/{code:int}")]
+        
         public IActionResult Error(int? code)
         {
             ViewData["Code"] = code;
