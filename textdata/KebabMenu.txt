@@ -38,3 +38,33 @@ KEBAB HOUSE -
 30. ZIGAREN BOREK - 130,-
 31. HRANOLKY - 60,-
 32. NUDLE - 60,-
+
+GALATA KEBAB - 
+	DÖNER KEBAB
+1. Kebab v chlebu Klasik -
+2. Kebab v chlebu se sýrem - 
+3. Kebab v chlebu s olivami -
+4. Kebab v chlebu POUZE MASO -
+	Tortilla
+5. Kebab v tortille Klasik -
+6. Kebab v tortille se sýrem -
+7. Kebab v tortille s olivami - 
+8. Kebab v tortille POUZE MASO -
+	Kebab talíř
+9.  Velký talíř s hranolky - 
+10. Malý talíř s hranolky -
+11. Velký talíř s chlebem -
+12. Malý talíř s chlebem -
+13. Velký talíř s rýží -
+14. Malý talíř s rýží -
+15. Velký talíř s nudlemi -
+16. Malý talíř s nudlemi -
+	Box
+17. Döner box s hranolky -
+18. Döner box s nudlemi -
+	Stripsy
+19. Velký talíř s hranolky a stripsy -
+20 Tortila se stripsy -
+	Vegetariánská jídla
+21. Tortilla s falafel -
+22. Talíř falafel -
