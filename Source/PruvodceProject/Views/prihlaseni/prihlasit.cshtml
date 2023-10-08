@@ -2,16 +2,26 @@
     ViewData["Title"] = "Přihlášení";
 }
 
-<article>
-   <section>
-        <form action="/Prihlaseni/Prihlasit" method="post">
-           <input name="mail" placeholder="Zadejte svůj e-mail..." type="email" /><br />
-           <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
-           <input value="Přihlásit se" type="submit" />
-            <p><span>@ViewData["chyba"]</span></p>
-       </form>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" type="text/css" href="~/css/prihlasit.css"> 
+</head>
+<body>
+    <article>
+        <section>
+            <form action="/Prihlaseni/Prihlasit" method="post">
+                <input name="mail" placeholder="Zadejte svůj e-mail..." type="email" /><br />
+                <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
+                <input value="Přihlásit se" type="submit" />
+                <p><span>@ViewData["chyba"]</span></p>
+            </form>
 
-        <p>Nemáš ještě účet, <a asp-action="Registrace"><b>zaregistruj se</b></a></p>
-        <p>Zapomněli ještě heslo? <a asp-action="ZapomenuteHeslo"><b>obnovte si ho</b></a></p>
-    </section>
-</article>
+            <p>Nemáš ještě účet, <a asp-action="Registrace"><b>zaregistruj se</b></a></p>
+            <p>Zapomněli ještě heslo? <a asp-action="ZapomenuteHeslo"><b>obnovte si ho</b></a></p>
+        </section>
+    </article>
+</body>
+</html>
