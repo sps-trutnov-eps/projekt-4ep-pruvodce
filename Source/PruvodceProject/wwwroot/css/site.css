@@ -103,10 +103,27 @@ h1 {
 .container {
     width: 80vw;
     margin: 0 auto;
-    color: white;
+    
 }
+
+
 
 .novinky {
     height: 20%;
     width: 100%;
 }
+
+button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: margin 0.2s, padding 0.2s; /* Pøidáme pøechod pro vytvoøení animace */
+}
+
+    button:active {
+        margin-top: 5px; /* Zasunutí tlaèítka nahoru */
+        padding: 8px 18px; /* Zmenšení paddingu pro zasunutí */
+    }
