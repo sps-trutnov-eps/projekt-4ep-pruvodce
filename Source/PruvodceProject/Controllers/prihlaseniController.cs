@@ -104,7 +104,7 @@ namespace PruvodceProject.Controllers
 
             int kod = new Random().Next(1000000, 9999999);
 
-            string URL = HttpContext.Request.Host.Value + "/Prihlaseni/Overit?mail=" + mail + "&kod=" + kod;
+            string URL = "https://" + HttpContext.Request.Host.Value + "/Prihlaseni/Overit?mail=" + mail + "&kod=" + kod;
 
             string subject = "Ověření e-mailu!";
             string message = "Klikněte na link pro ověření účtu: " + URL;

@@ -5,7 +5,6 @@
     string uzivatel = httpContext.Session.GetString("jmeno");
 }
 
-
 <nav>
     <a asp-controller="Home" asp-action="Index">Prváku, neztrať se!</a>
 
@@ -14,48 +13,48 @@
     </div>
 
     <div class="menu">
-        <a>Navigace</a>
+        <a asp-controller="Navigace" asp-action="Index">Navigace</a>
         <ul>
             <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
-            <li><a>Učebny</a></li>
-            <li><a>Tělocvičny</a></li>
-            <li><a>Jídelny</a></li>
-            <li><a>Záchody</a></li>
+            <li><a asp-controller="Budovy" asp-action="Ucebny">Učebny</a></li>
+            <li><a asp-controller ="Budovy" asp-action="Telocvicny">Tělocvičny</a></li>
+            <li><a asp-controller="Budovy" asp-action="Jidelny">Jídelny</a></li>
+            <li><a asp-controller="Budovy" asp-action="Zachody">Záchody</a></li>
         </ul>
     </div>
 
     <div class="menu">
-        <a>Jídlo</a>
+        <a asp-controller="Jidlo" asp-action="Index">Jídlo</a>
         <ul>
-            <li><a>Automaty</a></li>
-            <li><a>Tipy na oběd</a></li>
-            <li><a>Jídelny</a></li>
-            <li><a>Kafe</a></li>
-            <li><a>Obchody</a></li>
-            <li><a>Mikrovlnky</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Automaty">Automaty</a></li>
+            <li><a asp-controller="Jidlo" asp-action="TipyNaObed">Tipy na oběd</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Jidelny">Jídelny</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Kafe">Kafe</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Obchody">Obchody</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Mikrovlnky">Mikrovlnky</a></li>
         </ul>
     </div>
 
     <div class="menu">
-        <a>Odkazy</a>
+        <a asp-controller="Odkazy" asp-action="Index">Odkazy</a>
         <ul>
-            <li><a>ISIC - slevy</a></li>
-            <li><a>Bakaláři</a></li>
-            <li><a>SPŠ Trutnov</a></li>
-            <li><a>Školní řád</a></li>
-            <li><a>Mail</a></li>
-            <li><a>Youtube</a></li>
-            <li><a>GitHub</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Isic">ISIC - slevy</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Bakalari">Bakaláři</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Sps">SPŠ Trutnov</a></li>
+            <li><a asp-controller ="Odkazy" asp-action="KeStazeni">Školní řád</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Mail">Mail</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Youtube">Youtube</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Github">GitHub</a></li>
         </ul>
     </div>
 
     <div class="menu">
-        <a>Doprava</a>
+        <a asp-controller="Doprava" asp-action="Index">Doprava</a>
         <ul>
-            <li><a>MHD</a></li>
-            <li><a>Parkoviště</a></li>
-            <li><a>Chůze</a></li>
-            <li><a>Buky</a></li>
+            <li><a asp-controller="Doprava" asp-action="JizdniRady">Jízdní řády</a></li>
+            <li><a asp-controller="Doprava" asp-action="Parkoviste">Parkoviště</a></li>
+            <li><a asp-controller="Doprava" asp-action="Chuze">Chůze</a></li>
+            <li><a asp-controller="Doprava" asp-action="Buky">Buky</a></li>
         </ul>
     </div>
 

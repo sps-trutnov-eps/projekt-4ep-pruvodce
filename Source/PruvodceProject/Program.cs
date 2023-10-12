@@ -18,8 +18,6 @@ namespace PruvodceProject
             var dotenv = Path.Combine(root, ".env");
             EnvInterpret.Load(dotenv);
 
-            
-
             // Add email service
             builder.Services.AddTransient<IEmailSender, EmailSender>();
 
@@ -46,6 +44,7 @@ namespace PruvodceProject
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
             }
 
             //Je pro wwwroot soubor

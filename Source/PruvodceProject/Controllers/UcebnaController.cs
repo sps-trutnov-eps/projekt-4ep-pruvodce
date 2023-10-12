@@ -11,10 +11,9 @@ namespace PruvodceProject.Controllers
 
         public IActionResult Index()
         {
-           
-
             return View();
         }
+        
         public Ucebna UcebnaDetail(Guid id)
         {
             Ucebna? ucebna = _pruvodceData.Ucebna
