@@ -8,7 +8,7 @@ namespace PruvodceProject.Controllers
         {
             return View();
         }
-        public IActionResult Mhd()
+        public IActionResult JizdniRady()
         {
             return View();
         }
