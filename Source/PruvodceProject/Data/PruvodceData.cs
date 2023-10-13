@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PruvodceProject.Models;
 using System.Security.Cryptography;
 
@@ -25,6 +25,9 @@ namespace PruvodceProject.Data
         /// 
         /// </summary>
         /// <param name="options"></param>
-        public PruvodceData(DbContextOptions<PruvodceData> options) : base(options) { }
+        public PruvodceData(DbContextOptions<PruvodceData> options) : base(options)
+        {
+            
+        }
     }
 }
