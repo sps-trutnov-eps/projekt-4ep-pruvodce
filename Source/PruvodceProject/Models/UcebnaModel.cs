@@ -16,7 +16,7 @@ namespace PruvodceProject.Models
         [Required]
         public string druh { get; set; } = String.Empty; //Ur�uje, zda-li je u�ebna odborn�, �i v�eobcen� "kmenov�"
         [Required] // Učebna má 1 budovu a 1 budova má více učeben.
-        public int budovaID { get; set; }
+        public BudovyModel budovaID { get; set; }
         
     }
 }

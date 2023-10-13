@@ -29,5 +29,9 @@ namespace PruvodceProject.Data
         {
             
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Ucebna>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Ucebny);
+        }
     }
 }

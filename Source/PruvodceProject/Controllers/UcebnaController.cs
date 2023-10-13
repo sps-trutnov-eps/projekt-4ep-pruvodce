@@ -19,7 +19,6 @@ namespace PruvodceProject.Controllers
             Ucebna? ucebna = _pruvodceData.Ucebna
                 .Where(u => u.Id == id)
                 .FirstOrDefault();
-
             Debug.WriteLine(id);
             Debug.WriteLine(ucebna);
 
