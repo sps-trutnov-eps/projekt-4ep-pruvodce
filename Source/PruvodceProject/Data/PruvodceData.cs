@@ -26,5 +26,10 @@ namespace PruvodceProject.Data
         /// </summary>
         /// <param name="options"></param>
         public PruvodceData(DbContextOptions<PruvodceData> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<PhotoModel>().HasOne<BudovyModel>(a => a.IdBudovy).WithMany(a => a.fotky);
+        }
     }
 }

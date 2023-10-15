@@ -17,7 +17,8 @@ namespace PruvodceProject.Models
         [Required]
         public string Pripona { get; set; }
 
-        public Guid IdBudovy { get; set; }  //poslední dva řádky kvůli vazbě 1:N (1 budova: N fotkám) V.K.
-        public virtual BudovyModel Budovy { get; set; } 
+        [Required]
+        public Guid BudovaID { get; set; }  //poslední dva řádky kvůli vazbě 1:N (1 budova: N fotkám) V.K.
+        public BudovyModel IdBudovy { get; set; } 
     }
 }
