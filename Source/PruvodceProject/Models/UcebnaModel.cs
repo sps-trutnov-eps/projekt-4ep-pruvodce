@@ -16,5 +16,6 @@ namespace PruvodceProject.Models
         [Required]
         public string druh { get; set; } = String.Empty; //Urèuje, zda-li je uèebna odborná, èi všeobcená "kmenová"
         //Napojení na budovu (jedna tøída mùže být jen na jedné budovì)
+        public ICollection<PhotoModel> fotky { get; set; } //vazba na foto 1:N
     }
 }
