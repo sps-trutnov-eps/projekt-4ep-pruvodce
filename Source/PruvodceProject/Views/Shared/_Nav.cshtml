@@ -3,6 +3,7 @@
 @{
     HttpContext? httpContext = HttpContextAccessor.HttpContext;
     string uzivatel = httpContext.Session.GetString("jmeno");
+    string jeAdmin = httpContext.Session.GetString("jeAdmin");
 }
 
 <nav>
@@ -26,9 +27,8 @@
     <div class="menu">
         <a asp-controller="Jidlo" asp-action="Index">Jídlo</a>
         <ul>
-            <li><a asp-controller="Jidlo" asp-action="Automaty">Automaty</a></li>
-            <li><a asp-controller="Jidlo" asp-action="TipyNaObed">Tipy na oběd</a></li>
             <li><a asp-controller="Jidlo" asp-action="Jidelny">Jídelny</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Automaty">Automaty</a></li>
             <li><a asp-controller="Jidlo" asp-action="Kafe">Kafe</a></li>
             <li><a asp-controller="Jidlo" asp-action="Obchody">Obchody</a></li>
             <li><a asp-controller="Jidlo" asp-action="Mikrovlnky">Mikrovlnky</a></li>
@@ -68,6 +68,12 @@
         <div class="vpravo">
             <a asp-controller="Prihlaseni" asp-action="Profil">@uzivatel</a>
         </div>
+
+        @if (jeAdmin == "True") {
+            <div class="vpravo">
+                <a asp-controller="Prihlaseni" asp-action="Admin">Admin</a>
+            </div>
+        }
     }
     else
     {

@@ -7,12 +7,10 @@ using PruvodceProject.Data;
 using PruvodceProject.Interfaces;
 using PruvodceProject.Models;
 
-
 namespace PruvodceProject.Controllers
 {
     public class PrihlaseniController : Controller
     {
-
         PruvodceData Databaze { get; }
 
         private readonly IEmailSender _emailSender;
@@ -20,7 +18,7 @@ namespace PruvodceProject.Controllers
         public PrihlaseniController(PruvodceData databaze, IEmailSender emailSender)
         {
             Databaze = databaze;
-            this._emailSender = emailSender;
+            _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -135,6 +133,7 @@ namespace PruvodceProject.Controllers
                 return RedirectToAction("Prihlasit", new { chyba = "Nesprávný e-mail nebo heslo!" });
 
             HttpContext.Session.SetString("mail", mail);
+            HttpContext.Session.SetString("jeAdmin", hledaneUdaje.jeAdmin.ToString());
 
             string[] strlist = mail.Split("@",StringSplitOptions.RemoveEmptyEntries);
 
@@ -302,6 +301,15 @@ namespace PruvodceProject.Controllers
 
 
             return RedirectToAction("Prihlasit", new { chyba = "Heslo úspěšně změněno!" });
+        }
+
+        [HttpGet]
+        public IActionResult Admin()
+        {
+            if (HttpContext.Session.GetString("jeAdmin") == "True")
+                return View();
+            else
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
         }
     }
 }
