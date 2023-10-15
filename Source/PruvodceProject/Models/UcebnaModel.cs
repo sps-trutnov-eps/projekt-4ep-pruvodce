@@ -7,7 +7,7 @@ namespace PruvodceProject.Models
     /// Datov� model pro u�ebnu.
     /// Prim�rn�m kl��em je Id, kter� je typu GUID
     /// </summary>
-    public class Ucebna
+    public class UcebnaModel
     {
         [Key]
         public Guid Id { get; set; }  

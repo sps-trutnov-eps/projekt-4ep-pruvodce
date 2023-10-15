@@ -10,6 +10,7 @@ namespace PruvodceProject.Models
         public string adresa { get; set; }
         [Required]
         public string kodoveOznaceni { get; set; }
-        public ICollection<Ucebna> Ucebny { get; set; }
+        public ICollection<UcebnaModel> Ucebny { get; set; }
+        public ICollection<AutomatyModel> Automaty { get; set; }
     }
 }

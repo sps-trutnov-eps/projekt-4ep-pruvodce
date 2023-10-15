@@ -6,7 +6,7 @@ namespace PruvodceProject.Data
 {
     public class PruvodceData : DbContext
     {
-        public DbSet<Ucebna> Ucebna { get; set; }
+        public DbSet<UcebnaModel> Ucebna { get; set; }
         
         public DbSet<UserModel> PrihlasovaciUdaje { get; set; }
 
@@ -31,7 +31,8 @@ namespace PruvodceProject.Data
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Ucebna>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Ucebny);
+            builder.Entity<AutomatyModel>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Automaty);
+            builder.Entity<UcebnaModel>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Ucebny);
         }
     }
 }
