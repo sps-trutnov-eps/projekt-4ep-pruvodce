@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PruvodceProject.Data;
 
@@ -11,9 +12,11 @@ using PruvodceProject.Data;
 namespace PruvodceProject.Migrations
 {
     [DbContext(typeof(PruvodceData))]
-    partial class PruvodceDataModelSnapshot : ModelSnapshot
+    [Migration("20231012203135_Pridani_jeAdmin")]
+    partial class Pridani_jeAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,9 +38,6 @@ namespace PruvodceProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("budovaIDID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("patro")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -47,8 +47,6 @@ namespace PruvodceProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("budovaIDID");
 
                     b.ToTable("Automaty");
                 });
@@ -99,13 +97,10 @@ namespace PruvodceProject.Migrations
                     b.ToTable("StravovaciZarizeni");
                 });
 
-            modelBuilder.Entity("PruvodceProject.Models.UcebnaModel", b =>
+            modelBuilder.Entity("PruvodceProject.Models.Ucebna", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("budovaIDID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("druh")
@@ -117,8 +112,6 @@ namespace PruvodceProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("budovaIDID");
 
                     b.ToTable("Ucebna");
                 });
@@ -176,35 +169,6 @@ namespace PruvodceProject.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("OverovaciUdaje");
-                });
-
-            modelBuilder.Entity("PruvodceProject.Models.AutomatyModel", b =>
-                {
-                    b.HasOne("PruvodceProject.Models.BudovyModel", "budovaID")
-                        .WithMany("Automaty")
-                        .HasForeignKey("budovaIDID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("budovaID");
-                });
-
-            modelBuilder.Entity("PruvodceProject.Models.UcebnaModel", b =>
-                {
-                    b.HasOne("PruvodceProject.Models.BudovyModel", "budovaID")
-                        .WithMany("Ucebny")
-                        .HasForeignKey("budovaIDID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("budovaID");
-                });
-
-            modelBuilder.Entity("PruvodceProject.Models.BudovyModel", b =>
-                {
-                    b.Navigation("Automaty");
-
-                    b.Navigation("Ucebny");
                 });
 #pragma warning restore 612, 618
         }

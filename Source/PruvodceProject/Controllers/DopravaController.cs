@@ -8,5 +8,21 @@ namespace PruvodceProject.Controllers
         {
             return View();
         }
+        public IActionResult JizdniRady()
+        {
+            return View();
+        }
+        public IActionResult Parkoviste()
+        {
+            return View();
+        }
+        public IActionResult Chuze()
+        {
+            return View();
+        }
+        public IActionResult Buky()
+        {
+            return View();
+        }
     }
 }
