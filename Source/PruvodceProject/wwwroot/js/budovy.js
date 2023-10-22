@@ -2,6 +2,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { FlyControls } from 'three/addons/controls/FlyControls.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 window.addEventListener("load", (event) => {
   /////Pro objekty, bez potřeby psaní scena.add(....)
@@ -85,7 +86,7 @@ window.addEventListener("load", (event) => {
   var vybranamistnost = '';
   switch(l){
     case 1:
-      vybranamistnost = '/wwwroot/soubor3D/skolni101.glb'
+      vybranamistnost = '/wwwroot/soubor3D/skolni101.gltf'
       break;
     case 2:
       vybranamistnost = '/wwwroot/soubor3D/horska618.gltf'
@@ -95,6 +96,9 @@ window.addEventListener("load", (event) => {
       break;
     case 4:
       vybranamistnost = '/wwwroot/soubor3D/mladebuky.gltf'
+      break;
+    case 5:
+      vybranamistnost = '/wwwroot/soubor3D/largeSkolni101.gltf'
       break;
   }
 
@@ -138,20 +142,24 @@ window.addEventListener("load", (event) => {
   //#endregion
 
   /////Tohle mapování myši je pro pohyb po mapě
-  //const pohyb = new OrbitControls(kamera, renderer.domElement);
-  const pohyb = new FlyControls(kamera, renderer.domElement)
-  pohyb.dragToLook = true;
-  pohyb.rollSpeed = 0.05;
-  pohyb.movementSpeed = 0.5;
+  const pohyb = new OrbitControls(kamera, renderer.domElement);
+  //const pohyb = new FlyControls(kamera, renderer.domElement)
+  //pohyb.dragToLook = true;
+  //pohyb.rollSpeed = 0.05;
+  //pohyb.movementSpeed = 0.5;
 
   document.addEventListener('keypress', (event) => {
     var name = event.key;
     var code = event.code;
-    if(name == "+"){
-      pohyb.movementSpeed += 0.5;
-    }
+    if(name == "w"){
+      kamera.position.X -= 500;
+    //  console.log("ss")
+    pohyb.movementSpeed += 0.5;
+      
+  }
     if(name == "-"){
       pohyb.movementSpeed -= 0.5;
+    //console.log("ss")
     }
   }, false);
 
@@ -173,7 +181,7 @@ window.addEventListener("load", (event) => {
 
   function animate(){
     requestAnimationFrame(animate);
-    pohyb.update(0.5);
+    //pohyb.update(0.5);
     renderer.render(scena, kamera);
   }
 

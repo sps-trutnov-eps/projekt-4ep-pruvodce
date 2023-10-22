@@ -1,0 +1,13 @@
+
+Pro budovy.js >>
+Dokončit přijímání výběru modelu
+Méně cancer pohyb pro zkoumání modelu (Buď vlastní pohyb nebo modifikovat OrbitControls nebo FlyControls (Oboje je možné zkusit - stačí odkomentovat/zakomentovat))
+Načítání modelu na stránku (může zasahovat do Budovy/Index.cshtml "Částečně to tam bylo, ale někdo to smazal")
+Požadavek na Controller pro vytáhnutí dat o místnosti (k tomu poslouží funkce "dotek()")
+Hezčí layout (pokud se vám to podaří lmao))))
+Změna názvu proměnných na více čitelné)))
+
+>> Nic z toho není povinné pro nikoho mimo 3D vrstvu, ale ocenil bych pomoc od IDLE vrstev))
+
+
+Povolení osvětlení (přidá se po dokončení modelů)
