@@ -6,6 +6,7 @@ namespace PruvodceProject.Controllers
     {
         public IActionResult AdminDashboard()
         {
+            //Membership.GetUser();
             return View();
         }
     }
