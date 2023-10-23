@@ -19,7 +19,7 @@ left: 0;
 body{
     margin: 0;
 }
-#vyber{
+#vyber {
     display: none;
     grid-template-rows: 10% 10% 10% 10% 10% 10% auto 4%;
     position: absolute;
@@ -28,6 +28,7 @@ body{
     height: 100%;
     width: 23rem;
     text-align: center;
+    padding: 10px;
 }
 #vyber *{
     padding: 10px;
@@ -37,10 +38,17 @@ body{
 #vyber button{
     width: 80%;
     margin: 0 auto;
-    margin-bottom: 4px;
+    margin-bottom: 4px;  
 }
-header{
+
+} header {
     display: block;
+    }
+
+#vyber a {
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
 }
 
 #panelMistnostiPrekryvaPlatno h1{

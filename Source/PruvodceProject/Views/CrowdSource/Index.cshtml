@@ -1,0 +1,19 @@
+@{ ViewData["Title"] = "Crowd Source"; } 
+
+<article>
+   <section>
+      @if (Model == null || Model.Count == 0) { @: 
+      <p class="prihlas-se">Zatím žádné problémy.</p>
+      } 
+
+      @foreach(PruvodceProject.Models.CrowdSourceModel problem in Model) 
+      { 
+
+          <p>@problem.nadpis</p>
+          <p>@problem.Text</p>
+          <p>@problem.stav</p>
+          <p>@problem.existujici</p>
+          <br /> 
+      } 
+   </section>
+</article>
