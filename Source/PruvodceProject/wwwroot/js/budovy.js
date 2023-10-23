@@ -66,6 +66,21 @@ window.addEventListener("load", (event) => {
     procentaNacitaniContainer.style.display = 'none';
   }
 
+  window.addEventListener( 'keydown', dolniklic );
+
+  window.addEventListener("onkeypress", (event) => {
+    if (event.shiftkey){
+      console.log("Aaaa")
+    }
+  })
+  
+  function dolniklic(){
+    if (event.shiftkey){
+      console.log("g")
+    }
+  }
+
+  
   var l = 1
   var vybranamistnost = '';
   switch(l){
@@ -128,6 +143,18 @@ window.addEventListener("load", (event) => {
   pohyb.dragToLook = true;
   pohyb.rollSpeed = 0.05;
   pohyb.movementSpeed = 0.5;
+
+  document.addEventListener('keypress', (event) => {
+    var name = event.key;
+    var code = event.code;
+    if(name == "+"){
+      pohyb.movementSpeed += 0.5;
+    }
+    if(name == "-"){
+      pohyb.movementSpeed -= 0.5;
+    }
+  }, false);
+
 
 
   window.addEventListener('click', dotek);

@@ -1,0 +1,14 @@
+@model List<StravovaciZarizeniModel>
+@{
+    ViewData["Title"] = "Stravovací zařízení";
+}
+
+<article>
+    <section>
+        <h2>Pizzerie</h2>
+        @foreach(StravovaciZarizeniModel jidelna in Model) {
+            @jidelna.nazev
+        }    
+
+    </section>
+</article>
