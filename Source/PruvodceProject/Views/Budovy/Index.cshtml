@@ -4,13 +4,29 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<body>
     @* Progres bar bude chtít trochu překopat *@
     @* <div class="procentaNacitaniContainer">
         <label for="procentaNacitani">Načítá se...</label>
         <progress id="Nacteno" value="0" max="100"></progress>
     </div> *@
-    <canvas id="bg"></canvas>
+    
+
+<div id="blocker">
+    <div id="instructions">
+        <p style="font-size:36px">
+        	Klikni pro spuštění
+        </p>
+        <p>
+        	Pohyb: WASD<br/>
+            Nahoru: SPACE<br/>
+            Dolů: C<br/>
+        	Rozhlížení: MYŠ
+        </p>
+    </div>
+</div>
+<div id="3dContainer"></div>
+
+
 
 <script type="module" src="/js/budovy.js"></script>
 <script>
@@ -26,4 +42,3 @@
             document.getElementById('scho').innerHTML = "Schovat nabídku"
         }}
 </script>
-</body>
