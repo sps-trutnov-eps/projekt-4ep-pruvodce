@@ -1,16 +1,16 @@
-//import './style.css';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
 
-let container;
-let camera, controls, scene, renderer;
-let raycaster, hasFocus;
+THREE.Cache.enabled = true;
+
+let renderContainer, blocker, instructions, loadingContainer, loadingProgress, roomContainer, roomInfo;
+let camera, controls, scene, renderer, raycaster;
+let hasFocus;
 let loader, loadingManager;
 
 let textures = {};
 let objects = [];
-let variace = "";
 let moveForward = false;
 let moveBackward = false;
 let moveLeft = false;
@@ -25,6 +25,7 @@ let velocity = new THREE.Vector3();
 
 let prevTime = performance.now();
 
+// Spuštění
 window.addEventListener("load", () => {
   init();
   animate();
@@ -38,8 +39,14 @@ window.addEventListener("load", () => {
 
 // Inicializace
 function init() {
-  // Kam renderovat
-  container = document.getElementById('3dContainer');
+  // HTML Elementy
+  renderContainer = document.getElementById('renderer');
+  blocker = document.getElementById( 'blocker' );
+  instructions = document.getElementById( 'instructions' );
+  loadingContainer = document.getElementById('loadingContainer');
+  loadingProgress = document.getElementById('loadingProgress');
+  roomContainer = document.getElementById('roomContainer');
+  roomInfo = document.getElementById('roomInfo');
   
   // Nastavení kamery
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -60,29 +67,26 @@ function init() {
   renderer = new THREE.WebGLRenderer();
 
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  canvasResize();
   renderer.render(scene, camera);
-  container.appendChild(renderer.domElement);
+  renderContainer.appendChild(renderer.domElement);
   
   // Nastavení ovládání
   controls = new PointerLockControls(camera, renderer.domElement);
-  const blocker = document.getElementById( 'blocker' );
-  const instructions = document.getElementById( 'instructions' );
 
   instructions.addEventListener('click', () => {
     controls.lock();
   }, false);
 
   controls.addEventListener('lock', () => {
-    instructions.style.display = 'none';
     blocker.style.display = 'none';
-    container.addEventListener('click', dotek);
+    renderContainer.addEventListener('click', dotek);
   });
 
   controls.addEventListener('unlock', () => {
     blocker.style.display = 'block';
-    instructions.style.display = 'block';
-    container.removeEventListener('click', dotek);
+    roomContainer.style.display = 'none';
+    renderContainer.removeEventListener('click', dotek);
   });
 
   scene.add(controls.getObject());
@@ -154,17 +158,6 @@ function init() {
   document.addEventListener( 'keydown', onKeyDown );
   document.addEventListener( 'keyup', onKeyUp );
   
-  // Nastavení načítání modelů
-  loader = new GLTFLoader();
-  
-  loadingManager = new THREE.LoadingManager();
-  loadingManager.onProgress = function(url, nacteno, total) {
-    document.getElementById('procentaNacitani').value = (nacteno / total) * 100;
-  }
-  loadingManager.onLoad = function() {
-    document.querySelector('.procentaNacitaniContainer').style.display = 'none';
-  }
-  
   // Vybrání modelu
   switch(selectedBuilding) {
     case 1:
@@ -183,8 +176,10 @@ function init() {
       selectedBuildingPath = '/wwwroot/soubor3D/largeSkolni101.gltf'
       break;
   }
+  
+  // Nastavení načítání modelů
+  loader = new GLTFLoader();
 
-  // Načtení modelu
   loader.load(
       selectedBuildingPath, // URL Zdroje
 
@@ -197,7 +192,12 @@ function init() {
       },
       function ( xhr ) {
         selectedBuilding = ( xhr.loaded / xhr.total * 100 )
+        loadingProgress.value = xhr.loaded / xhr.total * 100;
         console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        if (xhr.loaded / xhr.total === 1) {
+          loadingContainer.style.display = 'none';
+          blocker.style.display = 'block';
+        }
       },
       function ( error ) {
         console.log( 'Nastala chyba' );
@@ -209,9 +209,9 @@ function init() {
   textures['logo'] = new THREE.TextureLoader().load('../ob/logo.png');
 
   // Listeners
-  window.addEventListener( 'resize', onWindowResize );
-  container.addEventListener('mouseover', () => { hasFocus = true });
-  container.addEventListener('mouseleave', () => { hasFocus = false });
+  window.addEventListener( 'resize', canvasResize );
+  renderContainer.addEventListener('mouseover', () => { hasFocus = true });
+  renderContainer.addEventListener('mouseleave', () => { hasFocus = false });
 }
 
 // Pro objekty, bez potřeby psaní scena.add(....)
@@ -237,26 +237,29 @@ function dotek() {
   // Ukáže vytvořený ray (dobrý pro debug)
   //scene.add( new THREE.ArrowHelper(controls.getDirection(new THREE.Vector3()), controls.getObject().position, 50, 0xFFFFFF));
   
-  
   if (intersects.length > 0 && intersects[0].object.name !== "" && intersects[0].object.name !== undefined){
-    variace = intersects[0].object.name.substring(0,4);
+    let variace = intersects[0].object.name.substring(0,4);
     if (variace === "info") {
       //Požadavek informací ze serveru
       //InfoOMistnosti(intersects[0].object.name)
   
       //Vyplnění info panelu v html
-      document.getElementById("panelMistnostiPrekryvaPlatno").style.display = 'block';
-      document.getElementById("popisMistnosti").innerHTML = intersects[0].object.name.substring(4);
+      roomContainer.style.display = 'block';
+      roomInfo.innerHTML = intersects[0].object.name.substring(4);
     }
   }
 }
 
 // Přizpůsobení oknu
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
+function canvasResize() {
+  const height = renderContainer.parentElement.parentElement.clientHeight - 4.3 * Number(window.getComputedStyle(renderContainer).fontSize.replace('px', ''));
+  camera.aspect = renderContainer.clientWidth / height;
   camera.updateProjectionMatrix();
-
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  
+  blocker.style.height = height + "px";
+  roomContainer.style.height = height + "px";
+  loadingContainer.style.height = height + "px";
+  renderer.setSize(renderContainer.clientWidth, height);
 }
 
 // Animate loop
@@ -267,7 +270,7 @@ function animate() {
 
   if (controls.isLocked === true) {
     const delta = ( time - prevTime ) / 1000;
-
+    
     velocity.x -= velocity.x * 10.0 * delta;
     velocity.y -= velocity.y * 10.0 * delta;
     velocity.z -= velocity.z * 10.0 * delta;
@@ -277,9 +280,9 @@ function animate() {
     direction.z = Number(moveForward) - Number(moveBackward);
     direction.normalize();
 
-    if (moveLeft || moveRight) velocity.x -= direction.x * 400.0 * delta;
-    if (moveUp || moveDown) velocity.y -= direction.y * 400.0 * delta;
-    if (moveForward || moveBackward) velocity.z -= direction.z * 400.0 * delta;
+    if (moveLeft || moveRight) velocity.x -= direction.x * 600.0 * delta;
+    if (moveUp || moveDown) velocity.y -= direction.y * 600.0 * delta;
+    if (moveForward || moveBackward) velocity.z -= direction.z * 600.0 * delta;
     
     controls.moveRight(- velocity.x * delta);
     controls.moveForward(- velocity.z * delta);
