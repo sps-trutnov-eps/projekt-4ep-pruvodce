@@ -15,6 +15,7 @@ namespace PruvodceProject.Models
         public string typ { get; set; }
         [Required]
         public bool bagety { get; set; }
-        //Jeden automat mùže být jenom na jedné budovì, jednoduché napojení
+        [Required]
+        public BudovyModel budovaID { get; set; } //Jeden automat mï¿½ï¿½e bï¿½t jenom na jednï¿½ budovï¿½, jednoduchï¿½ napojenï¿½
     }
 }

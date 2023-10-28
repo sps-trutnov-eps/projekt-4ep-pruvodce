@@ -4,17 +4,19 @@ using System.Drawing;
 namespace PruvodceProject.Models
 {
     /// <summary>
-    /// Datovı model pro uèebnu.
-    /// Primárním klíèem je Id, které je typu GUID
+    /// Datovï¿½ model pro uï¿½ebnu.
+    /// Primï¿½rnï¿½m klï¿½ï¿½em je Id, kterï¿½ je typu GUID
     /// </summary>
-    public class Ucebna
+    public class UcebnaModel
     {
         [Key]
         public Guid Id { get; set; }  
         [Required]
-        public string patro { get; set; } = String.Empty; //Patro v budovy, na kterém se daná uèebna nachází
+        public string patro { get; set; } = String.Empty; //Patro v budovy, na kterï¿½m se danï¿½ uï¿½ebna nachï¿½zï¿½
         [Required]
-        public string druh { get; set; } = String.Empty; //Urèuje, zda-li je uèebna odborná, èi všeobcená "kmenová"
-        //Napojení na budovu (jedna tøída mùe bıt jen na jedné budovì)
+        public string druh { get; set; } = String.Empty; //Urï¿½uje, zda-li je uï¿½ebna odbornï¿½, ï¿½i vï¿½eobcenï¿½ "kmenovï¿½"
+        [Required] // UÄebna mÃ¡ 1 budovu a 1 budova mÃ¡ vÃ­ce uÄeben.
+        public BudovyModel budovaID { get; set; }
+        
     }
 }
