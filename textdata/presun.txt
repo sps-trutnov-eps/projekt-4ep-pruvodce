@@ -1,30 +1,30 @@
 Přesun
 
-Pěšky
+Pěšky (průměrná rychlost 5,6 km/h)
 	mezi budovami školy
-		Školní 101 - Horská 59		čas:
-		Školní 101 - Horská 618		čas:
-		Školní 101 - Mladé Buky 374	čas:
-		Horská 59 - Horská 618		čas:
-		Horská 59 - Mladé Buky 374	čas:
-		Horská 618 - Mladé Buky 374	čas:
+		Školní 101 - Horská 59		čas: 22 minut
+		Školní 101 - Horská 618		čas: 15 minut
+		Školní 101 - Mladé Buky 374	čas: 68 minut
+		Horská 59 - Horská 618		čas: 7 minut
+		Horská 59 - Mladé Buky 374	čas: 47 minut
+		Horská 618 - Mladé Buky 374	čas: 54 minut
 
 	mezi ostatními
-		Trutnov Hlavní nádraží - Školní 101	čas:
-		Trutnov Hlavní nádraží - Horská 59 	čas:
-		Trutnov Hlavní nádraží - Horská 618 	čas:
+		Trutnov Hlavní nádraží - Školní 101	čas: 6 minut
+		Trutnov Hlavní nádraží - Horská 59 	čas: 17 minut
+		Trutnov Hlavní nádraží - Horská 618 	čas: 11 minut
 
-		Trutnov autobusová stanice - Školní 101 čas:
-		Trutnov autobusová stanice - Horská 59	čas:
-		Trutnov autobusová stanice - Horská 618 čas:
+		Trutnov autobusová stanice - Školní 101 čas: 5 minut
+		Trutnov autobusová stanice - Horská 59	čas: 16 minut
+		Trutnov autobusová stanice - Horská 618 čas: 10 minut
 
-		Stadion - Školní 101			čas:
-		Stadion - Hosrká 59			čas:
-		Stadion - Hosrká 618			čas:
+		Stadion - Školní 101			čas: 11 minut
+		Stadion - Hosrká 59			čas: 30 minut
+		Stadion - Hosrká 618			čas: 24 minut
 
-		Středisko volného času - Školní 101	čas:
-		Středisko volného času - Horská 59	čas:
-		Středisko volného času - Horská 618	čas:
+		Středisko volného času - Školní 101	čas: 7 minut
+		Středisko volného času - Horská 59	čas: 22 minut
+		Středisko volného času - Horská 618	čas: 16 minut
 
 MHD
 	Školní 101 -> Horská 618 -> Horská 59
