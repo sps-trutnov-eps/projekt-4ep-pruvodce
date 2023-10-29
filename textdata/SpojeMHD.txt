@@ -1,1 +1,10 @@
 IDOS
+Autobusové linky - 1,2,4,6
+Zastávky:
+	(Ze zelené louky do města na školní 101)
+	-Hor.Staré Město,Zelená Louka
+	-Hor.Staré Město,hostinec
+	-Dol.Staré Město,zahradnictví
+	-Dol.Staré Město,Autostyl
+	-Šestidomí	
+	-autobusová stanice
