@@ -1,0 +1,70 @@
+KEBAB HOUSE -
+	TURECKÝ CHLEBA
+1. TURECKÝ CHLEBA KLASIK - 110,-
+2. TURECKÝ CHLEBA SE SÝREM - 125,-
+3. TURECKÝ CHLEBA S OLIVAMI - 125,-
+4. TURECKÝ CHLEBA, OLIVY, SÝR - 135,-
+5. TURECKÝ CHLEBA, POUZE MASO - 140,-
+	TORTILLY
+6. TORTILLA KLASIK - 120,-
+7. TORTILLA SÝR - 130,-
+8. TORTILLA OLIVY - 130,-
+9. TORTILLA, SÝR, OLIVY - 140,-
+10. TORTILLA POUZE MASO - 160,-
+11. TORTILLA S STRIPSY - 135,-
+	KEBAB NA TALÍŘI
+12. VELKÝ TALÍŘ S HRANOLKAMI - 170,-
+13. VELKÝ TALÍŘ S CHLEBEM - 160,-
+14. VELKÝ TALÍŘ S NUDLEMI - 180,-
+15. VELKÝ TALÍŘ JEN MASO - 180,-
+16. MALÝ TALÍŘ S HRANOLKAMI - 145,-
+17. MALÝ TALÍŘ S CHLEBEM - 140,-
+18. MALÝ TALÍŘ S NUDLEMI - 145,-
+19. MALÝ TALÍŘ JEN MASO - 150,-
+	STRIPSY
+20. VELKÝ TALÍŘ, HRANOLKY, STRIPSY - 170,-
+21. MALÝ TALÍŘ, HRANOLKY, STRIPSY - 150,-
+22. MALÝ TALÍŘ, NUDLE, STRIPSY - 150,-
+	BOXY
+23. DONER BOX HRANOLKY - 110,-
+24. DONER BOX NUDLE - 110,-
+	SALÁTY
+25. MÍCHANÝ SALÁT - 80,-
+26. SALÁT, MASO - 125,-
+27. SALÁT, MASO, OLIVY, SÝR - 135,-
+	VEGETARIÁNSKÁ JÍDLA
+28. TORTILLA FALAFEL - 120,-
+29. TALÍŘ FALAFEL - 130,-
+30. ZIGAREN BOREK - 130,-
+31. HRANOLKY - 60,-
+32. NUDLE - 60,-
+
+GALATA KEBAB - 
+	DÖNER KEBAB
+1. Kebab v chlebu Klasik -
+2. Kebab v chlebu se sýrem - 
+3. Kebab v chlebu s olivami -
+4. Kebab v chlebu POUZE MASO -
+	Tortilla
+5. Kebab v tortille Klasik -
+6. Kebab v tortille se sýrem -
+7. Kebab v tortille s olivami - 
+8. Kebab v tortille POUZE MASO -
+	Kebab talíř
+9.  Velký talíř s hranolky - 
+10. Malý talíř s hranolky -
+11. Velký talíř s chlebem -
+12. Malý talíř s chlebem -
+13. Velký talíř s rýží -
+14. Malý talíř s rýží -
+15. Velký talíř s nudlemi -
+16. Malý talíř s nudlemi -
+	Box
+17. Döner box s hranolky -
+18. Döner box s nudlemi -
+	Stripsy
+19. Velký talíř s hranolky a stripsy -
+20 Tortila se stripsy -
+	Vegetariánská jídla
+21. Tortilla s falafel -
+22. Talíř falafel -
