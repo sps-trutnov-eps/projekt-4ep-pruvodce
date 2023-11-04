@@ -4,10 +4,9 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
 
 THREE.Cache.enabled = true;
 
-let renderContainer, blocker, instructions, loadingContainer, loadingProgress, roomContainer, roomInfo;
-let camera, controls, scene, renderer, raycaster;
-let hasFocus;
-let loader, loadingManager;
+let renderContainer, blocker, instructions, loadingContainer, loadingProgress, roomContainer, roomInfo, errorContainer;
+let camera, controls, scene, renderer, raycaster, loader;
+let hasFocus, selectedBuilding;
 
 let textures = {};
 let objects = [];
@@ -18,8 +17,6 @@ let moveRight = false;
 let moveUp = false;
 let moveDown = false;
 
-let selectedBuilding = 1;
-let selectedBuildingPath = '';
 let direction = new THREE.Vector3();
 let velocity = new THREE.Vector3();
 
@@ -47,6 +44,7 @@ function init() {
   loadingProgress = document.getElementById('loadingProgress');
   roomContainer = document.getElementById('roomContainer');
   roomInfo = document.getElementById('roomInfo');
+  errorContainer = document.getElementById('errorContainer');
   
   // Nastavení kamery
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -158,50 +156,35 @@ function init() {
   document.addEventListener( 'keydown', onKeyDown );
   document.addEventListener( 'keyup', onKeyUp );
   
-  // Vybrání modelu
-  switch(selectedBuilding) {
-    case 1:
-      selectedBuildingPath = '/wwwroot/soubor3D/skolni101.gltf'
-      break;
-    case 2:
-      selectedBuildingPath = '/wwwroot/soubor3D/horska618.gltf'
-      break;
-    case 3:
-      selectedBuildingPath = '/wwwroot/soubor3D/horska59.gltf'
-      break;
-    case 4:
-      selectedBuildingPath = '/wwwroot/soubor3D/mladebuky.gltf'
-      break;
-    case 5:
-      selectedBuildingPath = '/wwwroot/soubor3D/largeSkolni101.gltf'
-      break;
-  }
-  
   // Nastavení načítání modelů
   loader = new GLTFLoader();
+  selectedBuilding = document.getElementById('buildingRequest').innerText;
 
   loader.load(
-      selectedBuildingPath, // URL Zdroje
+    `/wwwroot/soubor3D/${selectedBuilding}.gltf`, // URL Zdroje
 
-      function ( gltf ) {
-        scene.add( gltf.scene );
-        gltf.animations; // Array<THREE.AnimationClip>
-        gltf.scene; // THREE.Group
-        gltf.scenes; // Array<THREE.Group>
-        gltf.cameras; // Array<THREE.Camera>
-      },
-      function ( xhr ) {
-        selectedBuilding = ( xhr.loaded / xhr.total * 100 )
-        loadingProgress.value = xhr.loaded / xhr.total * 100;
-        console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        if (xhr.loaded / xhr.total === 1) {
-          loadingContainer.style.display = 'none';
-          blocker.style.display = 'block';
-        }
-      },
-      function ( error ) {
-        console.log( 'Nastala chyba' );
+    function (gltf) {
+      scene.add( gltf.scene );
+      gltf.animations; // Array<THREE.AnimationClip>
+      gltf.scene; // THREE.Group
+      gltf.scenes; // Array<THREE.Group>
+      gltf.cameras; // Array<THREE.Camera>
+    },
+    function (xhr) {
+      selectedBuilding = ( xhr.loaded / xhr.total * 100 )
+      loadingProgress.value = xhr.loaded / xhr.total * 100;
+      console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+      if (xhr.loaded / xhr.total === 1) {
+        loadingContainer.style.display = 'none';
+        blocker.style.display = 'block';
       }
+    },
+    function (error) {
+      console.log( `Nastala chyba: ${error}` );
+      loadingContainer.style.display = 'none';
+      errorContainer.style.display = 'flex';
+      errorContainer.childNodes[1].innerHTML = `${errorContainer.childNodes[1].innerHTML}<br />${error}`;
+    }
   );
   
   // Načtení textur
