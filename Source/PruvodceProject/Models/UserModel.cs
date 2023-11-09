@@ -16,7 +16,8 @@ namespace PruvodceProject.Models
         public string mail { get; set; }
 
         public string trida { get; set; } = String.Empty;
-        public bool jeAdmin { get; set; }
+        [Required]
+        public bool jeAdmin { get; set; } = true;
     }
 
     public class UserVerify
@@ -27,7 +28,6 @@ namespace PruvodceProject.Models
         public string mail { get; set; }
         [Required]
         public string heslo { get; set; }
-        
         public string trida { get; set; } = String.Empty; 
 
         [Required]
