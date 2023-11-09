@@ -31,16 +31,7 @@ namespace PruvodceProject.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<PhotoModel>().HasOne<BudovyModel>(a => a.IdBudovy).WithMany(a => a.fotky); //vazba budovy na fotky
-            builder.Entity<PhotoModel>().HasOne<Ucebna>(a => a.UcebnaId).WithMany(a => a.fotky); //vazba ucebny na fotky
-        }
-        public PruvodceData(DbContextOptions<PruvodceData> options) : base(options)
-        {
-            
-        }
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<AutomatyModel>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Automaty);
-            builder.Entity<UcebnaModel>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Ucebny);
+            builder.Entity<PhotoModel>().HasOne<UcebnaModel>(a => a.UcebnaId).WithMany(a => a.fotky); //vazba ucebny na fotky
         }
     }
 }

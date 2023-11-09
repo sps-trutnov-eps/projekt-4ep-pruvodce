@@ -22,6 +22,6 @@ namespace PruvodceProject.Models
         public BudovyModel IdBudovy { get; set; }
 
         public Guid UcebnaID { get; set; }  //tady ty další jsou zas kvůli vazbě 1:N (1 učebna: N fotkám) V.K.
-        public Ucebna UcebnaId { get; set; }
+        public UcebnaModel UcebnaId { get; set; }
     }
 }
