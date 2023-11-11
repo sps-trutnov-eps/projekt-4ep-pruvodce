@@ -19,6 +19,6 @@ namespace PruvodceProject.Models
         public BudovyModel budovaID { get; set; }
         
         //Napojen� na budovu (jedna t��da m��e b�t jen na jedn� budov�)
-        public ICollection<PhotoModel> fotky { get; set; } //vazba na foto 1:N
+        public ICollection<PhotoModelUcebny> fotky { get; set; } //vazba na foto 1:N
     }
 }

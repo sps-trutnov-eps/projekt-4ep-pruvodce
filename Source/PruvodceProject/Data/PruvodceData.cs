@@ -18,7 +18,9 @@ namespace PruvodceProject.Data
         
         public DbSet<StravovaciZarizeniModel> StravovaciZarizeni { get; set; }
 
-        public DbSet<PhotoModel> Photo { get; set; }
+        public DbSet<PhotoModelBudovy> PhotoBudovy { get; set; }
+
+        public DbSet<PhotoModelUcebny> PhotoUcebny { get; set; }
 
 
         //Nutno doplnit vazby mezi databázemi

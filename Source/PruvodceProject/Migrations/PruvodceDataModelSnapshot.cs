@@ -72,7 +72,7 @@ namespace PruvodceProject.Migrations
                     b.ToTable("Budovy");
                 });
 
-            modelBuilder.Entity("PruvodceProject.Models.PhotoModel", b =>
+            modelBuilder.Entity("PruvodceProject.Models.PhotoModelBudovy", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -96,6 +96,31 @@ namespace PruvodceProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdBudovy1");
+
+                    b.ToTable("PhotoBudovy");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.PhotoModelUcebny", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("DataPhoto")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Nazev")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pripona")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("UcebnaID")
                         .HasColumnType("uniqueidentifier");
 
@@ -104,11 +129,9 @@ namespace PruvodceProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdBudovy1");
-
                     b.HasIndex("UcebnaIdId");
 
-                    b.ToTable("Photo");
+                    b.ToTable("PhotoUcebny");
                 });
 
             modelBuilder.Entity("PruvodceProject.Models.StravovaciZarizeniModel", b =>
@@ -228,7 +251,7 @@ namespace PruvodceProject.Migrations
                     b.Navigation("budovaID");
                 });
 
-            modelBuilder.Entity("PruvodceProject.Models.PhotoModel", b =>
+            modelBuilder.Entity("PruvodceProject.Models.PhotoModelBudovy", b =>
                 {
                     b.HasOne("PruvodceProject.Models.BudovyModel", "IdBudovy")
                         .WithMany("fotky")
@@ -236,13 +259,16 @@ namespace PruvodceProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("IdBudovy");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.PhotoModelUcebny", b =>
+                {
                     b.HasOne("PruvodceProject.Models.UcebnaModel", "UcebnaId")
                         .WithMany("fotky")
                         .HasForeignKey("UcebnaIdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("IdBudovy");
 
                     b.Navigation("UcebnaId");
                 });
