@@ -10,7 +10,9 @@
     </section>
 </article>
 
-<div style="display: none;" id="display">@ViewData["clanekString"]</div>
+<div style="display: none;" id="hack">@ViewData["clanekString"]</div>
+
+<div style="display: none;" id="display"></div>
 <div class="article" id="article">asdsd</div>
 
 
@@ -27,14 +29,17 @@
             theme: 'snow' // or 'bubble'
         });
 
-        // var clanek = JSON.parse(document.getElementById("display").innerHTML);
+        var clanek = document.getElementById("hack").innerHTML;
+
+        console.log(clanek);
 
         //quill.setContents(quill.root.innerHTML); // Hack because ViewData nefunguje v <script> pro nějáký důvod.
-        var ops = [{ insert: "Hello" },{ insert: "World!", attributes: { bold: true } },{ insert: "\n" }];
 
         //quill.setContents(JSON.parse(document.getElementById("display").innerHTML), "api");
-        quill.setContents(ops, "api")
+        quill.setContents(JSON.parse(clanek), "api")
         var html = quill.root.innerHTML;
+
+        console.log(html)
         document.getElementById("article").innerHTML = html;
         
     }
