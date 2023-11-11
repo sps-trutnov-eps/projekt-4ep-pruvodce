@@ -19,6 +19,7 @@ namespace PruvodceProject.Data
         public DbSet<StravovaciZarizeniModel> StravovaciZarizeni { get; set; }
         public DbSet<CrowdSourceModel> CrowdSource { get; set; }
 
+        public DbSet<PhotoModel> Photo { get; set; }
 
 
         //Nutno doplnit vazby mezi databázemi
@@ -26,14 +27,12 @@ namespace PruvodceProject.Data
         /// 
         /// </summary>
         /// <param name="options"></param>
-        public PruvodceData(DbContextOptions<PruvodceData> options) : base(options)
-        {
-            
-        }
+        public PruvodceData(DbContextOptions<PruvodceData> options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<AutomatyModel>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Automaty);
-            builder.Entity<UcebnaModel>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Ucebny);
+            builder.Entity<PhotoModel>().HasOne<BudovyModel>(a => a.IdBudovy).WithMany(a => a.fotky); //vazba budovy na fotky
+            builder.Entity<PhotoModel>().HasOne<UcebnaModel>(a => a.UcebnaId).WithMany(a => a.fotky); //vazba ucebny na fotky
         }
     }
 }
