@@ -30,8 +30,7 @@ namespace PruvodceProject.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<PhotoModel>().HasOne<BudovyModel>(a => a.IdBudovy).WithMany(a => a.fotky); //vazba budovy na fotky
-            builder.Entity<PhotoModel>().HasOne<UcebnaModel>(a => a.UcebnaId).WithMany(a => a.fotky); //vazba ucebny na fotky
+
         }
     }
 }
