@@ -21,6 +21,8 @@ namespace PruvodceProject.Data
 
         public DbSet<PhotoModel> Photo { get; set; }
 
+        public DbSet<ClanekModel> Clanek { get; set; }
+
 
         //Nutno doplnit vazby mezi databázemi
         /// <summary>
