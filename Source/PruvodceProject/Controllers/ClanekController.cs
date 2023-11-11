@@ -26,8 +26,9 @@ namespace PruvodceProject.Controllers
             mail = HttpContext.Session.GetString("mail");
             UserModel? hledane_udaje = _databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.mail == mail);
             uzivatel = (hledane_udaje.ID);
-            _databaze.CrowdSource.Add(new CrowdSourceModel() { IDUzivatele = uzivatel, nadpis = _nadpis, Text = _text, stav = "nevyřízeno"});
-            return RedirectToAction("editor");
+            _databaze.Clanek.Add(new ClanekModel() { ID_autora = uzivatel, NadpisClanku = _nadpis, ObsahClanku = _text, DatumVytvoreni = DateTime.Now});
+            _databaze.SaveChanges();
+            return RedirectToAction("prehled");
         }
         [HttpGet]
         public IActionResult upravit()
@@ -38,6 +39,11 @@ namespace PruvodceProject.Controllers
         public IActionResult smazat()
         {
             return View();
+        }
+        [HttpGet]
+        public IActionResult prehled() 
+        { 
+            return View(_databaze.Clanek.ToList());
         }
     }
 }
