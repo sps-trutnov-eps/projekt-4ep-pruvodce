@@ -17,10 +17,141 @@ namespace PruvodceProject.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("PruvodceProject.Models.AutomatyModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("bagety")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("budova")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("budovaIDID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("patro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("typ")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("budovaIDID");
+
+                    b.ToTable("Automaty");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.BudovyModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("adresa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("kodoveOznaceni")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Budovy");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.CrowdSourceModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("IDUzivatele")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("existujici")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nadpis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("stav")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("CrowdSource");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.StravovaciZarizeniModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("adresa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nazev")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("odkazNaMenu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("popis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("StravovaciZarizeni");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.UcebnaModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("budovaIDID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("druh")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("patro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("budovaIDID");
+
+                    b.ToTable("Ucebna");
+                });
 
             modelBuilder.Entity("PruvodceProject.Models.UserModel", b =>
                 {
@@ -31,6 +162,9 @@ namespace PruvodceProject.Migrations
                     b.Property<string>("heslo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("jeAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<string>("mail")
                         .IsRequired()
@@ -72,6 +206,35 @@ namespace PruvodceProject.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("OverovaciUdaje");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.AutomatyModel", b =>
+                {
+                    b.HasOne("PruvodceProject.Models.BudovyModel", "budovaID")
+                        .WithMany("Automaty")
+                        .HasForeignKey("budovaIDID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("budovaID");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.UcebnaModel", b =>
+                {
+                    b.HasOne("PruvodceProject.Models.BudovyModel", "budovaID")
+                        .WithMany("Ucebny")
+                        .HasForeignKey("budovaIDID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("budovaID");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.BudovyModel", b =>
+                {
+                    b.Navigation("Automaty");
+
+                    b.Navigation("Ucebny");
                 });
 #pragma warning restore 612, 618
         }

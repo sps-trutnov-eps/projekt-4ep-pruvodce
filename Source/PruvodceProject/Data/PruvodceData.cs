@@ -1,14 +1,39 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PruvodceProject.Models;
+using System.Security.Cryptography;
 
 namespace PruvodceProject.Data
 {
     public class PruvodceData : DbContext
     {
+        public DbSet<UcebnaModel> Ucebna { get; set; }
+        
         public DbSet<UserModel> PrihlasovaciUdaje { get; set; }
 
         public DbSet<UserVerify> OverovaciUdaje { get; set; }
 
-        public PruvodceData(DbContextOptions<PruvodceData> options) : base(options) { }
+        public DbSet<AutomatyModel> Automaty { get; set; }
+
+        public DbSet<BudovyModel> Budovy { get; set; }
+        
+        public DbSet<StravovaciZarizeniModel> StravovaciZarizeni { get; set; }
+        public DbSet<CrowdSourceModel> CrowdSource { get; set; }
+
+
+
+        //Nutno doplnit vazby mezi databázemi
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        public PruvodceData(DbContextOptions<PruvodceData> options) : base(options)
+        {
+            
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<AutomatyModel>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Automaty);
+            builder.Entity<UcebnaModel>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Ucebny);
+        }
     }
 }

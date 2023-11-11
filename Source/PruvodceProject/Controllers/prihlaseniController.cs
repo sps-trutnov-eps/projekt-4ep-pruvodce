@@ -7,12 +7,10 @@ using PruvodceProject.Data;
 using PruvodceProject.Interfaces;
 using PruvodceProject.Models;
 
-
 namespace PruvodceProject.Controllers
 {
     public class PrihlaseniController : Controller
     {
-
         PruvodceData Databaze { get; }
 
         private readonly IEmailSender _emailSender;
@@ -20,7 +18,7 @@ namespace PruvodceProject.Controllers
         public PrihlaseniController(PruvodceData databaze, IEmailSender emailSender)
         {
             Databaze = databaze;
-            this._emailSender = emailSender;
+            _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -104,7 +102,7 @@ namespace PruvodceProject.Controllers
 
             int kod = new Random().Next(1000000, 9999999);
 
-            string URL = HttpContext.Request.Host.Value + "/Prihlaseni/Overit?mail=" + mail + "&kod=" + kod;
+            string URL = "https://" + HttpContext.Request.Host.Value + "/Prihlaseni/Overit?mail=" + mail + "&kod=" + kod;
 
             string subject = "Ověření e-mailu!";
             string message = "Klikněte na link pro ověření účtu: " + URL;
@@ -135,6 +133,7 @@ namespace PruvodceProject.Controllers
                 return RedirectToAction("Prihlasit", new { chyba = "Nesprávný e-mail nebo heslo!" });
 
             HttpContext.Session.SetString("mail", mail);
+            HttpContext.Session.SetString("jeAdmin", hledaneUdaje.jeAdmin.ToString());
 
             string[] strlist = mail.Split("@",StringSplitOptions.RemoveEmptyEntries);
 
@@ -229,7 +228,7 @@ namespace PruvodceProject.Controllers
 
             int kod = new Random().Next(1000000, 9999999);
 
-            string URL = HttpContext.Request.Host.Value + "/Prihlaseni/OveritSmazani?mail=" + uzivatel.mail + "&kod=" + kod;
+            string URL = "https://" + HttpContext.Request.Host.Value + "/Prihlaseni/OveritSmazani?mail=" + uzivatel.mail + "&kod=" + kod;
 
             string subject = "Ověření e-mailu!";
             string message = "Klikněte na link pro ověření účtu: " + URL;
