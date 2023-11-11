@@ -18,6 +18,10 @@ namespace PruvodceProject.Controllers
         [HttpGet]
         public IActionResult editor()
         {
+            if(HttpContext.Session.GetString("mail") == null || HttpContext.Session.GetString("mail").Length == 0)
+            {
+                return RedirectToAction("Prihlasit","prihlaseni", new {chyba = "Musíte se přihlásit!"});
+            }
             return View();
         }
         [HttpPost]
