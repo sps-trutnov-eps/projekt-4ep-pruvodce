@@ -1,9 +1,49 @@
 ﻿@{
     ViewData["Title"] = "Kafe";
 }
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
 
 <article>
     <section>
         <p>Kafe????</p>
     </section>
 </article>
+
+<div style="display: none;" id="display">@ViewData["clanekString"]</div>
+<div class="article" id="article">asdsd</div>
+
+
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    window.onload = function() {
+        var quill = new Quill('#display', {
+            modules: {
+                toolbar: false
+            },
+            readOnly: true,
+            placeholder: 'Compose an epic...',
+            theme: 'snow' // or 'bubble'
+        });
+
+        // var clanek = JSON.parse(document.getElementById("display").innerHTML);
+
+        //quill.setContents(quill.root.innerHTML); // Hack because ViewData nefunguje v <script> pro nějáký důvod.
+        var ops = [{ insert: "Hello" },{ insert: "World!", attributes: { bold: true } },{ insert: "\n" }];
+
+        //quill.setContents(JSON.parse(document.getElementById("display").innerHTML), "api");
+        quill.setContents(ops, "api")
+        var html = quill.root.innerHTML;
+        document.getElementById("article").innerHTML = html;
+        
+    }
+    // window.onload  = function() {
+    //     document.getElementById("article").innerHTML = document.getElementById("display").innerHTML; // Hack because ViewData nefunguje v <script> pro nějáký důvod.
+    // }
+
+    // function fill() {
+    //     document.getElementById("article").innerHTML = "FILL";
+    // }
+
+</script>
