@@ -15,13 +15,28 @@ namespace PruvodceProject.Migrations
                 name: "Budovy",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdBudovy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     adresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     kodoveOznaceni = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Budovy", x => x.ID);
+                    table.PrimaryKey("PK_Budovy", x => x.IdBudovy);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clanek",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ID_autora = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NadpisClanku = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ObsahClanku = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DatumVytvoreni = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clanek", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,16 +110,38 @@ namespace PruvodceProject.Migrations
                     patro = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     typ = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     bagety = table.Column<bool>(type: "bit", nullable: false),
-                    budovaIDID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    budovaIDIdBudovy = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Automaty", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Automaty_Budovy_budovaIDID",
-                        column: x => x.budovaIDID,
+                        name: "FK_Automaty_Budovy_budovaIDIdBudovy",
+                        column: x => x.budovaIDIdBudovy,
                         principalTable: "Budovy",
-                        principalColumn: "ID",
+                        principalColumn: "IdBudovy",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhotoBudovy",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nazev = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataPhoto = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Pripona = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BudovaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdBudovy1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhotoBudovy", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PhotoBudovy_Budovy_IdBudovy1",
+                        column: x => x.IdBudovy1,
+                        principalTable: "Budovy",
+                        principalColumn: "IdBudovy",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -115,28 +152,60 @@ namespace PruvodceProject.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     patro = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     druh = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    budovaIDID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    budovaIDIdBudovy = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ucebna", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ucebna_Budovy_budovaIDID",
-                        column: x => x.budovaIDID,
+                        name: "FK_Ucebna_Budovy_budovaIDIdBudovy",
+                        column: x => x.budovaIDIdBudovy,
                         principalTable: "Budovy",
-                        principalColumn: "ID",
+                        principalColumn: "IdBudovy",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhotoUcebny",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nazev = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataPhoto = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Pripona = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UcebnaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UcebnaIdId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhotoUcebny", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PhotoUcebny_Ucebna_UcebnaIdId",
+                        column: x => x.UcebnaIdId,
+                        principalTable: "Ucebna",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Automaty_budovaIDID",
+                name: "IX_Automaty_budovaIDIdBudovy",
                 table: "Automaty",
-                column: "budovaIDID");
+                column: "budovaIDIdBudovy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ucebna_budovaIDID",
+                name: "IX_PhotoBudovy_IdBudovy1",
+                table: "PhotoBudovy",
+                column: "IdBudovy1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PhotoUcebny_UcebnaIdId",
+                table: "PhotoUcebny",
+                column: "UcebnaIdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ucebna_budovaIDIdBudovy",
                 table: "Ucebna",
-                column: "budovaIDID");
+                column: "budovaIDIdBudovy");
         }
 
         /// <inheritdoc />
@@ -146,10 +215,19 @@ namespace PruvodceProject.Migrations
                 name: "Automaty");
 
             migrationBuilder.DropTable(
+                name: "Clanek");
+
+            migrationBuilder.DropTable(
                 name: "CrowdSource");
 
             migrationBuilder.DropTable(
                 name: "OverovaciUdaje");
+
+            migrationBuilder.DropTable(
+                name: "PhotoBudovy");
+
+            migrationBuilder.DropTable(
+                name: "PhotoUcebny");
 
             migrationBuilder.DropTable(
                 name: "PrihlasovaciUdaje");
