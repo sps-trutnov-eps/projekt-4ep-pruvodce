@@ -1,0 +1,152 @@
+﻿@{
+    ViewData["Title"] = "Editor";
+}
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<article>
+    <section>
+        <div id="editorContainer"></div>
+    </section>
+</article>
+
+<script>
+    var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+
+        [{ 'header': 1 }, { 'header': 2 }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],
+        [{ 'indent': '-1' }, { 'indent': '+1' }],
+        [{ 'direction': 'rtl' }],
+
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+
+        ['clean'],
+        ['image'],
+        ['video'],
+        ["link"]
+
+    ];
+    var quill = new Quill('#editorContainer', {
+        modules: {
+            toolbar: {
+                container: toolbarOptions,
+                handlers: {
+                    image: imageHandler,
+                    "link": function (value) {
+                        if (value) {
+                            var href = prompt('Enter the URL');
+                            this.quill.format('link', href);
+                        } else {
+                            this.quill.format('link', false);
+                        }
+                    }
+                }
+
+            }
+        },
+        placeholder: 'Compose an epic...',
+        theme: 'snow'  // or 'bubble'
+    });
+    function imageHandler() {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.click();
+
+        // Listen upload local image and save to server
+        input.onchange = () => {
+            const file = input.files[0];
+
+            // file type is only image.
+            if (/^image\//.test(file.type)) {
+                const altText = prompt('Enter alt text for the image:'); // Prompt the user to enter alt text
+                saveToServer(file, altText); // Pass alt text to the saveToServer function
+            } else {
+                console.warn('You could only upload images.');
+            }
+        };
+    }
+
+    function saveToServer(file, altText) {
+        const data = new FormData();
+        data.append('img', file);
+        data.append('alt', altText); // Append alt text to the form data
+        $.ajax({
+            dataType: 'json',
+            url: "/clanek/uploadImg",
+            method: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                var url = res.path;
+                url = url.replace("http://localhost:9000/", "")
+                insertToEditor(res.path, altText); // Pass alt text to the insertToEditor function
+            }
+        })
+    }
+    function insertToEditor(url, altText) {
+        const range = quill.getSelection();
+        const imgTag = `<img src="${url}" alt="${altText}" loading="lazy">`;
+        const div = document.createElement('div');
+        div.innerHTML = imgTag;
+        const imageElement = div.firstChild;
+        quill.clipboard.dangerouslyPasteHTML(range.index, imgTag);
+        const insertedImage = quill.getLeaf(range.index)[0];
+        insertedImage[0].parentNode.replaceChild(imageElement, insertedImage[0]);
+    }
+    $('#submit').click(function () {
+        var delta = quill.getContents();
+        $.ajax({
+            url: "/clanek/pridat-clanek",
+            method: "POST",
+            data: {
+                "delta": JSON.stringify(delta),
+                "title": document.getElementById("Title").value,
+                "hook": document.getElementById("Hook").value,
+                "image": $('input[name="radio"]:checked').val(),
+                "category": document.getElementById("cat").value,
+                "date": document.getElementById("date").value,
+                success: function () {
+                    window.location.reload();
+                }
+            }
+
+        })
+    });
+    var images;
+    $(document).ready(function () {
+        $.ajax({
+            url: "/clanek/imgs",
+            method: "get",
+            success: function (res) {
+                var images = res.imagesOut;
+                for (var i = 0; i < images.length; i++) {
+                    var mainDiv = document.getElementById("images");
+                    var imgDiv = document.createElement("div");
+                    imgDiv.style.backgroundImage = "url( " + images[i].path.replace(/\\/g, "/") + ")"
+                    imgDiv.classList.add("img-selector");
+                    var input = document.createElement("input");
+                    input.type = "radio";
+                    input.name = "radio";
+                    input.id = "image";
+                    input.value = images[i].path.replace(/\\/g, "/");
+                    imgDiv.appendChild(input);
+                    mainDiv.appendChild(imgDiv);
+                }
+            }
+        })
+    })
+    $("#close-window").click(function () {
+        document.getElementById("dialog").style.display = "none";
+    })
+    $("#select-images").click(function () {
+        document.getElementById("dialog").style.display = "block";
+    })
+</script>
