@@ -41,6 +41,13 @@ namespace PruvodceProject.Controllers
         public IActionResult Jidelny()
         {
             List<StravovaciZarizeniModel> stravovaciZarizeni = Databaze.StravovaciZarizeni.ToList();
+            stravovaciZarizeni.Add(new StravovaciZarizeniModel()
+            {
+                adresa = "Školní 101, Trutnov",
+                nazev = "SPŠ",
+                odkazNaMenu = "www.odkaz.eu",
+                popis = "Dobře vaří :)"
+            });
 
             return View(stravovaciZarizeni);
         }
