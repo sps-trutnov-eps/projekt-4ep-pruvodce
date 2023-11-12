@@ -20,7 +20,16 @@ namespace PruvodceProject.Controllers
 
         public IActionResult Automaty()
         {
-            return View();
+            List<AutomatyModel> automaty = Databaze.Automaty.ToList();
+            automaty.Add(new AutomatyModel()
+            {
+                budova = "Školní 101",
+                patro = "1",
+                typ = "Automat na jídlo",
+                bagety = true
+
+            }); 
+            return View(automaty);
         }
 
         public IActionResult Kafe()
