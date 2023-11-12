@@ -238,6 +238,8 @@ namespace PruvodceProject.Controllers
             Databaze.OverovaciUdaje.Add(new UserVerify() { heslo = heslo, mail = uzivatel.mail, trida = uzivatel.trida, kod = kod });
             Databaze.SaveChanges();
 
+            Odhlasit();
+
             return RedirectToAction("Profil", new { chyba = "Byl odeslán ověřovací e-mail." });
         }
 
