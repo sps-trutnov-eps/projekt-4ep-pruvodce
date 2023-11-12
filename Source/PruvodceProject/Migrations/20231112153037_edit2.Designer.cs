@@ -12,8 +12,8 @@ using PruvodceProject.Data;
 namespace PruvodceProject.Migrations
 {
     [DbContext(typeof(PruvodceData))]
-    [Migration("20230925163927_NoveModely1")]
-    partial class NoveModely1
+    [Migration("20231112153037_edit2")]
+    partial class edit2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace PruvodceProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("budovaIDIdBudovy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("patro")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -48,12 +51,14 @@ namespace PruvodceProject.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("budovaIDIdBudovy");
+
                     b.ToTable("Automaty");
                 });
 
             modelBuilder.Entity("PruvodceProject.Models.BudovyModel", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("IdBudovy")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -65,12 +70,74 @@ namespace PruvodceProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("IdBudovy");
 
                     b.ToTable("Budovy");
                 });
 
-            modelBuilder.Entity("PruvodceProject.Models.StravovaciZarizeni", b =>
+            modelBuilder.Entity("PruvodceProject.Models.PhotoModelBudovy", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BudovaID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("DataPhoto")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<Guid>("IdBudovy1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nazev")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pripona")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdBudovy1");
+
+                    b.ToTable("PhotoBudovy");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.PhotoModelUcebny", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("DataPhoto")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Nazev")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pripona")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UcebnaID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UcebnaIdId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UcebnaIdId");
+
+                    b.ToTable("PhotoUcebny");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.StravovaciZarizeniModel", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
@@ -97,10 +164,13 @@ namespace PruvodceProject.Migrations
                     b.ToTable("StravovaciZarizeni");
                 });
 
-            modelBuilder.Entity("PruvodceProject.Models.Ucebna", b =>
+            modelBuilder.Entity("PruvodceProject.Models.UcebnaModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("budovaIDIdBudovy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("druh")
@@ -112,6 +182,8 @@ namespace PruvodceProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("budovaIDIdBudovy");
 
                     b.ToTable("Ucebna");
                 });
@@ -125,6 +197,9 @@ namespace PruvodceProject.Migrations
                     b.Property<string>("heslo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("jeAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<string>("mail")
                         .IsRequired()
@@ -166,6 +241,64 @@ namespace PruvodceProject.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("OverovaciUdaje");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.AutomatyModel", b =>
+                {
+                    b.HasOne("PruvodceProject.Models.BudovyModel", "budovaID")
+                        .WithMany("Automaty")
+                        .HasForeignKey("budovaIDIdBudovy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("budovaID");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.PhotoModelBudovy", b =>
+                {
+                    b.HasOne("PruvodceProject.Models.BudovyModel", "IdBudovy")
+                        .WithMany("fotky")
+                        .HasForeignKey("IdBudovy1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("IdBudovy");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.PhotoModelUcebny", b =>
+                {
+                    b.HasOne("PruvodceProject.Models.UcebnaModel", "UcebnaId")
+                        .WithMany("fotky")
+                        .HasForeignKey("UcebnaIdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UcebnaId");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.UcebnaModel", b =>
+                {
+                    b.HasOne("PruvodceProject.Models.BudovyModel", "budovaID")
+                        .WithMany("Ucebny")
+                        .HasForeignKey("budovaIDIdBudovy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("budovaID");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.BudovyModel", b =>
+                {
+                    b.Navigation("Automaty");
+
+                    b.Navigation("Ucebny");
+
+                    b.Navigation("fotky");
+                });
+
+            modelBuilder.Entity("PruvodceProject.Models.UcebnaModel", b =>
+                {
+                    b.Navigation("fotky");
                 });
 #pragma warning restore 612, 618
         }

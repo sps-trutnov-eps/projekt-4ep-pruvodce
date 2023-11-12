@@ -6,7 +6,12 @@
     bool pristupOveren = (httpContext != null) && (httpContext.Session.GetString("prihlasen") == "Ano");
     string prihlaseny_uzivatel = httpContext.Session.GetString("uzivatel");
 }
-<div class="novinky"> @* Novinky, doporučené články atd.. "isic nebo aktuály školy" *@
-    <h1>tohle jsou krutý novinky</h1>
-</div> 
-<h1>Indexin'</h1>
+<article>
+    <section>
+        <div class="novinky"> @* Novinky, doporučené články atd.. "isic nebo aktuály školy" *@
+            <h2>tohle jsou krutý novinky</h2>
+        </div> 
+        <h2>Indexin'</h2>
+        
+    </section>
+</article>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace PruvodceProject.Controllers
 {
@@ -31,3 +32,4 @@ namespace PruvodceProject.Controllers
         }
     }
 }
+

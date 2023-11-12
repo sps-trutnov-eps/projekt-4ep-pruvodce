@@ -3,6 +3,7 @@
 @{
     HttpContext? httpContext = HttpContextAccessor.HttpContext;
     string uzivatel = httpContext.Session.GetString("jmeno");
+    string jeAdmin = httpContext.Session.GetString("jeAdmin");
 }
 
 <nav>
@@ -16,19 +17,17 @@
         <a asp-controller="Navigace" asp-action="Index">Navigace</a>
         <ul>
             <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
-            <li><a asp-controller="Budovy" asp-action="Ucebny">Učebny</a></li>
-            <li><a asp-controller ="Budovy" asp-action="Telocvicny">Tělocvičny</a></li>
-            <li><a asp-controller="Budovy" asp-action="Jidelny">Jídelny</a></li>
-            <li><a asp-controller="Budovy" asp-action="Zachody">Záchody</a></li>
+            <li><a asp-controller="Navigace" asp-action="Ucebny">Učebny</a></li>
+            <li><a asp-controller="Navigace" asp-action="Telocvicny">Tělocvičny</a></li>
+            <li><a asp-controller="Navigace" asp-action="Zachody">Záchody</a></li>
         </ul>
     </div>
 
     <div class="menu">
         <a asp-controller="Jidlo" asp-action="Index">Jídlo</a>
         <ul>
-            <li><a asp-controller="Jidlo" asp-action="Automaty">Automaty</a></li>
-            <li><a asp-controller="Jidlo" asp-action="TipyNaObed">Tipy na oběd</a></li>
             <li><a asp-controller="Jidlo" asp-action="Jidelny">Jídelny</a></li>
+            <li><a asp-controller="Jidlo" asp-action="Automaty">Automaty</a></li>
             <li><a asp-controller="Jidlo" asp-action="Kafe">Kafe</a></li>
             <li><a asp-controller="Jidlo" asp-action="Obchody">Obchody</a></li>
             <li><a asp-controller="Jidlo" asp-action="Mikrovlnky">Mikrovlnky</a></li>
@@ -38,13 +37,10 @@
     <div class="menu">
         <a asp-controller="Odkazy" asp-action="Index">Odkazy</a>
         <ul>
-            <li><a asp-controller="Odkazy" asp-action="Isic">ISIC - slevy</a></li>
-            <li><a asp-controller="Odkazy" asp-action="Bakalari">Bakaláři</a></li>
-            <li><a asp-controller="Odkazy" asp-action="Sps">SPŠ Trutnov</a></li>
-            <li><a asp-controller ="Odkazy" asp-action="KeStazeni">Školní řád</a></li>
-            <li><a asp-controller="Odkazy" asp-action="Mail">Mail</a></li>
-            <li><a asp-controller="Odkazy" asp-action="Youtube">Youtube</a></li>
-            <li><a asp-controller="Odkazy" asp-action="Github">GitHub</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Bakalari" target="_blank">Bakaláři</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Sps" target="_blank">SPŠ Trutnov</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Mail" target="_blank">Mail</a></li>
+            <li><a asp-controller="Odkazy" asp-action="Github" target="_blank">GitHub</a></li>
         </ul>
     </div>
 
@@ -58,7 +54,6 @@
         </ul>
     </div>
 
-
     @if (uzivatel != null)
     {
         <div class="vpravo">
@@ -68,6 +63,12 @@
         <div class="vpravo">
             <a asp-controller="Prihlaseni" asp-action="Profil">@uzivatel</a>
         </div>
+
+        @if (jeAdmin == "True") {
+            <div class="vpravo">
+                <a asp-controller="CrowdSource" asp-action="Index">Admin</a>
+            </div>
+        }
     }
     else
     {
