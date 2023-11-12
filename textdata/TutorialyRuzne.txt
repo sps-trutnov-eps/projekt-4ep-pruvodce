@@ -9,3 +9,16 @@ Zdarma AI programy vhodné ke studiu
 
 - Adobe Firefly
  -
+
+- Epsilon
+ - připojíte se např. přes Filezillu
+ - školní server, hostuje testovací weby žáků naší školy.
+ - pouze statické weby
+
+- WIFI
+ - jak se připojit?
+ - škola má vlastní wifi pro žáky, připojíte se k ní tak,
+že použijete své jméno a heslo, které máte na školních počítačích.
+
+- Seznam učitelů
+ - nachází se na webu školy
