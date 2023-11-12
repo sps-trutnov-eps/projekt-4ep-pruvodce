@@ -13,12 +13,22 @@ namespace PruvodceProject.Controllers
             _databaze = databaze;
         }
 
+        public IActionResult Reporty()
+        {
+            if (HttpContext.Session.GetString("jeAdmin") == "True")
+                return View(_databaze.CrowdSource.ToList());
+            
+            return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nedostatečná oprávnění!" });
+
+        }
+        
         public IActionResult Index()
         {
-            List<CrowdSourceModel>? crowdSource = _databaze.CrowdSource
-                .ToList();
-
-            return View(crowdSource);
+            //Membership.GetUser();
+            if (HttpContext.Session.GetString("jeAdmin") == "True")
+                return View();
+            
+            return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nedostatečná oprávnění!" });
         }
     }
 }

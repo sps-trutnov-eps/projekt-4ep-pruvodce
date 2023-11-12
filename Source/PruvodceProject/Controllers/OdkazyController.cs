@@ -4,10 +4,7 @@ namespace PruvodceProject.Controllers
 {
     public class OdkazyController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
         public IActionResult Isic() => Redirect("https://www.isic.cz/prukazy/isic/");
 
@@ -22,5 +19,7 @@ namespace PruvodceProject.Controllers
         public IActionResult Youtube() => Redirect("https://www.youtube.com/@@spstrutnov");
         
         public IActionResult Github() => Redirect("https://github.com/enterprises/sps-trutnov");
+
+        public IActionResult GithubStudent() => Redirect("https://education.github.com/pack");
     }
 }

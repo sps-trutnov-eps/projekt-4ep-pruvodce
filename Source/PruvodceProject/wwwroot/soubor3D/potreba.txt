@@ -1,0 +1,23 @@
+
+Pro budovy.js >>
+Dokončit přijímání výběru modelu
+Načítání modelu na stránku (může zasahovat do Budovy/Index.cshtml "Částečně to tam bylo, ale někdo to smazal")
+Požadavek na Controller pro vytáhnutí dat o místnosti (k tomu poslouží funkce "dotek()")
+
+>> Nic z toho není povinné pro nikoho mimo 3D vrstvu, ale ocenil bych pomoc od IDLE vrstev))
+
+>> Tlačítka pro patra. A.k.a. bude tlačítko pro každé patro + pro všechny naráz
+-Na tlačítko ťuknu a ukáže se pouze požadované patro
+(školní má kolekce:
+patro-prizemi
+patro-1.patro
+patro-2.patro
+patro-3.patro
+patro-strecha
+V celku doporučuji vždy zneviditelnit děti těchto kolekcí
+
+>> Nějaký styl pro načítací obrazovku (např. bílá barva na logu školy se bude podle procent načítání vyplňovat za modrou barvu, nebo barvově naopak)
+
+
+
+Povolení osvětlení (přidá se po dokončení modelů)
