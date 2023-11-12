@@ -35,14 +35,17 @@ namespace PruvodceProject.Controllers
             return RedirectToAction("prehled");
         }
         [HttpGet]
-        public IActionResult upravit()
+        public IActionResult upravit(Guid Id)
         {
             return RedirectToAction("editor");
         }
-
-        public IActionResult smazat()
+        [HttpPost]
+        public IActionResult smazat(Guid Id)
         {
-            return View();
+            ClanekModel? hledany_clanek = _databaze.Clanek.FirstOrDefault(n => n != null && n.Id == Id);
+            _databaze.Clanek.Remove(hledany_clanek);
+            _databaze.SaveChanges();
+            return RedirectToAction("prehled");
         }
         [HttpGet]
         public IActionResult prehled() 
