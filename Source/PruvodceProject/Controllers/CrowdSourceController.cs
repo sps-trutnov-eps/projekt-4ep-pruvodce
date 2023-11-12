@@ -26,7 +26,7 @@ namespace PruvodceProject.Controllers
         {
             //Membership.GetUser();
             if (HttpContext.Session.GetString("jeAdmin") == "True")
-                return View();
+                return View(_databaze.PrihlasovaciUdaje.ToList());
             
             return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nedostatečná oprávnění!" });
         }
