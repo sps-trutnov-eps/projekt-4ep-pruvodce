@@ -67,7 +67,7 @@ namespace PruvodceProject.Migrations
                     b.ToTable("Budovy");
                 });
 
-            modelBuilder.Entity("PruvodceProject.Models.StravovaciZarizeni", b =>
+            modelBuilder.Entity("PruvodceProject.Models.StravovaciZarizeniModel", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
@@ -122,6 +122,9 @@ namespace PruvodceProject.Migrations
                     b.Property<string>("heslo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("jeAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<string>("mail")
                         .IsRequired()
