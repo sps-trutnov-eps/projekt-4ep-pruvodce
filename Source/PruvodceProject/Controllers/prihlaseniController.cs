@@ -311,5 +311,17 @@ namespace PruvodceProject.Controllers
             else
                 return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
         }
+        [HttpGet]
+        public IActionResult CrowdSource()
+        {
+            List<CrowdSourceModel>? crowdSource = Databaze.CrowdSource
+                .ToList();
+
+            if (HttpContext.Session.GetString("jeAdmin") == "True")
+                return View(crowdSource);
+            else
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
+        }
+
     }
 }
