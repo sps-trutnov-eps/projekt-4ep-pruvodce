@@ -1,4 +1,5 @@
-﻿using System.Text.Encodings.Web;
+﻿using System.Diagnostics;
+using System.Text.Encodings.Web;
 using System.Web;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
@@ -304,23 +305,26 @@ namespace PruvodceProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Admin()
+        public IActionResult NahlasitProblem()
         {
-            if (HttpContext.Session.GetString("jeAdmin") == "True")
-                return View();
-            else
-                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
-        }
-        [HttpGet]
-        public IActionResult CrowdSource()
-        {
-            List<CrowdSourceModel>? crowdSource = Databaze.CrowdSource
-                .ToList();
+            string userID = HttpContext.Session.GetString("mail");
+            Debug.WriteLine(userID);
 
-            if (HttpContext.Session.GetString("jeAdmin") == "True")
-                return View(crowdSource);
-            else
-                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
+            return View();
+        }
+        [HttpPost]
+        public IActionResult NahlasitProblem(string nadpis, string text)
+        {
+            string userID = HttpContext.Session.GetString("ID");
+
+            Debug.WriteLine(userID);
+            /*
+            CrowdSourceModel problem = new CrowdSourceModel()
+            {
+                IDUzivatele = userID
+            };
+            */
+            return RedirectToAction("Home", "Index");
         }
 
     }
