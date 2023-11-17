@@ -4,7 +4,8 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
 
 THREE.Cache.enabled = true;
 
-let renderContainer, blocker, instructions, loadingContainer, loadingProgress, roomContainer, roomInfo, errorContainer;
+let renderContainer, blocker, instructions, loadingContainer, loadingProgress, roomContainer, roomInfo, errorContainer,
+    optionsContainer;
 let camera, controls, scene, renderer, raycaster, loader;
 let hasFocus, selectedBuilding;
 
@@ -45,6 +46,7 @@ function init() {
   roomContainer = document.getElementById('roomContainer');
   roomInfo = document.getElementById('roomInfo');
   errorContainer = document.getElementById('errorContainer');
+  optionsContainer = document.getElementById('optionsContainer');
   
   // Nastavení kamery
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -169,16 +171,40 @@ function init() {
       gltf.scene; // THREE.Group
       gltf.scenes; // Array<THREE.Group>
       gltf.cameras; // Array<THREE.Camera>
+      
+      scene.children[scene.children.length - 1].children.forEach(e => {
+        optionsContainer.appendChild(document.createElement('li'));
+        let element = document.createElement('a');
+        Object.assign(element, {
+          innerHTML: e.name.replace('patro-', ''),
+          id: e.name,
+          onclick: (e) => {
+            selectGroup(e.target.id)
+          }
+        });
+        optionsContainer.lastChild.appendChild(element);
+      });
+      
+      optionsContainer.appendChild(document.createElement('li'));
+      let element = document.createElement('a');
+      Object.assign(element, {
+        innerHTML: 'Zobrazit vše',
+        onclick: () => {
+          selectGroup()
+        }
+      });
+      optionsContainer.lastChild.appendChild(element);
     },
+      
     function (xhr) {
       selectedBuilding = ( xhr.loaded / xhr.total * 100 )
       loadingProgress.value = xhr.loaded / xhr.total * 100;
-      console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
       if (xhr.loaded / xhr.total === 1) {
         loadingContainer.style.display = 'none';
         blocker.style.display = 'block';
       }
     },
+      
     function (error) {
       console.log( `Nastala chyba: ${error}` );
       loadingContainer.style.display = 'none';
@@ -212,7 +238,7 @@ function obd(x, y, z, obrazek, barva, jmeno) {
   objects.push(ct);
 }
 
-// Nevím, co to dělá
+// Už vím, co to dělá
 function dotek() {
   raycaster.set(controls.getObject().position, controls.getDirection(new THREE.Vector3()));
   const intersects = raycaster.intersectObjects(objects, true);
@@ -275,4 +301,19 @@ function animate() {
   prevTime = time;
 
   renderer.render( scene, camera );
+}
+
+// Přepnutí zobrazení části modelu
+function selectGroup(name = null) {
+  if (name === null) {
+    scene.children[scene.children.length - 1].children.forEach(e => {
+      e.visible = true;
+    })
+  } else {
+    scene.children[scene.children.length - 1].children.forEach(e => {
+      e.visible = false;
+    })
+    
+    scene.getObjectByName(name).visible = true;
+  }
 }
