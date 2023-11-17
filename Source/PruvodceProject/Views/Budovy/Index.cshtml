@@ -8,26 +8,18 @@
     
     <nav class="vpravo">
         <div class="menu">
-            <a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">Školní 101</a>
+            <a>Možnosti</a>
+            <ul id="optionsContainer"></ul>
+        </div>
+        
+        <div class="menu">
+            <a>Výběr budovy</a>
             <ul>
-                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">Přízemí</a></li>
-                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">1. patro</a></li>
-                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">2. patro</a></li>
-                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">3. patro</a></li>
-                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">Střecha</a></li>
+                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">Školní 101</a></li>
+                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="horska618">Horská 618</a></li>
+                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="horska59">Horská 59</a></li>
+                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="mladebuky">Mladé Buky</a></li>
             </ul>
-        </div>
-        
-        <div class="menu">
-            <a asp-controller="Budovy" asp-action="Index" asp-route-budova="horska618">Horská 618</a>
-        </div>
-        
-        <div class="menu">
-            <a asp-controller="Budovy" asp-action="Index" asp-route-budova="horska59">Horská 59</a>
-        </div>
-        
-        <div class="menu">
-            <a asp-controller="Budovy" asp-action="Index" asp-route-budova="mladebuky">Mladé Buky</a>
         </div>
     </nav>
 </div>
@@ -46,9 +38,7 @@
     </div>
     
     <div id="errorContainer">
-        <p style="font-size:36px">
-            Nastala chyba!
-        </p>
+        <p style="font-size:36px">Nastala chyba!</p>
     </div>
 
     <div id="roomContainer">
@@ -59,9 +49,7 @@
     
     <div id="blocker">
         <div id="instructions">
-            <p style="font-size:36px">
-                Klikni pro spuštění
-            </p>
+            <p style="font-size:36px">Klikni pro spuštění</p>
             <p>
                 Pohyb: WASD<br/>
                 Nahoru: SPACE<br/>
