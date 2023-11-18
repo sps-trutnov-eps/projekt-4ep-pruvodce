@@ -28,11 +28,11 @@ window.addEventListener("load", () => {
   init();
   animate();
 
-  obd(24,10,20,textures['logo'],"", "infoT1");
-  obd(8,10,20,textures['logo'],"", "infoT2");
-  obd(16,10,20,textures['logo'],"", "infoT5");
-  obd(20,10,20,textures['logo'],"", "infoT6");
-  obd(0,10,20,textures['logo'],"", "infoT15");
+  // obd(24,10,20,textures['logo'],"", "infoT1");
+  // obd(8,10,20,textures['logo'],"", "infoT2");
+  // obd(16,10,20,textures['logo'],"", "infoT5");
+  // obd(20,10,20,textures['logo'],"", "infoT6");
+  // obd(0,10,20,textures['logo'],"", "infoT15");
 });
 
 // Inicializace
