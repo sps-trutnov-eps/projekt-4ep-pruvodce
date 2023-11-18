@@ -61,7 +61,7 @@ function init() {
   scene.background = textures['pozadi'];
 
   // Nastavení mapování myši pro interakci s objekty
-  raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
+  raycaster = new THREE.Raycaster();
   
   // Renderer
   renderer = new THREE.WebGLRenderer();
