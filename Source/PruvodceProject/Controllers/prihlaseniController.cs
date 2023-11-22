@@ -303,29 +303,5 @@ namespace PruvodceProject.Controllers
 
             return RedirectToAction("Prihlasit", new { chyba = "Heslo úspěšně změněno!" });
         }
-
-        [HttpGet]
-        public IActionResult NahlasitProblem()
-        {
-            string userID = HttpContext.Session.GetString("mail");
-            Debug.WriteLine(userID);
-
-            return View();
-        }
-        [HttpPost]
-        public IActionResult NahlasitProblem(string nadpis, string text)
-        {
-            string userID = HttpContext.Session.GetString("ID");
-
-            Debug.WriteLine(userID);
-            /*
-            CrowdSourceModel problem = new CrowdSourceModel()
-            {
-                IDUzivatele = userID
-            };
-            */
-            return RedirectToAction("Home", "Index");
-        }
-
     }
 }
