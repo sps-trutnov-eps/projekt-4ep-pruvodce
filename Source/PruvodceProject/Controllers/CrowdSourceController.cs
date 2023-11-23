@@ -5,11 +5,11 @@ using System.Diagnostics;
 
 namespace PruvodceProject.Controllers
 {
-    public class CrowdSource : Controller
+    public class CrowdSourceController : Controller
     {
         public PruvodceData _databaze;
 
-        public CrowdSource(PruvodceData databaze)
+        public CrowdSourceController(PruvodceData databaze)
         {
             _databaze = databaze;
         }

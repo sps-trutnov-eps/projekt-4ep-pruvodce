@@ -58,6 +58,14 @@
         </ul>
     </div>
 
+    @if (uzivatel != null)
+    {
+        <div class="menu">
+            <a asp-controller="CrowdSource" asp-action="NahlasitProblem">Nahlásit</a>
+        </div>
+    }
+
+
 
     @if (uzivatel != null)
     {
