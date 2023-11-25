@@ -3,7 +3,7 @@
 }
 
 <article>
-    <section>
+    <section id="registrace">
         <form action="/Prihlaseni/Registrace" method="post">
             <input name="trida" placeholder="Zadejte třídu..." type="text"/><br/>
             <input name="mail" placeholder="zadejte svůj e-mail..."/><br/>
@@ -13,6 +13,6 @@
             <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
         </form>
         
-        <p>Máš už účet, <a asp-action="Prihlasit"><b>přihlas se</b></a></p>
+        <p>Máš už účet? <a asp-action="Prihlasit"><b>Přihlas se</b></a></p>
     </section>
 </article>
