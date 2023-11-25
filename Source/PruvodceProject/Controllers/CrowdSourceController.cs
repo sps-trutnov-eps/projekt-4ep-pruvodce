@@ -43,7 +43,8 @@ namespace PruvodceProject.Controllers
                 IDUzivatele = userID,
                 nadpis = title,
                 Text = text,
-                stav = "čeká na vyřízení"
+                stav = "čeká na vyřízení",
+                existujici = ""
             };
 
             _databaze.Add(problem);
