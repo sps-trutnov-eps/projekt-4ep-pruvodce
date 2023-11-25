@@ -18,7 +18,10 @@ namespace PruvodceProject.Controllers
         [HttpGet]
         public IActionResult NahlasitProblem()
         {
-            return View();
+            if (HttpContext.Session.GetString("jmeno") != null)
+                return View();
+            else
+                return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         public IActionResult NahlasitProblem(string title, string text)
