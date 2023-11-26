@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using PruvodceProject.Data;
 using PruvodceProject.Models;
+using System.Diagnostics;
 
 namespace PruvodceProject.Controllers
 {
@@ -13,13 +14,46 @@ namespace PruvodceProject.Controllers
             _databaze = databaze;
         }
 
-        public IActionResult Reporty()
-        {
-            if (HttpContext.Session.GetString("jeAdmin") == "True")
-                return View(_databaze.CrowdSource.ToList());
-            
-            return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nedostatečná oprávnění!" });
 
+        [HttpGet]
+        public IActionResult NahlasitProblem()
+        {
+            if (HttpContext.Session.GetString("jmeno") != null)
+                return View();
+            else
+                return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public IActionResult NahlasitProblem(string title, string text)
+        {
+            bool uzivatelNezadalNadpis = title == null || title.Trim().Length == 0;
+            bool uzivatelNezadalText = text == null || text.Trim().Length == 0;
+
+            if (uzivatelNezadalNadpis || uzivatelNezadalText)
+                return RedirectToAction("Pridat");
+
+
+            string userMail = HttpContext.Session.GetString("mail");
+
+            UserModel? user = _databaze.PrihlasovaciUdaje
+                .Where(u => u.mail == userMail)
+                .FirstOrDefault();
+
+            Guid userID = user.ID;
+
+            CrowdSourceModel problem = new CrowdSourceModel()
+            {
+                IDUzivatele = userID,
+                nadpis = title,
+                Text = text,
+                stav = "čeká na vyřízení",
+                existujici = ""
+            };
+
+            _databaze.Add(problem);
+            _databaze.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
         
         public IActionResult Index()
@@ -31,4 +65,4 @@ namespace PruvodceProject.Controllers
             return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nedostatečná oprávnění!" });
         }
     }
-}
+}   

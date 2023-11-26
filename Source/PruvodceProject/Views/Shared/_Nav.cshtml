@@ -1,4 +1,4 @@
-﻿@inject IHttpContextAccessor HttpContextAccessor;
+@inject IHttpContextAccessor HttpContextAccessor;
 @using Microsoft.AspNetCore.Http;
 @{
     HttpContext? httpContext = HttpContextAccessor.HttpContext;
@@ -56,6 +56,15 @@
 
     @if (uzivatel != null)
     {
+        <div class="menu">
+            <a asp-controller="CrowdSource" asp-action="NahlasitProblem">Nahlásit</a>
+        </div>
+    }
+
+
+
+    @if (uzivatel != null)
+    {
         <div class="vpravo">
             <a asp-controller="Prihlaseni" asp-action="Odhlasit">Odhlásit se</a>
         </div>
@@ -66,7 +75,7 @@
 
         @if (jeAdmin == "True") {
             <div class="vpravo">
-                <a asp-controller="CrowdSource" asp-action="Index">Admin</a>
+                <a asp-controller="AdminDashboard" asp-action="Index">Admin</a>
             </div>
         }
     }

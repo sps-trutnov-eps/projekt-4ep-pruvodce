@@ -1,4 +1,5 @@
-﻿using System.Text.Encodings.Web;
+﻿using System.Diagnostics;
+using System.Text.Encodings.Web;
 using System.Web;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
