@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using PruvodceProject.Data;
 using PruvodceProject.Models;
 using System.Diagnostics;
@@ -54,6 +54,15 @@ namespace PruvodceProject.Controllers
             _databaze.SaveChanges();
 
             return RedirectToAction("Index", "Home");
+        }
+        
+        public IActionResult Index()
+        {
+            //Membership.GetUser();
+            if (HttpContext.Session.GetString("jeAdmin") == "True")
+                return View(_databaze.PrihlasovaciUdaje.ToList());
+            
+            return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nedostatečná oprávnění!" });
         }
     }
 }   

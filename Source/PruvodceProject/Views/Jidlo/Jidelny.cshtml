@@ -5,10 +5,20 @@
 
 <article>
     <section>
-        <h2>Pizzerie</h2>
+        <h2 style="text-align: center">Jídelny</h2>
         @foreach(StravovaciZarizeniModel jidelna in Model) {
-            @jidelna.nazev
-        }    
-
+            <section style="border-top: #223974 solid 3px">
+                <h3 style="text-align: center">@jidelna.nazev</h3>
+                <div style="text-align: center">
+                    <p><u><b>Adresa jídelny:</b></u> @jidelna.adresa</p>
+                    <p><u><b>Popis jídelny:</b></u> @jidelna.popis</p>
+                    <p><u><b>Odkaz na stránku s týdenním menu:</b></u> @jidelna.odkazNaMenu</p>
+                </div>
+                <div>
+                    <section style="border-top: #223974 solid 3px"></section>
+                </div>
+            </section>
+        }
     </section>
 </article>
+@Html.Partial("Prispevek_template")

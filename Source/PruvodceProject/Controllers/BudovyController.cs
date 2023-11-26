@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace PruvodceProject.Controllers
 {
     public class BudovyController : Controller
     {
-        public IActionResult Index()
+        [Route("/Budovy/{budova?}")]
+        public IActionResult Index(string? budova)
         {
+            ViewData["Budova"] = budova ?? "skolni101";
             return View();
         }
 
@@ -29,3 +32,4 @@ namespace PruvodceProject.Controllers
         }
     }
 }
+

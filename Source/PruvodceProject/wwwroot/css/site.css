@@ -1,3 +1,4 @@
+/* HTML */
 html {
   font-size: 15px;
 }
@@ -7,44 +8,41 @@ html {
     font-size: 16px;
   }
 }
-
 html {
   position: relative;
   min-height: 100%;
 }
 
+/* Body */
 body {
-  margin: 0px;
+  margin: 0;
   height: 100vh;
 }
 
+body > * {
+    padding: 1rem;
+}
+
+/* Header */
 header {
-    height: 40px;
+    height: 1em;
     background-color: #223974;
-    padding-top: 20px;
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding-bottom: 10px;
-}
-
+/* Navigace */
 nav {
     text-decoration: none;
     text-align: center;
 }
+
+
 
 nav div {
     min-width: 6em;
     position: relative;
     display: inline-block;
     text-align: center;
-    
 }
-
 
 nav div:hover.menu > ul, nav div:hover.podmenu > ul {
     display: initial;
@@ -66,13 +64,9 @@ nav div ul {
     border-radius: 5px;
 }
 
-nav .vpravo {
-    float: right;
-}
-
 nav a {
     color: white;
-    }
+}
 
 nav li {
     position: relative;
@@ -89,20 +83,153 @@ nav div.podmenu > ul {
     padding: 0;
 }
 
-.center{
-    text-align: center;
+
+.vpravo {
+    float: right;
 }
 
+.center{
+    text-align: center;
+    background-color: #223974
+}
+
+/* Main */
 h1 {
-    /*margin: 0px;*/
+    margin: 0;
+    padding-block: 1rem;
+}
+
+main {
+    min-height: calc(100vh - 8rem);
 }
 
 .container {
     width: 80vw;
+    min-height: calc(100vh - 8rem);
     margin: 0 auto;
+    
 }
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1rem;
+}
+
+/* Novinky */
+
 
 .novinky {
     height: 20%;
     width: 100%;
 }
+
+/* Budovy */
+.container.budovy {
+    width: 100%;
+    max-height: calc(100vh - 8rem);
+}
+
+#renderContainer {
+    position: relative;
+}
+
+#renderer {
+    width: 100%;
+}
+
+#budovyNav .menu > a {
+    color: black;
+}
+
+#budovyNav ul {
+    z-index: 200;
+}
+
+#budovyNav h1 {
+    width: max-content;
+    display: inline-block;
+}
+
+#budovyNav nav {
+    padding-block: 1.5rem;
+    display: inline-block;
+    width: max-content;
+}
+
+#roomContainer, #loadingContainer, #blocker, #instructions, #crosshair, #errorContainer {
+    position: absolute;
+    top: 0;
+}
+
+#loadingContainer, #blocker, #instructions, #crosshair, #errorContainer{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#errorContainer {
+    background-color: rgba(252,3,3,0.30);
+}
+
+#roomContainer, #blocker, #errorContainer {
+    display: none;
+}
+
+#instructions {
+    z-index: 100;
+    background-color: rgba(0,0,0,0.60);
+}
+
+#roomContainer {
+    right: 0;
+    height: 100%;
+    padding-inline: 1em;
+    background-color: rgba(0,0,0,0.60);
+    color: white;
+    text-align: center;
+}
+
+#crosshair *:first-child {
+    position: absolute;
+    top: calc(50% - 1px);
+    left: calc(50% - 6px);
+    width: 2px;
+    height: 2px;
+    border-inline: solid black 5px;
+    background-color: black;
+}
+
+#crosshair *:last-child {
+    position: absolute;
+    top: calc(50% - 6px);
+    left: calc(50% - 1px);
+    width: 2px;
+    height: 2px;
+    border-block: solid black 5px;
+    background-color: black;
+}
+
+
+button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: margin 0.2s, padding 0.2s; /* P�id�me p�echod pro vytvo�en� animace */
+}
+
+    button:active {
+        margin-top: 5px; /* Zasunut� tla��tka nahoru */
+        padding: 8px 18px; /* Zmen�en� paddingu pro zasunut� */
+    }
