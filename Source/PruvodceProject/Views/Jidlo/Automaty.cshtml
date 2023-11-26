@@ -1,9 +1,24 @@
-﻿@{
+﻿@model List<AutomatyModel>
+
+@{
     ViewData["Title"] = "Automaty";
 }
 
 <article>
     <section>
-        <p>Tady budou automaty</p>
+        <h2 style="text-align: center">Automaty na jednotlivých budovách</h2>
+        @foreach(AutomatyModel automat in Model){
+            <section style ="border-top: #223974 solid 3px">
+                <h3 style="text-align: center">@automat.budova</h3>
+                <div style="text-align: center">
+                    <p>@automat.typ</p>
+                    <p>@automat.bagety</p>
+                    <p>@automat.patro</p>
+                </div>
+                <div>
+                    <section style="border-top: #223974 solid 3px"></section>
+                </div>
+            </section>
+        }
     </section>
 </article>
