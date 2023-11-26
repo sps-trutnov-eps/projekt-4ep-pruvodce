@@ -157,7 +157,8 @@ namespace PruvodceProject.Controllers
 
             if (uzivatel != null)
                 return View(uzivatel);
-            
+
+            HttpContext.Session.Clear();
             return RedirectToAction("Prihlasit");
         }
 
@@ -167,7 +168,11 @@ namespace PruvodceProject.Controllers
             UserModel? uzivatel = Databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.mail == HttpContext.Session.GetString("mail"));
 
             if (uzivatel == null)
+            {
+                HttpContext.Session.Clear();
                 return RedirectToAction("Prihlasit");
+
+            }
 
             if (zmenitTrida != null)
             {
