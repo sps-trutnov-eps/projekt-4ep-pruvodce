@@ -20,7 +20,16 @@ namespace PruvodceProject.Controllers
 
         public IActionResult Automaty()
         {
-            return View();
+            List<AutomatyModel> automaty = Databaze.Automaty.ToList();
+            automaty.Add(new AutomatyModel()
+            {
+                budova = "Školní 101",
+                patro = "1",
+                typ = "Automat na jídlo",
+                bagety = true
+
+            }); 
+            return View(automaty);
         }
 
         public IActionResult Kafe()
@@ -49,16 +58,7 @@ namespace PruvodceProject.Controllers
 
         public IActionResult Jidelny()
         {
-            List<StravovaciZarizeniModel> stravovaciZarizeni = Databaze.StravovaciZarizeni.ToList();
-            stravovaciZarizeni.Add(new StravovaciZarizeniModel()
-            {
-                adresa = "Školní 101, Trutnov",
-                nazev = "SPŠ",
-                odkazNaMenu = "www.odkaz.eu",
-                popis = "Dobře vaří :)"
-            });
-
-            return View(stravovaciZarizeni);
+            return View(Databaze.StravovaciZarizeni.ToList());
         }
     }
 }
