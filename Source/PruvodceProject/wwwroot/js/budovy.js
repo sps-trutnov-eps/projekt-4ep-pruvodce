@@ -1,154 +1,278 @@
-//import './style.css';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { FlyControls } from 'three/addons/controls/FlyControls.js';
+import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
 
-window.addEventListener("load", (event) => {
-  /////Pro objekty, bez potřeby psaní scena.add(....)
-  /////Tyto objetky nemají žádnou interakci s myší (tedy teď mají ale potom nebudou)
-  function obd(x,y,z,obrazek,barva,jmeno){
-    var ct = new THREE.Mesh(
-      new THREE.SphereGeometry(3,32,32), 
-      new THREE.MeshStandardMaterial({map: obrazek, color:barva}));
-    ct.position.x = x;
-    ct.position.y = y;
-    ct.position.z = z;
-    ct.name = jmeno
-    scena.add(ct);
-  }
-  //#region Základ/nestavení
-  const scena = new THREE.Scene();
-  const kamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({
-    canvas: document.querySelector('#bg'),
+THREE.Cache.enabled = true;
+
+let renderContainer, blocker, instructions, loadingContainer, loadingProgress, roomContainer, roomInfo, errorContainer;
+let camera, controls, scene, renderer, raycaster, loader;
+let hasFocus, selectedBuilding;
+
+let textures = {};
+let objects = [];
+let moveForward = false;
+let moveBackward = false;
+let moveLeft = false;
+let moveRight = false;
+let moveUp = false;
+let moveDown = false;
+
+let direction = new THREE.Vector3();
+let velocity = new THREE.Vector3();
+
+let prevTime = performance.now();
+
+// Spuštění
+window.addEventListener("load", () => {
+  init();
+  animate();
+
+  obd(24,10,20,textures['logo'],"", "infoT1");
+  obd(8,10,20,textures['logo'],"", "infoT2");
+  obd(16,10,20,textures['logo'],"", "infoT5");
+  obd(20,10,20,textures['logo'],"", "infoT6");
+  obd(0,10,20,textures['logo'],"", "infoT15");
+});
+
+// Inicializace
+function init() {
+  // HTML Elementy
+  renderContainer = document.getElementById('renderer');
+  blocker = document.getElementById( 'blocker' );
+  instructions = document.getElementById( 'instructions' );
+  loadingContainer = document.getElementById('loadingContainer');
+  loadingProgress = document.getElementById('loadingProgress');
+  roomContainer = document.getElementById('roomContainer');
+  roomInfo = document.getElementById('roomInfo');
+  errorContainer = document.getElementById('errorContainer');
+  
+  // Nastavení kamery
+  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 40, 4);
+  
+  // Nastavení světla pro celou mapu (nejsou stíny)
+  const light = new THREE.AmbientLight(0xffffff);
+  
+  // Nastavení scény
+  scene = new THREE.Scene();
+  scene.add(light);
+  scene.background = textures['pozadi'];
+
+  // Nastavení mapování myši pro interakci s objekty
+  raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
+  
+  // Renderer
+  renderer = new THREE.WebGLRenderer();
+
+  renderer.setPixelRatio(window.devicePixelRatio);
+  canvasResize();
+  renderer.render(scene, camera);
+  renderContainer.appendChild(renderer.domElement);
+  
+  // Nastavení ovládání
+  controls = new PointerLockControls(camera, renderer.domElement);
+
+  instructions.addEventListener('click', () => {
+    controls.lock();
+  }, false);
+
+  controls.addEventListener('lock', () => {
+    blocker.style.display = 'none';
+    renderContainer.addEventListener('click', dotek);
   });
 
+  controls.addEventListener('unlock', () => {
+    blocker.style.display = 'block';
+    roomContainer.style.display = 'none';
+    renderContainer.removeEventListener('click', dotek);
+  });
 
-  /////Tohle mapování myši je pro interakci objektů
-  const raycaster = new THREE.Raycaster();
-  const mouse = new THREE.Vector2();
+  scene.add(controls.getObject());
 
-  function mysPohyb(e){
-    mouse.x = (e.clientX / window.innerWidth)*2 -1;
-    mouse.y = -(e.clientY / window.innerHeight) * 2 +1;
-  }
+  const onKeyDown = function (event) {
+    switch (event.code) {
+      case 'ArrowUp':
+      case 'KeyW':
+        moveForward = true;
+        break;
 
-  var variace = "";
+      case 'ArrowLeft':
+      case 'KeyA':
+        moveLeft = true;
+        break;
 
-  function dotek(){
-    raycaster.setFromCamera(mouse, kamera);
-    const intersects = raycaster.intersectObjects(scena.children);
-    if(intersects[0].object.name != "" && intersects[0].object.name != undefined){
-      
-      variace = intersects[0].object.name.substring(0,4);
+      case 'ArrowDown':
+      case 'KeyS':
+        moveBackward = true;
+        break;
 
-      if(variace == "info"){
-        //Požadavek informací ze serveru
-        //InfoOMistnosti(intersects[0].object.name)
-        
-        //Vyplnění info panelu v html
-        document.getElementById("panelMistnostiPrekryvaPlatno").style.display = 'block';
-        document.getElementById("popisMistnosti").innerHTML = intersects[0].object.name.substring(4);
-      }
-    }
-  }
+      case 'ArrowRight':
+      case 'KeyD':
+        moveRight = true;
+        break;
 
-  const procentaNacitani = document.getElementById('procentaNacitani');
-  const procentaNacitaniContainer = document.querySelector('.procentaNacitaniContainer');
-
-  const loader = new GLTFLoader();
-  const managerNacitani = new THREE.LoadingManager();
+      case 'Space':
+        moveUp = true;
+        break;
   
-  managerNacitani.onProgress = function(url, nacteno, total){
-    procentaNacitani.value = (nacteno / total) * 100;
-  }
-  managerNacitani.onLoad = function() {
-    procentaNacitaniContainer.style.display = 'none';
-  }
+      case 'KeyC':
+        moveDown = true;
+        break;
+    }
+  };
 
-  var l = 1
-  var vybranamistnost = '';
-  switch(l){
-    case 1:
-      vybranamistnost = '/wwwroot/soubor3D/skolni101.glb'
-      break;
-    case 2:
-      vybranamistnost = '/wwwroot/soubor3D/horska618.gltf'
-      break;
-    case 3:
-      vybranamistnost = '/wwwroot/soubor3D/horska59.gltf'
-      break;
-    case 4:
-      vybranamistnost = '/wwwroot/soubor3D/mladebuky.gltf'
-      break;
-  }
+  const onKeyUp = function (event) {
+    switch (event.code) {
+      case 'ArrowUp':
+      case 'KeyW':
+        moveForward = false;
+        break;
 
-  //Načtení modelu
+      case 'ArrowLeft':
+      case 'KeyA':
+        moveLeft = false;
+        break;
+
+      case 'ArrowDown':
+      case 'KeyS':
+        moveBackward = false;
+        break;
+
+      case 'ArrowRight':
+      case 'KeyD':
+        moveRight = false;
+        break;
+        
+      case 'Space':
+        moveUp = false;
+        break;
+        
+      case 'KeyC':
+        moveDown = false;
+        break;
+    }
+  };
+
+  document.addEventListener( 'keydown', onKeyDown );
+  document.addEventListener( 'keyup', onKeyUp );
+  
+  // Nastavení načítání modelů
+  loader = new GLTFLoader();
+  selectedBuilding = document.getElementById('buildingRequest').innerText;
+
   loader.load(
-    // resource URL
-    vybranamistnost,
+    `/wwwroot/soubor3D/${selectedBuilding}.gltf`, // URL Zdroje
 
-    function ( gltf ) {
-      scena.add( gltf.scene );
+    function (gltf) {
+      scene.add( gltf.scene );
       gltf.animations; // Array<THREE.AnimationClip>
       gltf.scene; // THREE.Group
       gltf.scenes; // Array<THREE.Group>
       gltf.cameras; // Array<THREE.Camera>
     },
-    function ( xhr ) {
-      l = ( xhr.loaded / xhr.total * 100 )
+    function (xhr) {
+      selectedBuilding = ( xhr.loaded / xhr.total * 100 )
+      loadingProgress.value = xhr.loaded / xhr.total * 100;
       console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+      if (xhr.loaded / xhr.total === 1) {
+        loadingContainer.style.display = 'none';
+        blocker.style.display = 'block';
+      }
     },
-    function ( error ) {
-      console.log( 'Nastala chyba' );
+    function (error) {
+      console.log( `Nastala chyba: ${error}` );
+      loadingContainer.style.display = 'none';
+      errorContainer.style.display = 'flex';
+      errorContainer.childNodes[1].innerHTML = `${errorContainer.childNodes[1].innerHTML}<br />${error}`;
     }
   );
+  
+  // Načtení textur
+  textures['pozadi'] = new THREE.TextureLoader().load('../ob/poza.png');
+  textures['logo'] = new THREE.TextureLoader().load('../ob/logo.png');
 
-  const logo = new THREE.TextureLoader().load('../ob/logo.png');
-  const pozadi = new THREE.TextureLoader().load('../ob/poza.png');
+  // Listeners
+  window.addEventListener( 'resize', canvasResize );
+  renderContainer.addEventListener('mouseover', () => { hasFocus = true });
+  renderContainer.addEventListener('mouseleave', () => { hasFocus = false });
+}
 
-  renderer.setPixelRatio(window.devicePixelRatio);
-  /////FULLSCREEN
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  /////Ať nejsem na začítaku ve středu
-  kamera.position.setZ(40);
-  kamera.position.setY(4);
-  /////renderer = DRAW (něco jako ve hře)
-  renderer.render(scena, kamera);
-  //#endregion
+// Pro objekty, bez potřeby psaní scena.add(....)
+// Tyto objekty nemají žádnou interakci s myší (tedy teď mají ale potom nebudou)
+function obd(x, y, z, obrazek, barva, jmeno) {
+  let ct = new THREE.Mesh(
+      new THREE.SphereGeometry(3, 32, 32),
+      new THREE.MeshStandardMaterial({ map: obrazek, color:barva })
+  );
+  ct.position.x = x;
+  ct.position.y = y;
+  ct.position.z = z;
+  ct.name = jmeno
+  scene.add(ct);
+  objects.push(ct);
+}
 
-  //#region  Světlo
-  /////Světlo pro celou mapu (nejsou stíny)
-  const svetlo = new THREE.AmbientLight(0xffffff);
-  //#endregion
+// Nevím, co to dělá
+function dotek() {
+  raycaster.set(controls.getObject().position, controls.getDirection(new THREE.Vector3()));
+  const intersects = raycaster.intersectObjects(objects, true);
 
-  /////Tohle mapování myši je pro pohyb po mapě
-  //const pohyb = new OrbitControls(kamera, renderer.domElement);
-  const pohyb = new FlyControls(kamera, renderer.domElement)
-  pohyb.dragToLook = true;
-  pohyb.rollSpeed = 0.05;
-  pohyb.movementSpeed = 0.5;
+  // Ukáže vytvořený ray (dobrý pro debug)
+  //scene.add( new THREE.ArrowHelper(controls.getDirection(new THREE.Vector3()), controls.getObject().position, 50, 0xFFFFFF));
+  
+  if (intersects.length > 0 && intersects[0].object.name !== "" && intersects[0].object.name !== undefined){
+    let variace = intersects[0].object.name.substring(0,4);
+    if (variace === "info") {
+      //Požadavek informací ze serveru
+      //InfoOMistnosti(intersects[0].object.name)
+  
+      //Vyplnění info panelu v html
+      roomContainer.style.display = 'block';
+      roomInfo.innerHTML = intersects[0].object.name.substring(4);
+    }
+  }
+}
 
+// Přizpůsobení oknu
+function canvasResize() {
+  const height = renderContainer.parentElement.parentElement.clientHeight - 4.3 * Number(window.getComputedStyle(renderContainer).fontSize.replace('px', ''));
+  camera.aspect = renderContainer.clientWidth / height;
+  camera.updateProjectionMatrix();
+  
+  blocker.style.height = height + "px";
+  roomContainer.style.height = height + "px";
+  loadingContainer.style.height = height + "px";
+  renderer.setSize(renderContainer.clientWidth, height);
+}
 
-  window.addEventListener('click', dotek);
-  //window.addEventListener('click', stop, true);
-  window.addEventListener('mousemove', mysPohyb, false);
+// Animate loop
+function animate() {
+  requestAnimationFrame(animate);
+  
+  const time = performance.now();
 
-  obd(24,10,20,logo,"", "infoT1");
-  obd(8,10,20,logo,"", "infoT2");
-  obd(16,10,20,logo,"", "infoT5");
-  obd(20,10,20,logo,"", "infoT6");
-  obd(0,10,20,logo,"", "infoT15");
+  if (controls.isLocked === true) {
+    const delta = ( time - prevTime ) / 1000;
+    
+    velocity.x -= velocity.x * 10.0 * delta;
+    velocity.y -= velocity.y * 10.0 * delta;
+    velocity.z -= velocity.z * 10.0 * delta;
 
-  scena.add(svetlo);
-  scena.background = pozadi;
-  //#endregion
+    direction.x = Number(moveRight) - Number(moveLeft);
+    direction.y = Number(moveDown) - Number(moveUp);
+    direction.z = Number(moveForward) - Number(moveBackward);
+    direction.normalize();
 
-  function animate(){
-    requestAnimationFrame(animate);
-    pohyb.update(0.5);
-    renderer.render(scena, kamera);
+    if (moveLeft || moveRight) velocity.x -= direction.x * 600.0 * delta;
+    if (moveUp || moveDown) velocity.y -= direction.y * 600.0 * delta;
+    if (moveForward || moveBackward) velocity.z -= direction.z * 600.0 * delta;
+    
+    controls.moveRight(- velocity.x * delta);
+    controls.moveForward(- velocity.z * delta);
+    controls.getObject().position.y += velocity.y * delta;
   }
 
-  animate();
-});
+  prevTime = time;
+
+  renderer.render( scene, camera );
+}

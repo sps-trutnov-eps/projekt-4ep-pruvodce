@@ -1,9 +1,35 @@
 KEBAB
-- 
--
--
--
--
+v celku dobrý, nenaštve => Kassan Kebab
+Otevírací doba od 9h
+Lze platit jen hotově
+
+Děs, nedoporučuji => Kassan Kebab 2
+Otevírací doba Po - Stř 8 - 24h, Čtv - So  14 - 22h 
+Lze platit jen hotově
+
+KEBAB HOUSE
+chuťovka, neomrzí => Kebab House
+Otevírací doba Po - Čt 9 - 24h, Pa - So 10 - 3h, Ne 10 - 24h
+Lze platit kartou
+Rozvoz předražený - Gastro Taxi
+plusové body za červené zelí 
+nejblíže klubu May Disco
+
+
+GALATA KEBAB
+Novinka v Trutnově => Galata Kebab
+Otevírací doba Ne - Čt 9 - 24h, Pa - So 9 - 5h
+lze platit kartou
+Červené zelí a mix vepřového a hovězího zaručeno.
+Nejblíže naší škole.
+
+
+VIETNAMSKÉ SPECIALITY
+Nejlepší vietnamské food porn => Rychlovka Kaufland
+Otevírací doba Po - Ne 9 - 20:30h
+lze platit kartou
+Lokalita: Kaufland Trutnov
+Chicken Bowl za 200,- je důvod proč je tato restaurace na seznamu.
 
 
 PIZZERIE
@@ -18,6 +44,11 @@ Lze platit kartou
 ne => Pizzerie pod King Benny
 Otevírací doba Po - Pá 11 - 1h
 Nelze platit kartou
+
+OTHER
+v celku dobré, daleko => KFC
+Otevírací doba Po - Pá 8 - 23h, So - Ne  8 - 23h
+Lze platit kartou 
 
 
 JÍDELNY

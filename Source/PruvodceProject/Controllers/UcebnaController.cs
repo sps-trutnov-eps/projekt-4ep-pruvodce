@@ -11,16 +11,14 @@ namespace PruvodceProject.Controllers
 
         public IActionResult Index()
         {
-           
-
             return View();
         }
-        public Ucebna UcebnaDetail(Guid id)
+        
+        public UcebnaModel UcebnaDetail(Guid id)
         {
-            Ucebna? ucebna = _pruvodceData.Ucebna
+            UcebnaModel? ucebna = _pruvodceData.Ucebna
                 .Where(u => u.Id == id)
                 .FirstOrDefault();
-
             Debug.WriteLine(id);
             Debug.WriteLine(ucebna);
 

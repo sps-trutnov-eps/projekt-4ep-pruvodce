@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Přehled novinek";
+}
+
+<article>
+    <section>
+        @if(Model == null || Model.count == 0)
+        {
+            <a asp-controller="Clanek" asp-action="editor">Vytvořit článek</a>
+        }
+        @foreach(PruvodceProject.Models.ClanekModel clanek in Model)
+        {
+            <div>
+                <h2>@clanek.NadpisClanku</h2>
+                <p>@clanek.ObsahClanku</p>
+                <i>uživatel: @clanek.ID_autora</i><i>vytvořeno: @clanek.DatumVytvoreni</i>
+            </div>
+        }
+    </section>
+</article>

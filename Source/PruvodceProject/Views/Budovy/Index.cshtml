@@ -1,29 +1,73 @@
 ﻿@{
-    ViewData["Title"] = "Skolni";
-    Layout = "3Dhead";
+    ViewData["Title"] = "Budovy";
 }
-<h1>@ViewData["Skolni"]</h1>
+<div id="buildingRequest" style="display: none">@ViewData["Budova"]</div>
 
-<body>
-    @* Progres bar bude chtít trochu překopat *@
-    @* <div class="procentaNacitaniContainer">
-        <label for="procentaNacitani">Načítá se...</label>
-        <progress id="Nacteno" value="0" max="100"></progress>
-    </div> *@
-    <canvas id="bg"></canvas>
+<div id="budovyNav">
+    <h1>@ViewData["Title"]</h1>
+    
+    <nav class="vpravo">
+        <div class="menu">
+            <a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">Školní 101</a>
+            <ul>
+                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">Přízemí</a></li>
+                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">1. patro</a></li>
+                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">2. patro</a></li>
+                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">3. patro</a></li>
+                <li><a asp-controller="Budovy" asp-action="Index" asp-route-budova="skolni101">Střecha</a></li>
+            </ul>
+        </div>
+        
+        <div class="menu">
+            <a asp-controller="Budovy" asp-action="Index" asp-route-budova="horska618">Horská 618</a>
+        </div>
+        
+        <div class="menu">
+            <a asp-controller="Budovy" asp-action="Index" asp-route-budova="horska59">Horská 59</a>
+        </div>
+        
+        <div class="menu">
+            <a asp-controller="Budovy" asp-action="Index" asp-route-budova="mladebuky">Mladé Buky</a>
+        </div>
+    </nav>
+</div>
 
-<script type="module" src="/js/budovy.js"></script>
-<script>
-    var t = false;
-    function schovat(){
-        t = !t;
-        if(t){
-            document.getElementById('vyber').style.display = "none";
-            document.getElementById('scho').innerHTML = "Zobrazit nabídku"
-        }
-        else{
-            document.getElementById('vyber').style.display = "grid";
-            document.getElementById('scho').innerHTML = "Schovat nabídku"
-        }}
-</script>
-</body>
+<div id="renderContainer">
+    <div id="renderer"></div> @* Tady se renderuje canvas *@
+    
+    <div id="crosshair">
+        <div></div>
+        <div></div>
+    </div>
+
+    <div id="loadingContainer">
+        <label for="loadingProgress" id="loadingLabel">Načítání...</label>
+        <progress id="loadingProgress" min="0" max="100" value="0"></progress>
+    </div>
+    
+    <div id="errorContainer">
+        <p style="font-size:36px">
+            Nastala chyba!
+        </p>
+    </div>
+
+    <div id="roomContainer">
+        <h2>Info o místnosti</h2>
+        <img src="/ob/logo.png" alt="">
+        <p style="word-wrap: break-word;" id="roomInfo"></p>
+    </div>
+    
+    <div id="blocker">
+        <div id="instructions">
+            <p style="font-size:36px">
+                Klikni pro spuštění
+            </p>
+            <p>
+                Pohyb: WASD<br/>
+                Nahoru: SPACE<br/>
+                Dolů: C<br/>
+                Rozhlížení: MYŠ
+            </p>
+        </div>
+    </div>
+</div>
