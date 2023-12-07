@@ -7,7 +7,12 @@ namespace PruvodceProject.Controllers
 {
     public class UcebnaController : Controller
     {
-        public PruvodceData _pruvodceData;
+        public PruvodceData _databaze;
+        public UcebnaController(PruvodceData databaze)
+        {
+            _databaze = databaze;
+        }
+
 
         public IActionResult Index()
         {
@@ -16,13 +21,21 @@ namespace PruvodceProject.Controllers
         
         public UcebnaModel UcebnaDetail(Guid id)
         {
-            UcebnaModel? ucebna = _pruvodceData.Ucebna
+            UcebnaModel? ucebna = _databaze.Ucebna
                 .Where(u => u.Id == id)
                 .FirstOrDefault();
-            Debug.WriteLine(id);
-            Debug.WriteLine(ucebna);
 
             return ucebna;
         }
+        [HttpGet]
+        public UcebnaModel NajitUcebnu(string id)
+        {
+            UcebnaModel? ucebna = _databaze.Ucebna
+                .Where(u => u.idUcebny == id)
+                .FirstOrDefault();
+
+            return ucebna;
+        }
+
     }
 }
