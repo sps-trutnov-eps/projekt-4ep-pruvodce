@@ -19,6 +19,11 @@ namespace PruvodceProject.Data
         public DbSet<StravovaciZarizeniModel> StravovaciZarizeni { get; set; }
         public DbSet<CrowdSourceModel> CrowdSource { get; set; }
 
+        public DbSet<PhotoModelBudovy> PhotoBudovy { get; set; }
+
+        public DbSet<PhotoModelUcebny> PhotoUcebny { get; set; }
+
+        public DbSet<ClanekModel> Clanek { get; set; }
 
 
         //Nutno doplnit vazby mezi databázemi
@@ -26,14 +31,14 @@ namespace PruvodceProject.Data
         /// 
         /// </summary>
         /// <param name="options"></param>
-        public PruvodceData(DbContextOptions<PruvodceData> options) : base(options)
-        {
-            
-        }
+        public PruvodceData(DbContextOptions<PruvodceData> options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<AutomatyModel>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Automaty);
-            builder.Entity<UcebnaModel>().HasOne<BudovyModel>(a => a.budovaID).WithMany(a => a.Ucebny);
+            builder.Entity<BudovyModel>().HasMany(t => t.fotky).WithOne(t => t.IdBudovy);
+            builder.Entity<UcebnaModel>().HasMany(t => t.fotky).WithOne(t => t.UcebnaId);
+            builder.Entity<BudovyModel>().HasMany(t => t.Ucebny).WithOne(t => t.budovaID);
+            builder.Entity<BudovyModel>().HasMany(t => t.Automaty).WithOne(t => t.budovaID);
         }
     }
 }

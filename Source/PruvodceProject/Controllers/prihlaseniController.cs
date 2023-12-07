@@ -158,7 +158,8 @@ namespace PruvodceProject.Controllers
 
             if (uzivatel != null)
                 return View(uzivatel);
-            
+
+            HttpContext.Session.Clear();
             return RedirectToAction("Prihlasit");
         }
 
@@ -168,7 +169,11 @@ namespace PruvodceProject.Controllers
             UserModel? uzivatel = Databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.mail == HttpContext.Session.GetString("mail"));
 
             if (uzivatel == null)
+            {
+                HttpContext.Session.Clear();
                 return RedirectToAction("Prihlasit");
+
+            }
 
             if (zmenitTrida != null)
             {
@@ -224,7 +229,7 @@ namespace PruvodceProject.Controllers
 
             int kod = new Random().Next(1000000, 9999999);
 
-            string URL = HttpContext.Request.Host.Value + "/Prihlaseni/OveritSmazani?mail=" + uzivatel.mail + "&kod=" + kod;
+            string URL = "https://" + HttpContext.Request.Host.Value + "/Prihlaseni/OveritSmazani?mail=" + uzivatel.mail + "&kod=" + kod;
 
             string subject = "Ověření e-mailu!";
             string message = "Klikněte na link pro ověření účtu: " + URL;

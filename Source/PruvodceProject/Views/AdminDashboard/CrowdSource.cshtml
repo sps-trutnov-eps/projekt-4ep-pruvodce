@@ -1,19 +1,31 @@
-@{ ViewData["Title"] = "Crowd Source"; } 
+@{
+    ViewData["Title"] = "Administrátorský panel";
+}
 
 <article>
-   <section>
-      @if (Model == null || Model.Count == 0) { @: 
-      <p class="prihlas-se">Zatím žádné problémy.</p>
-      } 
-
-      @foreach(PruvodceProject.Models.CrowdSourceModel problem in Model) 
-      { 
-
-          <p>@problem.nadpis</p>
-          <p>@problem.Text</p>
-          <p>@problem.stav</p>
-          <p>@problem.existujici</p>
-          <br /> 
-      } 
-   </section>
+    <section>
+        <h2>Správa obsahu</h2>
+        <p><a asp-action="Reporty">Správa reportů</a></p>
+    </section>
+    
+    <section>
+        <h2>Správa uživatelů</h2>
+        <div> @*tabulka na správu uživatelů*@
+            @foreach (UserModel uzivatelskeData in Model)
+            {
+                <div> @*tohle je jeden uživatel v tabulce správy uživatelů*@
+                    <h3>@uzivatelskeData.mail</h3>
+                    @if (!uzivatelskeData.jeAdmin)
+                    {    
+                        <a>Udělat adminem</a>
+                    } else
+                    {
+                        <p>Uživatel je již adminem!</p>
+                    }
+                    <a>Nějaký tlačítko</a> @*Sem si backend tým dodělá požadovanou funkcionalitu*@
+                    <a>Další tlačítko</a>
+                </div>
+            }
+        </div>
+    </section>
 </article>
