@@ -12,15 +12,15 @@ using PruvodceProject.Data;
 namespace PruvodceProject.Migrations
 {
     [DbContext(typeof(PruvodceData))]
-    [Migration("20231112164716_init")]
-    partial class init
+    [Migration("20231207154349_inot")]
+    partial class inot
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -106,8 +106,8 @@ namespace PruvodceProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("IDUzivatele")
-                        .HasColumnType("int");
+                    b.Property<Guid>("IDUzivatele")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -229,6 +229,10 @@ namespace PruvodceProject.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("druh")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("idUcebny")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

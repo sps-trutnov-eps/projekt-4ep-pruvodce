@@ -12,6 +12,8 @@ namespace PruvodceProject.Models
         [Key]
         public Guid Id { get; set; }  
         [Required]
+        public string idUcebny { get; set; }  
+        [Required]
         public string patro { get; set; } = String.Empty; //Patro v budovy, na kter�m se dan� u�ebna nach�z�
         [Required]
         public string druh { get; set; } = String.Empty; //Ur�uje, zda-li je u�ebna odborn�, �i v�eobcen� "kmenov�"

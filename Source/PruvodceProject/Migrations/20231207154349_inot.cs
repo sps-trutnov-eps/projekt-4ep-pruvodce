@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PruvodceProject.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class inot : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,7 +44,7 @@ namespace PruvodceProject.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IDUzivatele = table.Column<int>(type: "int", nullable: false),
+                    IDUzivatele = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     nadpis = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     stav = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -150,6 +150,7 @@ namespace PruvodceProject.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    idUcebny = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     patro = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     druh = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     budovaIDIdBudovy = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
