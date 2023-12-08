@@ -233,3 +233,187 @@ button {
         margin-top: 5px; /* Zasunut� tla��tka nahoru */
         padding: 8px 18px; /* Zmen�en� paddingu pro zasunut� */
     }
+
+
+#prihlaseni body {
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+
+#prihlaseni article {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#prihlaseni form {
+    margin-top: 20px;
+}
+
+#prihlaseni input[type="email"],
+            input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#prihlaseni input[type="submit"] {
+    background-color: #223974;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
+#prihlaseni span.error {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+
+#prihlaseni a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+#prihlaseni a:hover {
+    text-decoration: underline;
+}
+
+
+#registrace body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+
+#registrace article {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#registrace form {
+    margin-top: 20px;
+}
+
+#registrace input[type="email"],
+            input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#registrace input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#registrace input[type="submit"] {
+    background-color: #223974;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
+#registrace span.error,
+            span.success {
+    font-weight: bold;
+}
+
+#registrace span.error {
+    color: #ff0000;
+}
+
+#registrace span.success {
+    color: #008000;
+}
+
+
+#registrace a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+#registrace a:hover {
+    text-decoration: underline;
+}
+
+#forgor body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+#forgor article {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#forgor form {
+    margin-top: 20px;
+}
+
+#forgor input[type="email"],
+        input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+}
+
+#forgor input [type="submit"] {
+    background-color: #223974;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#forgor span.error,
+        span.success {
+    font-weight: bold;
+}
+
+#forgor span.error {
+    color: #ff0000;
+}
+
+#forgor span.success {
+    color: #008000;
+}
+
+#forgor a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+#forgor a:hover {
+    text-decoration: underline;
+} 
