@@ -4,7 +4,8 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
 
 THREE.Cache.enabled = true;
 
-let renderContainer, blocker, instructions, loadingContainer, loadingProgress, roomContainer, roomInfo, errorContainer;
+let renderContainer, blocker, instructions, loadingContainer, loadingProgress, roomContainer, roomInfo, errorContainer,
+    optionsContainer;
 let camera, controls, scene, renderer, raycaster, loader;
 let hasFocus, selectedBuilding;
 
@@ -26,12 +27,6 @@ let prevTime = performance.now();
 window.addEventListener("load", () => {
   init();
   animate();
-
-  obd(24,10,20,textures['logo'],"", "infoT1");
-  obd(8,10,20,textures['logo'],"", "infoT2");
-  obd(16,10,20,textures['logo'],"", "infoT5");
-  obd(20,10,20,textures['logo'],"", "infoT6");
-  obd(0,10,20,textures['logo'],"", "infoT15");
 });
 
 // Inicializace
@@ -45,6 +40,7 @@ function init() {
   roomContainer = document.getElementById('roomContainer');
   roomInfo = document.getElementById('roomInfo');
   errorContainer = document.getElementById('errorContainer');
+  optionsContainer = document.getElementById('optionsContainer');
   
   // Nastavení kamery
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -59,7 +55,7 @@ function init() {
   scene.background = textures['pozadi'];
 
   // Nastavení mapování myši pro interakci s objekty
-  raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
+  raycaster = new THREE.Raycaster();
   
   // Renderer
   renderer = new THREE.WebGLRenderer();
@@ -169,16 +165,44 @@ function init() {
       gltf.scene; // THREE.Group
       gltf.scenes; // Array<THREE.Group>
       gltf.cameras; // Array<THREE.Camera>
+      
+      gltf.scene.children.forEach(e => {
+        if (e.name.split('-')[1] === 'patro') {
+          optionsContainer.appendChild(document.createElement('li'));
+          let element = document.createElement('a');
+          Object.assign(element, {
+            innerHTML: e.name.split('-')[2].replaceAll("_", " "),
+            id: e.name.split('-')[0],
+            onclick: (e) => {
+              selectGroup(e.target.id);
+            }
+          });
+          optionsContainer.lastChild.appendChild(element);
+        } else if (e.name.split('-')[1] === 'info') {
+          objects.push(e);
+        }
+      });
+      
+      optionsContainer.appendChild(document.createElement('li'));
+      let element = document.createElement('a');
+      Object.assign(element, {
+        innerHTML: 'Zobrazit vše',
+        onclick: () => {
+          selectGroup();
+        }
+      });
+      optionsContainer.lastChild.appendChild(element);
     },
+      
     function (xhr) {
       selectedBuilding = ( xhr.loaded / xhr.total * 100 )
       loadingProgress.value = xhr.loaded / xhr.total * 100;
-      console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
       if (xhr.loaded / xhr.total === 1) {
         loadingContainer.style.display = 'none';
         blocker.style.display = 'block';
       }
     },
+      
     function (error) {
       console.log( `Nastala chyba: ${error}` );
       loadingContainer.style.display = 'none';
@@ -197,38 +221,22 @@ function init() {
   renderContainer.addEventListener('mouseleave', () => { hasFocus = false });
 }
 
-// Pro objekty, bez potřeby psaní scena.add(....)
-// Tyto objekty nemají žádnou interakci s myší (tedy teď mají ale potom nebudou)
-function obd(x, y, z, obrazek, barva, jmeno) {
-  let ct = new THREE.Mesh(
-      new THREE.SphereGeometry(3, 32, 32),
-      new THREE.MeshStandardMaterial({ map: obrazek, color:barva })
-  );
-  ct.position.x = x;
-  ct.position.y = y;
-  ct.position.z = z;
-  ct.name = jmeno
-  scene.add(ct);
-  objects.push(ct);
-}
-
-// Nevím, co to dělá
+// Už vím, co to dělá
 function dotek() {
   raycaster.set(controls.getObject().position, controls.getDirection(new THREE.Vector3()));
-  const intersects = raycaster.intersectObjects(objects, true);
+  const intersect = raycaster.intersectObjects(objects, true).length > 0 ? raycaster.intersectObjects(objects, true)[0] : null;
 
   // Ukáže vytvořený ray (dobrý pro debug)
   //scene.add( new THREE.ArrowHelper(controls.getDirection(new THREE.Vector3()), controls.getObject().position, 50, 0xFFFFFF));
   
-  if (intersects.length > 0 && intersects[0].object.name !== "" && intersects[0].object.name !== undefined){
-    let variace = intersects[0].object.name.substring(0,4);
-    if (variace === "info") {
+  if (intersect != null && intersect.object.name !== "" && intersect.object.name !== undefined) {
+    if (intersect.object.name.split('-')[1] === "info" && intersect.object.visible) {
       //Požadavek informací ze serveru
-      //InfoOMistnosti(intersects[0].object.name)
+      //InfoOMistnosti(intersect[0].object.name)
   
       //Vyplnění info panelu v html
       roomContainer.style.display = 'block';
-      roomInfo.innerHTML = intersects[0].object.name.substring(4);
+      roomInfo.innerHTML = intersect.object.name.split('-')[2].replaceAll('_', ' ');
     }
   }
 }
@@ -275,4 +283,11 @@ function animate() {
   prevTime = time;
 
   renderer.render( scene, camera );
+}
+
+// Přepnutí zobrazení části modelu
+function selectGroup(id = null) {
+  scene.children[scene.children.length - 1].children.forEach(e => {
+    e.visible = id === null ? true : !!e.name.includes(id);
+  })
 }
