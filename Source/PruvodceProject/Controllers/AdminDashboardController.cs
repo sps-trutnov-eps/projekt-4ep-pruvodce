@@ -112,7 +112,6 @@ namespace PruvodceProject.Controllers
             List<CrowdSourceModel> crowdSourceSorted = crowdSource.OrderByDescending(o => o.stav).ToList();
             return View(crowdSourceSorted);
         }
-
         [HttpPost]
         public IActionResult OdpovedetNaStiznost(string ID, string odpoved, string? stav)
         {

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PruvodceProject.Data;
+using PruvodceProject.Migrations;
 using PruvodceProject.Models;
 using System.Diagnostics;
 
@@ -57,6 +58,18 @@ namespace PruvodceProject.Controllers
                 return View(_databaze.PrihlasovaciUdaje.ToList());
 
             return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nedostatečná oprávnění!" });
+        }
+        [HttpGet]
+        public IActionResult Stiznosti()
+        {
+            if (HttpContext.Session.GetString("mail") == null || HttpContext.Session.GetString("mail").Length == 0)
+                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášeni!" });
+
+
+            List<CrowdSourceModel>? crowdSource = _databaze.CrowdSource.ToList();
+            var purged = crowdSource.Where(n => n.mailUzivatele == HttpContext.Session.GetString("mail")); // proč tohle nemůže být List<CrowdSourceModel> ????????
+            List<CrowdSourceModel> crowdSourceSorted = purged.OrderByDescending(o => o.stav).ToList();
+            return View(crowdSourceSorted);
         }
     }
 }
