@@ -10,13 +10,13 @@
     
     <section>
         <div> @*tabulka na správu uživatelů*@
-            <form action="/AdminDashboard/SpravovatUzivatele" method="post">
+            <form action="/AdminDashboard/VytvoritUzivatele" method="post">
                 <label>Vytvořit uživatele</label> <br>
-                <input name="mail" placeholder="Zadejte e-mail..." type="email" /><br />
+                <input required name="mail" placeholder="Zadejte e-mail..." type="email" /><br />
                 <input name="trida" placeholder="Zadejte tridu..." type="text" /><br />
-                <p>Udělat adminem:</p>
-                <input name="jeAdmin" type="checkbox" /><br />
-                <input name="heslo" placeholder="Zadejte heslo..." type="text" /><br />
+                <p style="display:inline">Udělat adminem:</p>
+                <input name="jeAdmin" type="checkbox" value="true" /><br />
+                <input required name="heslo" placeholder="Zadejte heslo..." type="text" /><br />
                 <input value="Vytvořit uživatele" type="submit" />
             </form>
 
@@ -28,7 +28,7 @@
                     <h3>@uzivatelskeData.mail</h3>
                     @if (uzivatelskeData.jeAdmin)
                     {
-                        <h2>Uživatel je admin.</h2>
+                        <p>Uživatel je admin.</p>
 
                     }
                     <a href="/AdminDashboard/DeleteUzivatele/@uzivatelskeData.ID">Smazat</a>
