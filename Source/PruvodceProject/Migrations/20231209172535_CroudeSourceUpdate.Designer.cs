@@ -12,7 +12,7 @@ using PruvodceProject.Data;
 namespace PruvodceProject.Migrations
 {
     [DbContext(typeof(PruvodceData))]
-    [Migration("20231209171422_CroudeSourceUpdate")]
+    [Migration("20231209172535_CroudeSourceUpdate")]
     partial class CroudeSourceUpdate
     {
         /// <inheritdoc />
@@ -119,6 +119,10 @@ namespace PruvodceProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nadpis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("odpovedAmina")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

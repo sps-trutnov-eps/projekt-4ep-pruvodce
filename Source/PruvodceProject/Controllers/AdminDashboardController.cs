@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PruvodceProject.Data;
+using PruvodceProject.Migrations;
 using PruvodceProject.Models;
+using System.Linq;
 
 namespace PruvodceProject.Controllers
 {
@@ -108,12 +110,30 @@ namespace PruvodceProject.Controllers
 
             List<CrowdSourceModel>? crowdSource = _databaze.CrowdSource.ToList();
             List<CrowdSourceModel> crowdSourceSorted = crowdSource.OrderByDescending(o => o.stav).ToList();
+            return View(crowdSourceSorted);    
+        }
 
-            return View(crowdSourceSorted);
+        [HttpPost]
+        public IActionResult OdpovedetNaStiznost(string ID, string odpoved, string? stav)
+        {
+            if (HttpContext.Session.GetString("jeAdmin") != "True")
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
+            if (stav == null)
+                stav = "čeká na vyřízení";
+
+            CrowdSourceModel? stiznost = _databaze.CrowdSource.FirstOrDefault(n => n.ID.ToString() == ID);
+
+            if (stiznost != null)
+            {
+                stiznost.odpovedAmina = odpoved;
+                stiznost.stav = stav;
+
+                _databaze.Entry(stiznost).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                _databaze.SaveChanges();
+            }
 
 
-
-                
+            return RedirectToAction("SpravaStiznosti");
         }
     }
 }

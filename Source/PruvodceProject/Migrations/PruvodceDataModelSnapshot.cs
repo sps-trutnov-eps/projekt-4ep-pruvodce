@@ -119,6 +119,10 @@ namespace PruvodceProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("odpovedAmina")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("stav")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

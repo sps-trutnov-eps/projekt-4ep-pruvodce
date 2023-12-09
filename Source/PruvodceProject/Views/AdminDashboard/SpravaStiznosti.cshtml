@@ -15,7 +15,19 @@
                 <h2>@stiznost.nadpis</h2>
                 <p>Napsal uživatel: @stiznost.mailUzivatele</p>
                 <p>Stav: @stiznost.stav</p>
+                <p>Odpověď od admina: @stiznost.odpovedAmina</p>
                 <p>Stížnost: @stiznost.Text</p>
+
+                <form action="/AdminDashboardController/OdpovedetNaStiznost" method="post">
+                    <label>Vaše odpověď</label><br />
+                    <input required type="text" name="odpoved" placeholder="Odpověď..."><br />
+                    <label>Změna stavu</label><br />
+                    <input type="text" name="stav" placeholder="Stav..."><br />
+                    @* tohle je špatná praxe protože by někdo mohl změnit ID ale já věřím našim adminům *@
+                    <input type="text" name="ID" value="@stiznost.ID" style="display:none" />
+                    <button type="submit">Odeslat</button>
+                </form>
+                
                 <p>------------------------------------------</p>
             }
         </div>

@@ -10,19 +10,20 @@ namespace PruvodceProject.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "IDUzivatele",
+            migrationBuilder.AddColumn<string>(
+                name: "odpovedAmina",
                 table: "CrowdSource",
-                newName: "mailUzivatele");
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "mailUzivatele",
-                table: "CrowdSource",
-                newName: "IDUzivatele");
+            migrationBuilder.DropColumn(
+                name: "odpovedAmina",
+                table: "CrowdSource");
         }
     }
 }
