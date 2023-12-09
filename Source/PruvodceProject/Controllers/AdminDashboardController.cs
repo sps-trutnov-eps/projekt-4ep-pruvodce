@@ -20,7 +20,7 @@ namespace PruvodceProject.Controllers
             if (HttpContext.Session.GetString("jeAdmin") == "True")
                 return View();
             else
-                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
         }
 
         [HttpGet]
@@ -31,18 +31,18 @@ namespace PruvodceProject.Controllers
             if (HttpContext.Session.GetString("jeAdmin") == "True")
                 return View(sortedUzivatelskeData);
             else
-                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
 
         }
         [HttpGet]
         public IActionResult DeleteUzivatele(Guid ID)
         {
             if (HttpContext.Session.GetString("jeAdmin") != "True")
-                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
 
             UserModel? uzivatel = _databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.ID == ID);
 
-            if (uzivatel != null)
+            if (uzivatel != null && uzivatel.mail != "senkyr@spstrutnov.cz")
             {
                 _databaze.PrihlasovaciUdaje.Remove(uzivatel);
                 _databaze.SaveChanges();
@@ -54,7 +54,7 @@ namespace PruvodceProject.Controllers
         public IActionResult UdelatUzivateleAdminem(Guid ID)
         {
             if (HttpContext.Session.GetString("jeAdmin") != "True")
-                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
             UserModel? uzivatel = _databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.ID == ID);
             
             if (uzivatel != null)
@@ -71,10 +71,10 @@ namespace PruvodceProject.Controllers
         public IActionResult OdebratUzivateleAdmina(Guid ID)
         {
             if (HttpContext.Session.GetString("jeAdmin") != "True")
-                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
 
             UserModel? uzivatel = _databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.ID == ID);
-            if (uzivatel != null)
+            if (uzivatel != null && uzivatel.mail != "senkyr@spstrutnov.cz")
             {
                 uzivatel.jeAdmin = false;
 
@@ -104,7 +104,7 @@ namespace PruvodceProject.Controllers
         public IActionResult SpravaStiznosti()
         {
             if (HttpContext.Session.GetString("jeAdmin") != "True")
-                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
 
 
             List<CrowdSourceModel>? crowdSource = _databaze.CrowdSource.ToList();
@@ -115,7 +115,7 @@ namespace PruvodceProject.Controllers
         public IActionResult OdpovedetNaStiznost(string ID, string odpoved, string? stav)
         {
             if (HttpContext.Session.GetString("jeAdmin") != "True")
-                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
             if (stav == null)
                 stav = "čeká na vyřízení";
 

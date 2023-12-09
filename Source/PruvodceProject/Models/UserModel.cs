@@ -17,7 +17,7 @@ namespace PruvodceProject.Models
         
         public string trida { get; set; } = String.Empty;
         [Required]
-        public bool jeAdmin { get; set; } = true;
+        public bool jeAdmin { get; set; } = false;
     }
 
     public class UserVerify
