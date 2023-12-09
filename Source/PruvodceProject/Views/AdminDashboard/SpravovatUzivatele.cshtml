@@ -1,0 +1,42 @@
+@model List<UserModel>
+@{
+    ViewData["Title"] = "Administrátorský panel";
+}
+
+<article>
+    <section>
+        <h2>Správa uživatel</h2>
+    </section>
+    
+    <section>
+        <div> @*tabulka na správu uživatelů*@
+            <form action="/AdminDashboard/VytvoritUzivatele" method="post">
+                <label>Vytvořit uživatele</label> <br>
+                <input required name="mail" placeholder="Zadejte e-mail..." type="email" /><br />
+                <input name="trida" placeholder="Zadejte tridu..." type="text" /><br />
+                <p style="display:inline">Udělat adminem:</p>
+                <input name="jeAdmin" type="checkbox" value="true" /><br />
+                <input required name="heslo" placeholder="Zadejte heslo..." type="text" /><br />
+                <input value="Vytvořit uživatele" type="submit" />
+            </form>
+
+            <h3>Uživatelé:</h3>
+            @foreach (UserModel uzivatelskeData in Model)
+            {
+                <div>
+                    @*tohle je jeden uživatel v tabulce správy uživatelů*@
+                    <h3>@uzivatelskeData.mail</h3>
+                    @if (uzivatelskeData.jeAdmin)
+                    {
+                        <p>Uživatel je admin.</p>
+
+                    }
+                    <a href="/AdminDashboard/DeleteUzivatele/@uzivatelskeData.ID">Smazat</a>
+                    <a href="/AdminDashboard/UdelatUzivateleAdminem/@uzivatelskeData.ID">Povýšit na admina</a>
+                    <a href="/AdminDashboard/OdebratUzivateleAdmina/@uzivatelskeData.ID">Odebrat admina</a>
+                    <p>------------------------------------</p>
+                </div>
+            }
+        </div>
+    </section>
+</article>
