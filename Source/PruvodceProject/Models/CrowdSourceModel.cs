@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.Storage;
 using System.ComponentModel.DataAnnotations;
 
 namespace PruvodceProject.Models
@@ -7,7 +8,7 @@ namespace PruvodceProject.Models
         [Key]
         public Guid ID { get; set; }
         [Required]
-        public Guid IDUzivatele { get; set; } //ID uživatele který to vytvořil
+        public string IDUzivatele { get; set; } //ID uživatele který to vytvořil
         [Required]
         public string nadpis { get; set; }
         [Required]

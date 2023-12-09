@@ -44,10 +44,11 @@ namespace PruvodceProject.Controllers
             if (user == null)
                 return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Neexistujete." });
 
-
+            string userID = user.ID.ToString();
+            
             CrowdSourceModel problem = new CrowdSourceModel()
             {
-                IDUzivatele = user.ID,
+                IDUzivatele = userID,
                 nadpis = title,
                 Text = text,
                 stav = "čeká na vyřízení",
