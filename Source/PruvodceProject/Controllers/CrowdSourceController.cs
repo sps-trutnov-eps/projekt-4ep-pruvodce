@@ -26,43 +26,47 @@ namespace PruvodceProject.Controllers
         [HttpPost]
         public IActionResult NahlasitProblem(string title, string text)
         {
+            if (HttpContext.Session.GetString("mail") == null || HttpContext.Session.GetString("mail").Length == 0)
+                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášeni!" });
+
             bool uzivatelNezadalNadpis = title == null || title.Trim().Length == 0;
             bool uzivatelNezadalText = text == null || text.Trim().Length == 0;
 
             if (uzivatelNezadalNadpis || uzivatelNezadalText)
-                return RedirectToAction("Pridat");
+                return RedirectToAction("NahlasitProblem", new { chyba = "Vyplňte všechny pole!" });
 
 
             string userMail = HttpContext.Session.GetString("mail");
 
-            UserModel? user = _databaze.PrihlasovaciUdaje
-                .Where(u => u.mail == userMail)
-                .FirstOrDefault();
+            UserModel? user = _databaze.PrihlasovaciUdaje.Where(u => u.mail == userMail).FirstOrDefault();
 
-            Guid userID = user.ID;
+            // Tohle by se nikdy nemělo stát.
+            if (user == null)
+                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Neexistujete." });
+
 
             CrowdSourceModel problem = new CrowdSourceModel()
             {
-                IDUzivatele = userID,
+                IDUzivatele = user.ID,
                 nadpis = title,
                 Text = text,
                 stav = "čeká na vyřízení",
                 existujici = ""
             };
 
-            _databaze.Add(problem);
+            _databaze.CrowdSource.Add(problem);
             _databaze.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }
-        
+
         public IActionResult Index()
         {
             //Membership.GetUser();
             if (HttpContext.Session.GetString("jeAdmin") == "True")
                 return View(_databaze.PrihlasovaciUdaje.ToList());
-            
+
             return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nedostatečná oprávnění!" });
         }
     }
-}   
+}
