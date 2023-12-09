@@ -8,7 +8,7 @@ namespace PruvodceProject.Models
         [Key]
         public Guid ID { get; set; }
         [Required]
-        public string IDUzivatele { get; set; } //ID uživatele který to vytvořil
+        public string mailUzivatele { get; set; } //Email uživatele který to vytvořil
         [Required]
         public string nadpis { get; set; }
         [Required]

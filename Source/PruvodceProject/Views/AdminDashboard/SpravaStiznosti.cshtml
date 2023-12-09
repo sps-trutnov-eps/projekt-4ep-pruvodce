@@ -1,0 +1,23 @@
+@model List<CrowdSourceModel>
+@{
+    ViewData["Title"] = "Administrátorský panel";
+}
+
+<article>
+    <section>
+        <h2>Správa stížností</h2>
+    </section>
+    
+    <section>
+        <div> @*tabulka na správu uživatelů*@
+            @foreach (CrowdSourceModel stiznost in Model)
+            {
+                <h2>@stiznost.nadpis</h2>
+                <p>Napsal uživatel: @stiznost.mailUzivatele</p>
+                <p>Stav: @stiznost.stav</p>
+                <p>Stížnost: @stiznost.Text</p>
+                <p>------------------------------------------</p>
+            }
+        </div>
+    </section>
+</article>

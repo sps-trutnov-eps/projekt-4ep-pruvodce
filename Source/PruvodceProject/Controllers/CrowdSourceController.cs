@@ -34,27 +34,16 @@ namespace PruvodceProject.Controllers
 
             if (uzivatelNezadalNadpis || uzivatelNezadalText)
                 return RedirectToAction("NahlasitProblem", new { chyba = "Vyplňte všechny pole!" });
-
-
-            string userMail = HttpContext.Session.GetString("mail");
-
-            UserModel? user = _databaze.PrihlasovaciUdaje.Where(u => u.mail == userMail).FirstOrDefault();
-
-            // Tohle by se nikdy nemělo stát.
-            if (user == null)
-                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Neexistujete." });
-
-            string userID = user.ID.ToString();
             
             CrowdSourceModel problem = new CrowdSourceModel()
             {
-                IDUzivatele = userID,
+                mailUzivatele = HttpContext.Session.GetString("mail").ToString(),
                 nadpis = title,
                 Text = text,
                 stav = "čeká na vyřízení",
                 existujici = ""
             };
-
+            
             _databaze.CrowdSource.Add(problem);
             _databaze.SaveChanges();
 

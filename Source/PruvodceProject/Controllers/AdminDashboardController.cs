@@ -21,16 +21,6 @@ namespace PruvodceProject.Controllers
             else
                 return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
         }
-        [HttpGet]
-        public IActionResult CrowdSource()
-        {
-            List<CrowdSourceModel>? crowdSource = _databaze.CrowdSource.ToList();
-
-            if (HttpContext.Session.GetString("jeAdmin") == "True")
-                return View(crowdSource);
-            else
-                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
-        }
 
         [HttpGet]
         public IActionResult SpravovatUzivatele() {
@@ -108,6 +98,22 @@ namespace PruvodceProject.Controllers
             _databaze.SaveChanges();
             
             return RedirectToAction("SpravovatUzivatele");
+        }
+        [HttpGet]
+        public IActionResult SpravaStiznosti()
+        {
+            if (HttpContext.Session.GetString("jeAdmin") != "True")
+                return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
+
+
+            List<CrowdSourceModel>? crowdSource = _databaze.CrowdSource.ToList();
+            List<CrowdSourceModel> crowdSourceSorted = crowdSource.OrderByDescending(o => o.stav).ToList();
+
+            return View(crowdSourceSorted);
+
+
+
+                
         }
     }
 }

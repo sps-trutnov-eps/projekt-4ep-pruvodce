@@ -12,7 +12,7 @@ using PruvodceProject.Data;
 namespace PruvodceProject.Migrations
 {
     [DbContext(typeof(PruvodceData))]
-    [Migration("20231209164700_CroudeSourceUpdate")]
+    [Migration("20231209171422_CroudeSourceUpdate")]
     partial class CroudeSourceUpdate
     {
         /// <inheritdoc />
@@ -106,15 +106,15 @@ namespace PruvodceProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("IDUzivatele")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("existujici")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("mailUzivatele")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
