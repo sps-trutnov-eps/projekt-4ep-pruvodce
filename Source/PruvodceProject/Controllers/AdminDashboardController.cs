@@ -110,7 +110,7 @@ namespace PruvodceProject.Controllers
 
             List<CrowdSourceModel>? crowdSource = _databaze.CrowdSource.ToList();
             List<CrowdSourceModel> crowdSourceSorted = crowdSource.OrderByDescending(o => o.stav).ToList();
-            return View(crowdSourceSorted);    
+            return View(crowdSourceSorted);
         }
 
         [HttpPost]
