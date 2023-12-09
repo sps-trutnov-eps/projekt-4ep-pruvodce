@@ -1,11 +1,11 @@
 @model List<UserModel>
 @{
-    ViewData["Title"] = "Administrátorský panel";
+    ViewData["Title"] = "Administrace";
 }
 
 <article>
     <section>
-        <h2>Správa uživatel</h2>
+        <h2>Správa uživatelů</h2>
     </section>
     
     <section>
@@ -14,7 +14,7 @@
                 <label>Vytvořit uživatele</label> <br>
                 <input required name="mail" placeholder="Zadejte e-mail..." type="email" /><br />
                 <input name="trida" placeholder="Zadejte tridu..." type="text" /><br />
-                <p style="display:inline">Udělat adminem:</p>
+                <label for="jeAdmin" style="display:inline">Uživatel bude administrátor:</label>
                 <input name="jeAdmin" type="checkbox" value="true" /><br />
                 <input required name="heslo" placeholder="Zadejte heslo..." type="text" /><br />
                 <input value="Vytvořit uživatele" type="submit" />
@@ -28,12 +28,22 @@
                     <h3>@uzivatelskeData.mail</h3>
                     @if (uzivatelskeData.jeAdmin)
                     {
-                        <p>Uživatel je admin.</p>
+                        <p>Admin</p>
 
                     }
+                    else
+                    {
+                        <p>Uživatel</p>
+                    }
                     <a href="/AdminDashboard/DeleteUzivatele/@uzivatelskeData.ID">Smazat</a>
-                    <a href="/AdminDashboard/UdelatUzivateleAdminem/@uzivatelskeData.ID">Povýšit na admina</a>
-                    <a href="/AdminDashboard/OdebratUzivateleAdmina/@uzivatelskeData.ID">Odebrat admina</a>
+                    @if (uzivatelskeData.jeAdmin)
+                    {
+                        <a href="/AdminDashboard/OdebratUzivateleAdmina/@uzivatelskeData.ID">Odebrat administrátorská oprávění</a>
+                    }
+                    else
+                    {                        
+                        <a href="/AdminDashboard/UdelatUzivateleAdminem/@uzivatelskeData.ID">Povýšit na administrátora</a>
+                    }
                     <p>------------------------------------</p>
                 </div>
             }

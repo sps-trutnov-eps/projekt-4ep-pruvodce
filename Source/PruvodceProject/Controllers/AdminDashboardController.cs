@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PruvodceProject.Data;
-using PruvodceProject.Migrations;
 using PruvodceProject.Models;
 using System.Linq;
 
