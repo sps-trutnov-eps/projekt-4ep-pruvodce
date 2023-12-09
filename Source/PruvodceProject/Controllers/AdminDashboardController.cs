@@ -35,9 +35,10 @@ namespace PruvodceProject.Controllers
         [HttpGet]
         public IActionResult SpravovatUzivatele() {
             List<UserModel> uzivatelskeData = _databaze.PrihlasovaciUdaje.ToList();
+            List<UserModel> sortedUzivatelskeData = uzivatelskeData.OrderByDescending(o => o.jeAdmin).ToList();
 
             if (HttpContext.Session.GetString("jeAdmin") == "True")
-                return View(uzivatelskeData);
+                return View(sortedUzivatelskeData);
             else
                 return RedirectToAction("Prihlasit", new { chyba = "Nejste přihlášen jako admin!" });
 
@@ -50,7 +51,7 @@ namespace PruvodceProject.Controllers
 
             UserModel? uzivatel = _databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.ID == ID);
 
-            if (uzivatel == null)
+            if (uzivatel != null)
             {
                 _databaze.PrihlasovaciUdaje.Remove(uzivatel);
                 _databaze.SaveChanges();
@@ -91,6 +92,21 @@ namespace PruvodceProject.Controllers
             }
 
 
+            return RedirectToAction("SpravovatUzivatele");
+        }
+        [HttpPost]
+        public IActionResult VytvoritUzivatele(string mail, string? trida, string heslo, bool jeAdmin)
+        {
+            heslo = BCrypt.Net.BCrypt.HashPassword(heslo);
+            
+            if (trida != null)
+                _databaze.PrihlasovaciUdaje.Add(new UserModel() { heslo = heslo, mail = mail, trida = trida, jeAdmin = jeAdmin });
+            else
+                _databaze.PrihlasovaciUdaje.Add(new UserModel() { heslo = heslo, mail = mail, jeAdmin = jeAdmin });
+
+            
+            _databaze.SaveChanges();
+            
             return RedirectToAction("SpravovatUzivatele");
         }
     }
