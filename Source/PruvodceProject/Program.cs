@@ -3,6 +3,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.EntityFrameworkCore;
 using PruvodceProject.Interfaces;
 using PruvodceProject.Models;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace PruvodceProject
 {
@@ -28,7 +29,6 @@ namespace PruvodceProject
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             builder.Services.AddSession(options =>
