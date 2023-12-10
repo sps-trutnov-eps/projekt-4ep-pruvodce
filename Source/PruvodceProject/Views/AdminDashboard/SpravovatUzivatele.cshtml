@@ -35,8 +35,11 @@
                     {
                         <p>Uživatel</p>
                     }
-                    <a href="/AdminDashboard/DeleteUzivatele/@uzivatelskeData.ID">Smazat</a>
-                    @if (uzivatelskeData.jeAdmin)
+                    @if(uzivatelskeData.mail != "senkyr@spstrutnov.cz")
+                    {
+                        <a href="/AdminDashboard/DeleteUzivatele/@uzivatelskeData.ID">Smazat</a>
+                    }
+                    @if (uzivatelskeData.jeAdmin && uzivatelskeData.mail != "senkyr@spstrutnov.cz")
                     {
                         <a href="/AdminDashboard/OdebratUzivateleAdmina/@uzivatelskeData.ID">Odebrat administrátorská oprávění</a>
                     }
