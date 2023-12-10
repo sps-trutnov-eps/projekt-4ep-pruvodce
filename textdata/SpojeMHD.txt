@@ -1,20 +1,38 @@
+ pár vybraných časů, časy jsou blízko ke konci hodin, a přestávkám.
 IDOS
+
 1. Školní 101 - autobusová stanice --->>> Horská 618 - Šestidomí (poté po Alejce pár kroků)
 Trutnovské MHD - cena hotově 12kč - kartou 8kč
 Každých 25-30minut Pracovní dny
-7:40 - pár vybraných časů, časy jsou blízko ke konci hodin, a přestávkám.
-8:50
-9:50
-10:50
-11:50
-12:35
+ODJEZD - PŘÍJEZD
+7:40 - 7:42
+8:50 - 8:52
+9:35 - 9:37
+9:50 - 9:52
+10:50 - 10:52
+11:50 - 11:52
+12:35 - 12:37
+JEDNÁ SE O MHD
 				
 2. Školní 101 - autobusová stanice --->>> Horská 59 - Dol. Staré Město,zahradnictví
 Trutnovské MHD - cena hotově 12kč - kartou 10kč
 Každých 25-30minut Pracovní dny
-7:40 - pár vybraných časů, časy jsou blízko ke konci hodin, a přestávkám.
-8:50
-9:50
-10:50
-11:50
-12:35
+ODJEZD - PŘÍJEZD
+7:40 - 7:44
+8:50 - 8:54
+9:35 - 9:39
+9:50 - 9:54
+10:50 - 10:54
+11:50 - 11:54
+12:35 - 12:39
+JEDNÁ SE O MHD
+
+PRAXE
+3. Školní 101 - autobusová stanice --->>> Mladé Buky, střední škola
+ODJEZD - PŘÍJEZD
+6:28 - 6:40
+6:13 - 6:26
+ZPĚT:
+14:11 - 14:26
+14:34 - 14:49 - bývá spoždění
+JEDNÁ SE O LINKOVÝ AUTOBUS
