@@ -14,10 +14,10 @@ namespace PruvodceProject.Models
         public string heslo { get; set; }
         [Required]
         public string mail { get; set; }
-
+        
         public string trida { get; set; } = String.Empty;
         [Required]
-        public bool jeAdmin { get; set; } = true;
+        public bool jeAdmin { get; set; } = false;
     }
 
     public class UserVerify

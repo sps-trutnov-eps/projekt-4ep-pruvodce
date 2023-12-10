@@ -44,10 +44,11 @@ namespace PruvodceProject.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IDUzivatele = table.Column<int>(type: "int", nullable: false),
+                    mailUzivatele = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     nadpis = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     stav = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    odpovedAmina = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     existujici = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
