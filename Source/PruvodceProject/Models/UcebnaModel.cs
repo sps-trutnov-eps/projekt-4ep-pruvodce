@@ -11,6 +11,10 @@ namespace PruvodceProject.Models
     {
         [Key]
         public Guid Id { get; set; }  
+
+        /// <summary>
+        /// Kvůli interakčnímu bodu
+        /// </summary>
         [Required]
         public string idUcebny { get; set; }  
         [Required]
@@ -19,6 +23,9 @@ namespace PruvodceProject.Models
         public string druh { get; set; } = String.Empty; //Ur�uje, zda-li je u�ebna odborn�, �i v�eobcen� "kmenov�"
         [Required] // Učebna má 1 budovu a 1 budova má více učeben.
         public BudovyModel budovaID { get; set; }
+
+        [Required]
+        public Guid budovuID { get; set; }
         
         //Napojen� na budovu (jedna t��da m��e b�t jen na jedn� budov�)
         public ICollection<PhotoModelUcebny> fotky { get; set; } //vazba na foto 1:N

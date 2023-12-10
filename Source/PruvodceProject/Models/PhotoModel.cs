@@ -9,11 +9,7 @@ namespace PruvodceProject.Models
         [Required]
         public string Nazev { get; set; }
         [Required]
-        public byte[] DataPhoto { get; set; } //Tomuto úplně nerozumím
-        /*Chybí k fotce
-        [Required]
         public string Cesta { get; set; }
-        */
         [Required]
         public string Pripona { get; set; }
 
@@ -28,11 +24,7 @@ namespace PruvodceProject.Models
         [Required]
         public string Nazev { get; set; }
         [Required]
-        public byte[] DataPhoto { get; set; } //Tomuto úplně nerozumím
-        /*Chybí k fotce
-        [Required]
         public string Cesta { get; set; }
-        */
         [Required]
         public string Pripona { get; set; }
 
