@@ -13,29 +13,9 @@ namespace PruvodceProject.Controllers
             _databaze = databaze;
         }
 
-
         public IActionResult Index()
         {
             return View();
         }
-        
-        public UcebnaModel UcebnaDetail(Guid id)
-        {
-            UcebnaModel? ucebna = _databaze.Ucebna
-                .Where(u => u.Id == id)
-                .FirstOrDefault();
-
-            return ucebna;
-        }
-        [HttpGet]
-        public UcebnaModel NajitUcebnu(string id)
-        {
-            UcebnaModel? ucebna = _databaze.Ucebna
-                .Where(u => u.idUcebny == id)
-                .FirstOrDefault();
-
-            return ucebna;
-        }
-
     }
 }

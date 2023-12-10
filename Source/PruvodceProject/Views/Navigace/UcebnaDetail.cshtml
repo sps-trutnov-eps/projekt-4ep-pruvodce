@@ -1,0 +1,19 @@
+@model UcebnaModel
+@{
+    ViewData["Title"] = "Detail učebny";
+}
+
+<article> @* WIP *@
+    <section>
+        <h3>@Model.druh @Model.idUcebny</h3>
+        <div style="text-align: center">
+            <p>Budova:</p>
+            <p>@Model.patro</p>
+            @if (Model.druh == "Učebna")
+            {
+                <p>Fotografie:</p>
+            }
+        </div>
+    </section>
+</article>
+
