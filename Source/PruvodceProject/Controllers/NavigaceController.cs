@@ -22,21 +22,6 @@ namespace PruvodceProject.Controllers
             return View(_databaze.Ucebna.ToList());
         }
 
-        public IActionResult Budovy()
-        {
-            return View(_databaze.Budovy.ToList());
-        }
-
-        public IActionResult StravovaciZarizeni()
-        {
-            return View(_databaze.StravovaciZarizeni.ToList());
-        }
-
-        public IActionResult Automaty()
-        {
-            return View(_databaze.Automaty.ToList());
-        }
-
         public IActionResult UcebnaDetail(Guid id)
         {
             UcebnaModel? ucebna = _databaze.Ucebna
@@ -48,31 +33,18 @@ namespace PruvodceProject.Controllers
         [HttpGet]
         public UcebnaModel? UcebnaData(string id)
         {
-            UcebnaModel? ucebna = _databaze.Ucebna
-                .FirstOrDefault(u => u.idUcebny == id);
-            return ucebna;
+            return _databaze.Ucebna
+                .FirstOrDefault(uc => uc.idUcebny == id);
         }
-        public IActionResult BudovaDetail(Guid id)
-        {
-            BudovyModel? budova = _databaze.Budovy
-                .FirstOrDefault(u => u.IdBudovy == id);
+        
+        // public IActionResult BudovaDetail(Guid id)
+        // {
+        //     BudovyModel? budova = _databaze.Budovy
+        //         .FirstOrDefault(u => u.IdBudovy == id);
+        //
+        //     return View(budova);
+        // }
 
-            return View(budova);
-        }
-        public IActionResult StravovaciZarizeniDetil(Guid id)
-        {
-            StravovaciZarizeniModel? stravovaciZarizeni = _databaze.StravovaciZarizeni
-                .FirstOrDefault(u => u.ID == id);
-
-            return View(stravovaciZarizeni);
-        }
-        public IActionResult AutomatyDetail(Guid id)
-        {
-            AutomatyModel? automat = _databaze.Automaty
-                .FirstOrDefault(u => u.ID == id);
-
-            return View(automat);
-        }
         public IActionResult Telocvicny()
         {
             return View();

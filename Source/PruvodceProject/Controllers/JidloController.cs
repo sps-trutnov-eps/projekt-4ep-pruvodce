@@ -25,7 +25,6 @@ namespace PruvodceProject.Controllers
             return View(Databaze.Automaty.ToList());
         }
 
-
         public IActionResult Kafe()
         {
 
@@ -48,14 +47,17 @@ namespace PruvodceProject.Controllers
             return View();
         }
 
-        public IActionResult Mikrovlnky()
-        {
-            return View();
-        }
-
         public IActionResult Jidelny()
         {
             return View(Databaze.StravovaciZarizeni.ToList());
         }
+        
+        // public IActionResult JidelnyDetil(Guid id)
+        // {
+        //     StravovaciZarizeniModel? stravovaciZarizeni = Databaze.StravovaciZarizeni
+        //         .FirstOrDefault(u => u.ID == id);
+        //
+        //     return View(stravovaciZarizeni);
+        // }
     }
 }
