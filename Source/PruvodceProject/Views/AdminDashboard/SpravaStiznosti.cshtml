@@ -3,21 +3,21 @@
     ViewData["Title"] = "Administrátorský panel";
 }
 
-<article>
-    <section>
-        <h2>Správa stížností</h2>
-    </section>
-    
-    <section>
-        <div> @*tabulka na správu uživatelů*@
-            @foreach (CrowdSourceModel stiznost in Model)
-            {
-                <h2>@stiznost.nadpis</h2>
-                <p>Od uživatele: @stiznost.mailUzivatele</p>
-                <p>Stížnost: @stiznost.Text</p>
-                <p>Stav: @stiznost.stav</p>
-                <p>Odpověď administrátora: @stiznost.odpovedAmina</p>
+<h2>Správa stížností</h2>
 
+
+    
+<div> @*TOHLE JE DIV VŠECH STÍŽNOSTÍ*@
+    @foreach (CrowdSourceModel stiznost in Model)
+    {
+        <div> @*TOHLE JE INDIVIDUÁLNÍ STÍŽNOST!*@
+            <h2>@stiznost.nadpis</h2>
+            <p>Od: <b>@stiznost.mailUzivatele</b></p>
+            <p>„@stiznost.Text”</p>
+            <p>@stiznost.stav</p>
+            <p>Odpověď administrátora: @stiznost.odpovedAmina</p>
+
+            <div>
                 <form action="/AdminDashboard/OdpovedetNaStiznost" method="post">
                     <label>Vaše odpověď</label><br />
                     <input required type="text" name="odpoved" placeholder="Odpověď..."><br />
@@ -27,9 +27,7 @@
                     <input type="text" name="ID" value="@stiznost.ID" style="display:none" />
                     <button type="submit">Odeslat</button>
                 </form>
-                
-                <p>------------------------------------------</p>
-            }
+            </div>
         </div>
-    </section>
-</article>
+    }
+</div>
