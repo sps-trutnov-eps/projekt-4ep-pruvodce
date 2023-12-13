@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PruvodceProject.Data;
 
@@ -11,9 +12,11 @@ using PruvodceProject.Data;
 namespace PruvodceProject.Migrations
 {
     [DbContext(typeof(PruvodceData))]
-    partial class PruvodceDataModelSnapshot : ModelSnapshot
+    [Migration("20231213094154_piss")]
+    partial class piss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,59 +133,6 @@ namespace PruvodceProject.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("CrowdSource");
-                });
-
-            modelBuilder.Entity("PruvodceProject.Models.KafeModel", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("adresa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("nazev")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("odkazNaMenu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("popis")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Kafarny");
-                });
-
-            modelBuilder.Entity("PruvodceProject.Models.ObchodModel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Adresa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DatumVytvoreni")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Nazev")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ObsahClanku")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Obchody");
                 });
 
             modelBuilder.Entity("PruvodceProject.Models.PhotoModelBudovy", b =>

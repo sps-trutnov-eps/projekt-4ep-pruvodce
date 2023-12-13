@@ -35,17 +35,18 @@ namespace PruvodceProject.Controllers
             
 
             ////string[] clanky = { clanek };
+            
 
             ViewData["clanekString"] = clanek;
 
 
-            return View();
+            return View(Databaze.Kafarny.ToList());
         }
 
 
         public IActionResult Obchody()
         {
-            return View();
+            return View(Databaze.Obchody.ToList());
         }
 
         public IActionResult Mikrovlnky()
