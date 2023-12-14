@@ -25,30 +25,21 @@ namespace PruvodceProject.Controllers
 
         public IActionResult UcebnaDetail(Guid id)
         {
-            UcebnaModel? ucebna = _databaze.Ucebna
+            return View(_databaze.Ucebna
                 .Include(u => u.Budova) 
                 .ThenInclude(pB => pB.fotky)
-                .FirstOrDefault(u => u.Id == id);
-
-            //ucebna.Budova = _databaze.Budovy.Where(u => u.IdBudovy == ucebna.BudovaID).FirstOrDefault();
-            return View(ucebna);
+                .FirstOrDefault(u => u.Id == id));
         }
         
         [HttpGet]
         public UcebnaModel? UcebnaData(string id)
         {
-            UcebnaModel? ucebna = _databaze.Ucebna
-                .FirstOrDefault(u => u.Nazev == id);
-
-            return ucebna;
+            return _databaze.Ucebna.FirstOrDefault(u => u.Nazev == id);;
         }
         
         // public IActionResult BudovaDetail(Guid id)
         // {
-        //     BudovyModel? budova = _databaze.Budovy
-        //         .FirstOrDefault(u => u.IdBudovy == id);
-        //
-        //     return View(budova);
+        //     return View(_databaze.Budovy.FirstOrDefault(u => u.IdBudovy == id));
         // }
 
         public IActionResult Telocvicny()

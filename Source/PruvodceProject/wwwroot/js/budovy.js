@@ -233,17 +233,22 @@ function dotek() {
     if (intersect.object.name.split('-')[1] === "info" && intersect.object.visible) {
       //Vyplnění info panelu v html
       $.ajax(`/Navigace/UcebnaData/${intersect.object.name.split('-')[2]}`)
-          .fail(function() {
+        .fail(function() {
+          roomInfo.innerHTML = `<div><b>${intersect.object.name.split('-')[2].replaceAll('_', ' ')}</b></div>`;
+          roomInfo.innerHTML += `<div>Data nejsou k dispozici</div>`;
+          roomContainer.style.display = 'block';
+        })
+        .done(function(data) {
+          if (data === undefined) {
             roomInfo.innerHTML = `<div><b>${intersect.object.name.split('-')[2].replaceAll('_', ' ')}</b></div>`;
             roomInfo.innerHTML += `<div>Data nejsou k dispozici</div>`;
-            roomContainer.style.display = 'block';
-          })
-          .done(function(data) {
-             roomInfo.innerHTML = `<div><b> ${data.idUcebny.replaceAll('_', ' ')}</b></div>`;
-             roomInfo.innerHTML += `<div><b>Druh učebny:</b> ${data.druh}</div>`;
-             roomInfo.innerHTML += `<div><b><a href="/Navigace/UcebnaDetail/${data.id}">Více informací</a></b></div>`
-             roomContainer.style.display = 'block';
-          });
+          } else {
+           roomInfo.innerHTML = `<div><b> ${data.Nazev.replaceAll('_', ' ')}</b></div>`;
+           roomInfo.innerHTML += `<div><b>Druh učebny:</b> ${data.Druh}</div>`;
+           roomInfo.innerHTML += `<div><b><a href="/Navigace/UcebnaDetail/${data.ID}">Více informací</a></b></div>`
+          }
+         roomContainer.style.display = 'block';
+        });
     }
   }
 }
