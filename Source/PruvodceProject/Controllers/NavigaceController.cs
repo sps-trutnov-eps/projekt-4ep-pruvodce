@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PruvodceProject.Data;
 using PruvodceProject.Models;
 
@@ -40,8 +41,11 @@ namespace PruvodceProject.Controllers
         public IActionResult UcebnaDetail(Guid id)
         {
             UcebnaModel? ucebna = _databaze.Ucebna
+                .Include(u => u.Budova) 
+                .ThenInclude(pB => pB.fotky)
                 .FirstOrDefault(u => u.Id == id);
 
+            //ucebna.Budova = _databaze.Budovy.Where(u => u.IdBudovy == ucebna.BudovaID).FirstOrDefault();
             return View(ucebna);
         }
         
@@ -49,7 +53,8 @@ namespace PruvodceProject.Controllers
         public UcebnaModel? UcebnaData(string id)
         {
             UcebnaModel? ucebna = _databaze.Ucebna
-                .FirstOrDefault(u => u.idUcebny == id);
+                .FirstOrDefault(u => u.Nazev == id);
+
             return ucebna;
         }
         public IActionResult BudovaDetail(Guid id)

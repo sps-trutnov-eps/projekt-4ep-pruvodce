@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PruvodceProject.Data;
 
@@ -11,9 +12,11 @@ using PruvodceProject.Data;
 namespace PruvodceProject.Migrations
 {
     [DbContext(typeof(PruvodceData))]
-    partial class PruvodceDataModelSnapshot : ModelSnapshot
+    [Migration("20231214204518_upravaVazby")]
+    partial class upravaVazby
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,24 +230,27 @@ namespace PruvodceProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BudovaID")
+                    b.Property<Guid>("budovaIDIdBudovy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Druh")
+                    b.Property<Guid>("budovuID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("druh")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nazev")
+                    b.Property<string>("idUcebny")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Patro")
+                    b.Property<string>("patro")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BudovaID");
+                    b.HasIndex("budovaIDIdBudovy");
 
                     b.ToTable("Ucebna");
                 });
@@ -339,13 +345,13 @@ namespace PruvodceProject.Migrations
 
             modelBuilder.Entity("PruvodceProject.Models.UcebnaModel", b =>
                 {
-                    b.HasOne("PruvodceProject.Models.BudovyModel", "Budova")
+                    b.HasOne("PruvodceProject.Models.BudovyModel", "budovaID")
                         .WithMany("Ucebny")
-                        .HasForeignKey("BudovaID")
+                        .HasForeignKey("budovaIDIdBudovy")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Budova");
+                    b.Navigation("budovaID");
                 });
 
             modelBuilder.Entity("PruvodceProject.Models.BudovyModel", b =>
