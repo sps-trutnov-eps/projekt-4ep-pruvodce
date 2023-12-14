@@ -5,11 +5,11 @@
 
 <article> @* WIP *@
     <section>
-        <h3>@Model.druh @Model.idUcebny</h3>
+        <h3>@Model.Druh @Model.Nazev</h3>
         <div style="text-align: center">
-            <p>Budova:</p>
-            <p>@Model.patro</p>
-            @if (Model.druh == "Učebna")
+            <p>Budova: @Model.Budova.kodoveOznaceni</p>
+            <p>@Model.Patro</p>
+            @if (Model.Druh == "Učebna")
             {
                 <p>Fotografie:</p>
             }

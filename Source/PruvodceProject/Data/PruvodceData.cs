@@ -35,10 +35,14 @@ namespace PruvodceProject.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<BudovyModel>().HasMany(t => t.fotky).WithOne(t => t.IdBudovy);
-            builder.Entity<UcebnaModel>().HasMany(t => t.fotky).WithOne(t => t.UcebnaId);
-            builder.Entity<BudovyModel>().HasMany(t => t.Ucebny).WithOne(t => t.budovaID);
-            builder.Entity<BudovyModel>().HasMany(t => t.Automaty).WithOne(t => t.budovaID);
+            builder.Entity<UcebnaModel>()
+                .HasOne(t => t.Budova)
+                .WithMany(t => t.Ucebny)
+                .HasForeignKey(t => t.BudovaID);
+            builder.Entity<BudovyModel>()
+                .HasMany(p => p.fotky)
+                .WithOne(p => p.Budova)
+                .HasForeignKey(p => p.BudovaID);
         }
     }
 }
