@@ -23,12 +23,15 @@ namespace PruvodceProject.Controllers
             return View(_databaze.Ucebna.ToList());
         }
 
+        [HttpGet]
         public IActionResult UcebnaDetail(Guid id)
         {
-            return View(_databaze.Ucebna
-                .Include(u => u.Budova) 
+            UcebnaModel ucebna = _databaze.Ucebna
+                .Include(u => u.Budova)
                 .ThenInclude(pB => pB.fotky)
-                .FirstOrDefault(u => u.Id == id));
+                .Include(u => u.fotky)
+                .FirstOrDefault(u => u.Id == id);
+            return View(ucebna);
         }
         
         [HttpGet]

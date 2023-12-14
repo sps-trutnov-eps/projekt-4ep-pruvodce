@@ -9,9 +9,10 @@
         <div style="text-align: center">
             <p>Budova: @Model.Budova.kodoveOznaceni</p>
             <p>@Model.Patro</p>
-            @if (Model.Druh == "Učebna")
+            @if (Model.Poddruh != "Kabinet")
             {
                 <p>Fotografie:</p>
+                <img src="@(Model.fotky.FirstOrDefault().Cesta)">
             }
         </div>
     </section>

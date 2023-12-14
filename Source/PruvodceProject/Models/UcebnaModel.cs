@@ -22,7 +22,7 @@ namespace PruvodceProject.Models
         public string Patro { get; set; } = String.Empty; //Patro v budovy, na kter�m se dan� u�ebna nach�z�
         [Required]
         public string Druh { get; set; } = String.Empty; //Ur�uje, zda-li je u�ebna odborn�, �i v�eobcen� "kmenov�"
-        [ForeignKey("BudovaId")] // Učebna má 1 budovu a 1 budova má více učeben.
+        public string Poddruh {  get; set; } = String.Empty;
         public BudovyModel Budova { get; set; }
 
         [Required]

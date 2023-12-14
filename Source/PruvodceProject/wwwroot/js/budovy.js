@@ -243,9 +243,9 @@ function dotek() {
             roomInfo.innerHTML = `<div><b>${intersect.object.name.split('-')[2].replaceAll('_', ' ')}</b></div>`;
             roomInfo.innerHTML += `<div>Data nejsou k dispozici</div>`;
           } else {
-           roomInfo.innerHTML = `<div><b> ${data.Nazev.replaceAll('_', ' ')}</b></div>`;
-           roomInfo.innerHTML += `<div><b>Druh učebny:</b> ${data.Druh}</div>`;
-           roomInfo.innerHTML += `<div><b><a href="/Navigace/UcebnaDetail/${data.ID}">Více informací</a></b></div>`
+           roomInfo.innerHTML = `<div><b> ${data.nazev.replaceAll('_', ' ')}</b></div>`;
+           roomInfo.innerHTML += `<div><b>Druh učebny:</b> ${data.druh}</div>`;
+           roomInfo.innerHTML += `<div><b><a href="/Navigace/UcebnaDetail/${data.id}">Více informací</a></b></div>`
           }
          roomContainer.style.display = 'block';
         });
