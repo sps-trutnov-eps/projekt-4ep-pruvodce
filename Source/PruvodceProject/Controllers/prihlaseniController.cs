@@ -247,6 +247,7 @@ namespace PruvodceProject.Controllers
         [HttpGet]
         public IActionResult Overit(string? mail, int? kod)
         {
+            bool _jeAdmin = false;
             if (mail == null || kod == null)
                 return RedirectToAction("Registrace", new { chyba = "Špatný ověřovací token!" });
 
@@ -255,7 +256,14 @@ namespace PruvodceProject.Controllers
             if (uzivatel == null)
                 return RedirectToAction("Registrace", new { chyba = "Špatný ověřovací token!" });
 
-            Databaze.PrihlasovaciUdaje.Add(new UserModel() { heslo = uzivatel.heslo, mail = uzivatel.mail, trida = uzivatel.trida });
+            List<UserModel> vsichniUzivatele = Databaze.PrihlasovaciUdaje.ToList();
+            if (vsichniUzivatele.Count == 0) 
+            {
+                _jeAdmin = true;
+            }
+
+
+            Databaze.PrihlasovaciUdaje.Add(new UserModel() { heslo = uzivatel.heslo, mail = uzivatel.mail, trida = uzivatel.trida, jeAdmin = _jeAdmin });
             Databaze.OverovaciUdaje.Remove(uzivatel);
             Databaze.SaveChanges();
 
