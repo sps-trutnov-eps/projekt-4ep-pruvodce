@@ -74,12 +74,12 @@ function init() {
 
   controls.addEventListener('lock', () => {
     blocker.style.display = 'none';
+    roomContainer.style.display = 'none';
     renderContainer.addEventListener('click', dotek);
   });
 
   controls.addEventListener('unlock', () => {
     blocker.style.display = 'block';
-    roomContainer.style.display = 'none';
     renderContainer.removeEventListener('click', dotek);
   });
 
@@ -231,12 +231,24 @@ function dotek() {
   
   if (intersect != null && intersect.object.name !== "" && intersect.object.name !== undefined) {
     if (intersect.object.name.split('-')[1] === "info" && intersect.object.visible) {
-      //Požadavek informací ze serveru
-      //InfoOMistnosti(intersect[0].object.name)
-  
       //Vyplnění info panelu v html
-      roomContainer.style.display = 'block';
-      roomInfo.innerHTML = intersect.object.name.split('-')[2].replaceAll('_', ' ');
+      $.ajax(`/Navigace/UcebnaData/${intersect.object.name.split('-')[2]}`)
+        .fail(function() {
+          roomInfo.innerHTML = `<div><b>${intersect.object.name.split('-')[2].replaceAll('_', ' ')}</b></div>`;
+          roomInfo.innerHTML += `<div>Data nejsou k dispozici</div>`;
+          roomContainer.style.display = 'block';
+        })
+        .done(function(data) {
+          if (data === undefined) {
+            roomInfo.innerHTML = `<div><b>${intersect.object.name.split('-')[2].replaceAll('_', ' ')}</b></div>`;
+            roomInfo.innerHTML += `<div>Data nejsou k dispozici</div>`;
+          } else {
+           roomInfo.innerHTML = `<div><b> ${data.nazev.replaceAll('_', ' ')}</b></div>`;
+           roomInfo.innerHTML += `<div><b>Druh učebny:</b> ${data.druh}</div>`;
+           roomInfo.innerHTML += `<div><b><a href="/Navigace/UcebnaDetail/${data.id}">Více informací</a></b></div>`
+          }
+         roomContainer.style.display = 'block';
+        });
     }
   }
 }

@@ -12,7 +12,7 @@ using PruvodceProject.Data;
 namespace PruvodceProject.Migrations
 {
     [DbContext(typeof(PruvodceData))]
-    [Migration("20231209211623_init")]
+    [Migration("20231214220620_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -144,12 +144,9 @@ namespace PruvodceProject.Migrations
                     b.Property<Guid>("BudovaID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("DataPhoto")
+                    b.Property<string>("Cesta")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<Guid>("IdBudovy1")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nazev")
                         .IsRequired()
@@ -161,7 +158,7 @@ namespace PruvodceProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdBudovy1");
+                    b.HasIndex("BudovaID");
 
                     b.ToTable("PhotoBudovy");
                 });
@@ -172,9 +169,9 @@ namespace PruvodceProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("DataPhoto")
+                    b.Property<string>("Cesta")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nazev")
                         .IsRequired()
@@ -187,12 +184,9 @@ namespace PruvodceProject.Migrations
                     b.Property<Guid>("UcebnaID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UcebnaIdId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UcebnaIdId");
+                    b.HasIndex("UcebnaID");
 
                     b.ToTable("PhotoUcebny");
                 });
@@ -230,20 +224,28 @@ namespace PruvodceProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("budovaIDIdBudovy")
+                    b.Property<Guid>("BudovaID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("druh")
+                    b.Property<string>("Druh")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("patro")
+                    b.Property<string>("Nazev")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Patro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Poddruh")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("budovaIDIdBudovy");
+                    b.HasIndex("BudovaID");
 
                     b.ToTable("Ucebna");
                 });
@@ -316,35 +318,35 @@ namespace PruvodceProject.Migrations
 
             modelBuilder.Entity("PruvodceProject.Models.PhotoModelBudovy", b =>
                 {
-                    b.HasOne("PruvodceProject.Models.BudovyModel", "IdBudovy")
+                    b.HasOne("PruvodceProject.Models.BudovyModel", "Budova")
                         .WithMany("fotky")
-                        .HasForeignKey("IdBudovy1")
+                        .HasForeignKey("BudovaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("IdBudovy");
+                    b.Navigation("Budova");
                 });
 
             modelBuilder.Entity("PruvodceProject.Models.PhotoModelUcebny", b =>
                 {
-                    b.HasOne("PruvodceProject.Models.UcebnaModel", "UcebnaId")
+                    b.HasOne("PruvodceProject.Models.UcebnaModel", "Ucebna")
                         .WithMany("fotky")
-                        .HasForeignKey("UcebnaIdId")
+                        .HasForeignKey("UcebnaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("UcebnaId");
+                    b.Navigation("Ucebna");
                 });
 
             modelBuilder.Entity("PruvodceProject.Models.UcebnaModel", b =>
                 {
-                    b.HasOne("PruvodceProject.Models.BudovyModel", "budovaID")
+                    b.HasOne("PruvodceProject.Models.BudovyModel", "Budova")
                         .WithMany("Ucebny")
-                        .HasForeignKey("budovaIDIdBudovy")
+                        .HasForeignKey("BudovaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("budovaID");
+                    b.Navigation("Budova");
                 });
 
             modelBuilder.Entity("PruvodceProject.Models.BudovyModel", b =>

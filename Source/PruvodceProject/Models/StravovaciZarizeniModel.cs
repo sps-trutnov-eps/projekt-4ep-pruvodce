@@ -7,12 +7,12 @@ namespace PruvodceProject.Models
         [Key]
         public Guid ID { get; set; }
         [Required]
-        public string nazev { get; set; }
+        public string Nazev { get; set; }
         [Required]
-        public string adresa { get; set; }
+        public string Adresa { get; set; }
+        public string OdkazNaMenu { get; set; }
         [Required]
-        public string odkazNaMenu { get; set; }
-        [Required]
-        public string popis { get; set; }
+        public string Popis { get; set; }
+        public string Typ {  get; set; }
     }
 }

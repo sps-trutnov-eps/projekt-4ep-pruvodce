@@ -22,18 +22,8 @@ namespace PruvodceProject.Controllers
 
         public IActionResult Automaty()
         {
-            List<AutomatyModel> automaty = Databaze.Automaty.ToList();
-            automaty.Add(new AutomatyModel()
-            {
-                budova = "Školní 101",
-                patro = "1",
-                typ = "Automat na jídlo",
-                bagety = true
-
-            }); 
-            return View(automaty);
+            return View(Databaze.Automaty.ToList());
         }
-
 
         public IActionResult Kafe()
         {
@@ -57,14 +47,17 @@ namespace PruvodceProject.Controllers
             return View();
         }
 
-        public IActionResult Mikrovlnky()
-        {
-            return View();
-        }
-
         public IActionResult Jidelny()
         {
             return View(Databaze.StravovaciZarizeni.ToList());
         }
+        
+        // public IActionResult JidelnyDetil(Guid id)
+        // {
+        //     StravovaciZarizeniModel? stravovaciZarizeni = Databaze.StravovaciZarizeni
+        //         .FirstOrDefault(u => u.ID == id);
+        //
+        //     return View(stravovaciZarizeni);
+        // }
     }
 }
