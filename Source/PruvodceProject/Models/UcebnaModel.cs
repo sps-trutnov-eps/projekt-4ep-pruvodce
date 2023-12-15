@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 
 namespace PruvodceProject.Models
@@ -16,16 +17,16 @@ namespace PruvodceProject.Models
         /// Kvůli interakčnímu bodu
         /// </summary>
         [Required]
-        public string idUcebny { get; set; }  
+        public string Nazev { get; set; }  
         [Required]
-        public string patro { get; set; } = String.Empty; //Patro v budovy, na kter�m se dan� u�ebna nach�z�
+        public string Patro { get; set; } = String.Empty; //Patro v budovy, na kter�m se dan� u�ebna nach�z�
         [Required]
-        public string druh { get; set; } = String.Empty; //Ur�uje, zda-li je u�ebna odborn�, �i v�eobcen� "kmenov�"
-        [Required] // Učebna má 1 budovu a 1 budova má více učeben.
-        public BudovyModel budovaID { get; set; }
+        public string Druh { get; set; } = String.Empty; //Ur�uje, zda-li je u�ebna odborn�, �i v�eobcen� "kmenov�"
+        public string Poddruh {  get; set; } = String.Empty;
+        public BudovyModel Budova { get; set; }
 
         [Required]
-        public Guid budovuID { get; set; }
+        public Guid BudovaID { get; set; }
         
         //Napojen� na budovu (jedna t��da m��e b�t jen na jedn� budov�)
         public ICollection<PhotoModelUcebny> fotky { get; set; } //vazba na foto 1:N

@@ -130,17 +130,16 @@ namespace PruvodceProject.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nazev = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataPhoto = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Cesta = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Pripona = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BudovaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdBudovy1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    BudovaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PhotoBudovy", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PhotoBudovy_Budovy_IdBudovy1",
-                        column: x => x.IdBudovy1,
+                        name: "FK_PhotoBudovy_Budovy_BudovaID",
+                        column: x => x.BudovaID,
                         principalTable: "Budovy",
                         principalColumn: "IdBudovy",
                         onDelete: ReferentialAction.Cascade);
@@ -151,17 +150,18 @@ namespace PruvodceProject.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    idUcebny = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    patro = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    druh = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    budovaIDIdBudovy = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Nazev = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Patro = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Druh = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Poddruh = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BudovaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ucebna", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ucebna_Budovy_budovaIDIdBudovy",
-                        column: x => x.budovaIDIdBudovy,
+                        name: "FK_Ucebna_Budovy_BudovaID",
+                        column: x => x.BudovaID,
                         principalTable: "Budovy",
                         principalColumn: "IdBudovy",
                         onDelete: ReferentialAction.Cascade);
@@ -173,17 +173,16 @@ namespace PruvodceProject.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nazev = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataPhoto = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Cesta = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Pripona = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UcebnaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UcebnaIdId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    UcebnaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PhotoUcebny", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PhotoUcebny_Ucebna_UcebnaIdId",
-                        column: x => x.UcebnaIdId,
+                        name: "FK_PhotoUcebny_Ucebna_UcebnaID",
+                        column: x => x.UcebnaID,
                         principalTable: "Ucebna",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -195,19 +194,19 @@ namespace PruvodceProject.Migrations
                 column: "budovaIDIdBudovy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PhotoBudovy_IdBudovy1",
+                name: "IX_PhotoBudovy_BudovaID",
                 table: "PhotoBudovy",
-                column: "IdBudovy1");
+                column: "BudovaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PhotoUcebny_UcebnaIdId",
+                name: "IX_PhotoUcebny_UcebnaID",
                 table: "PhotoUcebny",
-                column: "UcebnaIdId");
+                column: "UcebnaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ucebna_budovaIDIdBudovy",
+                name: "IX_Ucebna_BudovaID",
                 table: "Ucebna",
-                column: "budovaIDIdBudovy");
+                column: "BudovaID");
         }
 
         /// <inheritdoc />

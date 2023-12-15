@@ -15,7 +15,7 @@ namespace PruvodceProject.Models
 
         
         public Guid BudovaID { get; set; }  //dva řádky kvůli vazbě 1:N (1 budova: N fotkám) V.K.
-        public BudovyModel IdBudovy { get; set; }
+        public BudovyModel Budova { get; set; }
     }
     public class PhotoModelUcebny
     {
@@ -30,6 +30,6 @@ namespace PruvodceProject.Models
 
 
         public Guid UcebnaID { get; set; }  //tady ty další jsou zas kvůli vazbě 1:N (1 učebna: N fotkám) V.K.
-        public UcebnaModel UcebnaId { get; set; }
+        public UcebnaModel Ucebna { get; set; }
     }
 }
