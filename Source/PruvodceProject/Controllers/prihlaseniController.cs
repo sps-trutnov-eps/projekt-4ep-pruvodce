@@ -28,7 +28,7 @@ namespace PruvodceProject.Controllers
             ViewData["chyba"] = chyba;
             return View();
         }
-
+        
         [HttpGet]
         public IActionResult Registrace(string chyba = "", string hotovo = "")
         {
