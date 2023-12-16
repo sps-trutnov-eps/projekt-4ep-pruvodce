@@ -1,18 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PruvodceProject.Data;
 using PruvodceProject.Models;
-using System.Linq;
 
 namespace PruvodceProject.Controllers
 {
     public class AdminDashboardController : Controller
     {
-        public PruvodceData _databaze;
-
-        public AdminDashboardController(PruvodceData databaze)
-        {
-            _databaze = databaze;
-        }
+        PruvodceData Databaze { get; }
+        public AdminDashboardController(PruvodceData databaze) => Databaze = databaze;
 
         [HttpGet]
         public IActionResult Index()
@@ -20,7 +15,7 @@ namespace PruvodceProject.Controllers
             if (HttpContext.Session.GetString("jeAdmin") == "True")
                 return View();
             else
-                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
+                return RedirectToAction("Prihlaseni", "Uzivatel", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
         }
         [HttpGet]
         public IActionResult PridatClanek()
@@ -28,66 +23,66 @@ namespace PruvodceProject.Controllers
             if (HttpContext.Session.GetString("jeAdmin") == "True")
                 return View();
             else
-                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
+                return RedirectToAction("Prihlaseni", "Uzivatel", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
         }
 
         [HttpGet]
         public IActionResult SpravovatUzivatele() {
-            List<UserModel> uzivatelskeData = _databaze.PrihlasovaciUdaje.ToList();
-            List<UserModel> sortedUzivatelskeData = uzivatelskeData.OrderByDescending(o => o.jeAdmin).ToList();
+            List<UzivatelModel> uzivatelskeData = Databaze.Uzivatele.ToList();
+            List<UzivatelModel> sortedUzivatelskeData = uzivatelskeData.OrderByDescending(o => o.JeAdmin).ToList();
 
             if (HttpContext.Session.GetString("jeAdmin") == "True")
                 return View(sortedUzivatelskeData);
             else
-                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
+                return RedirectToAction("Prihlaseni", "Uzivatel", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
 
         }
         [HttpGet]
-        public IActionResult DeleteUzivatele(Guid ID)
+        public IActionResult DeleteUzivatele(Guid id)
         {
             if (HttpContext.Session.GetString("jeAdmin") != "True")
-                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
+                return RedirectToAction("Prihlaseni", "Uzivatel", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
 
-            UserModel? uzivatel = _databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.ID == ID);
+            UzivatelModel? uzivatel = Databaze.Uzivatele.FirstOrDefault(n => n != null && n.Id == id);
 
-            if (uzivatel != null && uzivatel.mail != "senkyr@spstrutnov.cz")
+            if (uzivatel != null && uzivatel.Mail != "senkyr@spstrutnov.cz")
             {
-                _databaze.PrihlasovaciUdaje.Remove(uzivatel);
-                _databaze.SaveChanges();
+                Databaze.Uzivatele.Remove(uzivatel);
+                Databaze.SaveChanges();
             }
 
             return RedirectToAction("SpravovatUzivatele");
         }
         [HttpGet]
-        public IActionResult UdelatUzivateleAdminem(Guid ID)
+        public IActionResult UdelatUzivateleAdminem(Guid id)
         {
             if (HttpContext.Session.GetString("jeAdmin") != "True")
-                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
-            UserModel? uzivatel = _databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.ID == ID);
+                return RedirectToAction("Prihlaseni", "Uzivatel", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
+            UzivatelModel? uzivatel = Databaze.Uzivatele.FirstOrDefault(n => n != null && n.Id == id);
             
             if (uzivatel != null)
             {
-                uzivatel.jeAdmin = true;
-                _databaze.Entry(uzivatel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                _databaze.SaveChanges();
+                uzivatel.JeAdmin = true;
+                Databaze.Entry(uzivatel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                Databaze.SaveChanges();
             }
 
 
             return RedirectToAction("SpravovatUzivatele");
         }
         [HttpGet]
-        public IActionResult OdebratUzivateleAdmina(Guid ID)
+        public IActionResult OdebratUzivateleAdmina(Guid id)
         {
             if (HttpContext.Session.GetString("jeAdmin") != "True")
-                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
+                return RedirectToAction("Prihlaseni", "Uzivatel", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
 
-            UserModel? uzivatel = _databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.ID == ID);
-            if (uzivatel != null && uzivatel.mail != "senkyr@spstrutnov.cz")
+            UzivatelModel? uzivatel = Databaze.Uzivatele.FirstOrDefault(n => n != null && n.Id == id);
+            if (uzivatel != null && uzivatel.Mail != "senkyr@spstrutnov.cz")
             {
-                uzivatel.jeAdmin = false;
+                uzivatel.JeAdmin = false;
 
-                _databaze.Entry(uzivatel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                _databaze.SaveChanges();
+                Databaze.Entry(uzivatel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                Databaze.SaveChanges();
             }
 
 
@@ -99,12 +94,12 @@ namespace PruvodceProject.Controllers
             heslo = BCrypt.Net.BCrypt.HashPassword(heslo);
             
             if (trida != null)
-                _databaze.PrihlasovaciUdaje.Add(new UserModel() { heslo = heslo, mail = mail, trida = trida, jeAdmin = jeAdmin });
+                Databaze.Uzivatele.Add(new UzivatelModel() { Heslo = heslo, Mail = mail, Trida = trida, JeAdmin = jeAdmin });
             else
-                _databaze.PrihlasovaciUdaje.Add(new UserModel() { heslo = heslo, mail = mail, jeAdmin = jeAdmin });
+                Databaze.Uzivatele.Add(new UzivatelModel() { Heslo = heslo, Mail = mail, JeAdmin = jeAdmin });
 
             
-            _databaze.SaveChanges();
+            Databaze.SaveChanges();
             
             return RedirectToAction("SpravovatUzivatele");
         }
@@ -112,30 +107,30 @@ namespace PruvodceProject.Controllers
         public IActionResult SpravaStiznosti()
         {
             if (HttpContext.Session.GetString("jeAdmin") != "True")
-                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
+                return RedirectToAction("Prihlaseni", "Uzivatel", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
 
 
-            List<CrowdSourceModel>? crowdSource = _databaze.CrowdSource.ToList();
-            List<CrowdSourceModel> crowdSourceSorted = crowdSource.OrderByDescending(o => o.stav).ToList();
+            List<StiznostiModel>? crowdSource = Databaze.Stiznosti.ToList();
+            List<StiznostiModel> crowdSourceSorted = crowdSource.OrderByDescending(o => o.Stav).ToList();
             return View(crowdSourceSorted);
         }
         [HttpPost]
-        public IActionResult OdpovedetNaStiznost(string ID, string odpoved, string? stav)
+        public IActionResult OdpovedetNaStiznost(string id, string odpoved, string? stav)
         {
             if (HttpContext.Session.GetString("jeAdmin") != "True")
-                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
+                return RedirectToAction("Prihlaseni", "Uzivatel", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
             if (stav == null)
                 stav = "čeká na vyřízení";
 
-            CrowdSourceModel? stiznost = _databaze.CrowdSource.FirstOrDefault(n => n.ID.ToString() == ID);
+            StiznostiModel? stiznost = Databaze.Stiznosti.FirstOrDefault(n => n.Id.ToString() == id);
 
             if (stiznost != null)
             {
-                stiznost.odpovedAmina = odpoved;
-                stiznost.stav = stav;
+                stiznost.AdminOdpoved = odpoved;
+                stiznost.Stav = stav;
 
-                _databaze.Entry(stiznost).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                _databaze.SaveChanges();
+                Databaze.Entry(stiznost).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                Databaze.SaveChanges();
             }
 
 

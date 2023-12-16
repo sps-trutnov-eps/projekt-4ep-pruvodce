@@ -1,4 +1,4 @@
-@model List<CrowdSourceModel>
+@model List<StiznostiModel>
 @{
     ViewData["Title"] = "Administrátorský panel";
 }
@@ -10,13 +10,13 @@
     
     <section>
         <div> @*tabulka na správu uživatelů*@
-            @foreach (CrowdSourceModel stiznost in Model)
+            @foreach (StiznostiModel stiznost in Model)
             {
-                <h2>@stiznost.nadpis</h2>
-                <p>Od uživatele: @stiznost.mailUzivatele</p>
+                <h2>@stiznost.Nadpis</h2>
+                <p>Od uživatele: @stiznost.UzivatelMail</p>
                 <p>Stížnost: @stiznost.Text</p>
-                <p>Stav: @stiznost.stav</p>
-                <p>Odpověď administrátora: @stiznost.odpovedAmina</p>
+                <p>Stav: @stiznost.Stav</p>
+                <p>Odpověď administrátora: @stiznost.AdminOdpoved</p>
 
                 <form action="/AdminDashboard/OdpovedetNaStiznost" method="post">
                     <label>Vaše odpověď</label><br />
@@ -24,7 +24,7 @@
                     <label>Nový stav</label><br />
                     <input type="text" name="stav" placeholder="Stav..."><br />
                     @* tohle je špatná praxe protože by někdo mohl změnit ID ale já věřím našim adminům *@
-                    <input type="text" name="ID" value="@stiznost.ID" style="display:none" />
+                    <input type="text" name="ID" value="@stiznost.Id" style="display:none" />
                     <button type="submit">Odeslat</button>
                 </form>
                 

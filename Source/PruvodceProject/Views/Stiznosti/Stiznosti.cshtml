@@ -1,4 +1,4 @@
-@model List<CrowdSourceModel>
+@model List<StiznostiModel>
 @{ ViewData["Title"] = "Crowd Source"; } 
 
 <article>
@@ -8,12 +8,12 @@
    <section>
 
 
-        @foreach (CrowdSourceModel stiznost in Model)
+        @foreach (StiznostiModel stiznost in Model)
         {
-            <h2>@stiznost.nadpis</h2>
-            <p>Od uživatele: @stiznost.mailUzivatele</p>
-            <p>Stav: @stiznost.stav</p>
-            <p>Odpověď administrátora: @stiznost.odpovedAmina</p>
+            <h2>@stiznost.Nadpis</h2>
+            <p>Od uživatele: @stiznost.UzivatelMail</p>
+            <p>Stav: @stiznost.Stav</p>
+            <p>Odpověď administrátora: @stiznost.AdminOdpoved</p>
             <p>Stížnost: @stiznost.Text</p>
             <p>------------------------------------------</p>
         } 
