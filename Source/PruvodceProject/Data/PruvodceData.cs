@@ -21,11 +21,11 @@ namespace PruvodceProject.Data
 
         public DbSet<PhotoModelBudovy> PhotoBudovy { get; set; }
 
-        public DbSet<ObchodModel> Obchody { get; set; }
+        public DbSet<ObchodModel> Obchod { get; set; }
         
         public DbSet<PhotoModelUcebny> PhotoUcebny { get; set; }
 
-        public DbSet<KafeModel> Kafarny { get; set; }
+        public DbSet<KafeModel> Kafe { get; set; }
 
         public DbSet<ClanekModel> Clanek { get; set; }
 

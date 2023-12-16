@@ -22,6 +22,14 @@ namespace PruvodceProject.Controllers
             else
                 return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
         }
+        [HttpGet]
+        public IActionResult PridatClanek()
+        {
+            if (HttpContext.Session.GetString("jeAdmin") == "True")
+                return View();
+            else
+                return RedirectToAction("Prihlasit", "Prihlaseni", new { chyba = "Nejste přihlášen jako uživatel s administračními právy" });
+        }
 
         [HttpGet]
         public IActionResult SpravovatUzivatele() {
