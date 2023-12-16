@@ -144,36 +144,34 @@ namespace PruvodceProject.Controllers
                 return RedirectToAction("PridatClanek", new { chyba = "Vyplňte všechny údaje." });
             }
 
-            _databaze.StravovaciZarizeni.Add(new StravovaciZarizeniModel() { nazev = nazev, adresa = adresa, odkazNaMenu = odkazNaMenu, popis = popis });
-            _databaze.SaveChanges();
+            Databaze.StravovaciZarizeni.Add(new StravovaciZarizeniModel() { Nazev = nazev, Adresa = adresa, OdkazNaMenu = odkazNaMenu, Popis = popis });
+            Databaze.SaveChanges();
             return RedirectToAction("PridatClanek", new { chyba = "Stravovací zařízení úspěšně vytvořeno." });
             
         }
         [HttpPost]
-        public IActionResult PridatAutomat(string budova, string patro, string typ, bool bagety, string budovaID)
+        public IActionResult PridatAutomat(string? budova, string? patro, string? typ, bool bagety, string? budovaID)
         {
             if (budova == null || patro == null || typ == null)
-            {
                 return RedirectToAction("PridatClanek", new { chyba = "Vyplňte všechny údaje." });
-            }
 
             if (budovaID == null)
             {
-                BudovyModel? _budova = _databaze.Budovy.FirstOrDefault(n => n.name == budova);
-                if (_budova != null)
+                BudovyModel? budovaDb = Databaze.Budovy.FirstOrDefault(n => n.name == budova);
+                if (budovaDb != null)
                 {
-                    _databaze.Automaty.Add(new AutomatyModel() { budova = budova, patro = patro, typ = typ, bagety = bagety, budovaID = _budova });
-                    _databaze.SaveChanges();
+                    Databaze.Automaty.Add(new AutomatyModel() { Budova = budova, Patro = patro, Typ = typ, Bagety = bagety, BudovaId = budovaDb });
+                    Databaze.SaveChanges();
                     return RedirectToAction("PridatClanek", new { chyba = "Budova neexistuje." });
                 }
             }
             if (budovaID != null)
             {
-                BudovyModel? _budova = _databaze.Budovy.FirstOrDefault(n => n.IdBudovy.ToString() == budovaID);
-                if (_budova != null)
+                BudovyModel? budovaDb = Databaze.Budovy.FirstOrDefault(n => n.IdBudovy.ToString() == budovaID);
+                if (budovaDb != null)
                 {
-                    _databaze.Automaty.Add(new AutomatyModel() { budova = _budova.name, patro = patro, typ = typ, bagety = bagety, budovaID = _budova });
-                    _databaze.SaveChanges();
+                    Databaze.Automaty.Add(new AutomatyModel() { Budova = budovaDb.name, Patro = patro, Typ = typ, Bagety = bagety, BudovaId = budovaDb });
+                    Databaze.SaveChanges();
                     return RedirectToAction("PridatClanek", new { chyba = "Budova neexistuje." });
                 }
             }
