@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using PruvodceProject.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace PruvodceProject.Models
 {
@@ -14,5 +16,30 @@ namespace PruvodceProject.Models
         [Required]
         public string Popis { get; set; }
         public string Typ {  get; set; }
+    }
+    public static class SeedData
+    {
+        public static void Initialize(IServiceProvider serviceProvider)
+        {
+            using(var context = new PruvodceData(serviceProvider.GetRequiredService<DbContextOptions<PruvodceData>>()))
+            {
+                if(context.StravovaciZarizeni.Any())
+                {
+                    return;
+                }
+                context.StravovaciZarizeni.AddRange(
+                    new StravovaciZarizeniModel { 
+                        ID = Guid.NewGuid(),
+                        Nazev = "Nevim",
+                        Adresa = "Nevim",
+                        OdkazNaMenu = "www.nevim.cz",
+                        Popis = "nsdjnvxcvnxj",
+                        Typ = "neco"
+                    }
+                    );
+                context.SaveChanges();
+
+            }
+        }
     }
 }
