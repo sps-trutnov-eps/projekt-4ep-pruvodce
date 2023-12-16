@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using PruvodceProject.Data;
 using PruvodceProject.Interfaces;
 using PruvodceProject.Models;

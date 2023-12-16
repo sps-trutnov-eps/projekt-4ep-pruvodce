@@ -136,5 +136,49 @@ namespace PruvodceProject.Controllers
 
             return RedirectToAction("SpravaStiznosti");
         }
+        [HttpPost]
+        public IActionResult UlozitStravovaciZarizeni(string? nazev, string? adresa, string? odkazNaMenu, string? popis)
+        {
+            if (nazev == null || adresa == null|| odkazNaMenu == null)
+            {
+                return RedirectToAction("PridatClanek", new { chyba = "Vyplňte všechny údaje." });
+            }
+
+            _databaze.StravovaciZarizeni.Add(new StravovaciZarizeniModel() { nazev = nazev, adresa = adresa, odkazNaMenu = odkazNaMenu, popis = popis });
+            _databaze.SaveChanges();
+            return RedirectToAction("PridatClanek", new { chyba = "Stravovací zařízení úspěšně vytvořeno." });
+            
+        }
+        [HttpPost]
+        public IActionResult PridatAutomat(string budova, string patro, string typ, bool bagety, string budovaID)
+        {
+            if (budova == null || patro == null || typ == null)
+            {
+                return RedirectToAction("PridatClanek", new { chyba = "Vyplňte všechny údaje." });
+            }
+
+            if (budovaID == null)
+            {
+                BudovyModel? _budova = _databaze.Budovy.FirstOrDefault(n => n.name == budova);
+                if (_budova != null)
+                {
+                    _databaze.Automaty.Add(new AutomatyModel() { budova = budova, patro = patro, typ = typ, bagety = bagety, budovaID = _budova });
+                    _databaze.SaveChanges();
+                    return RedirectToAction("PridatClanek", new { chyba = "Budova neexistuje." });
+                }
+            }
+            if (budovaID != null)
+            {
+                BudovyModel? _budova = _databaze.Budovy.FirstOrDefault(n => n.IdBudovy.ToString() == budovaID);
+                if (_budova != null)
+                {
+                    _databaze.Automaty.Add(new AutomatyModel() { budova = _budova.name, patro = patro, typ = typ, bagety = bagety, budovaID = _budova });
+                    _databaze.SaveChanges();
+                    return RedirectToAction("PridatClanek", new { chyba = "Budova neexistuje." });
+                }
+            }
+
+            return RedirectToAction("PridatClanek", new { chyba = "Automat byl úspěšně vytvořen." });
+        }
     }
 }
