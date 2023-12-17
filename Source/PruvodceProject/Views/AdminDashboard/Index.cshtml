@@ -2,10 +2,15 @@
     ViewData["Title"] = "Administrátorský panel";
 }
 
-<article>
-    <section>
-        <a asp-controller="AdminDashboard" asp-action="SpravovatUzivatele">Spravovat uživatele</a> <br />
-        <a asp-controller="AdminDashboard" asp-action="SpravaStiznosti">Spravovat stížnosti</a> <br />
+<div>
+    <div>
+        <a asp-controller="AdminDashboard" asp-action="SpravovatUzivatele">Spravovat uživatele</a>
+    </div>
+    <div>
+        <a asp-controller="AdminDashboard" asp-action="SpravaStiznosti">Spravovat stížnosti</a>
+    </div>
+    <div>
         <a asp-controller="AdminDashboard" asp-action="PridatClanek">Přidat článek</a>
-    </section>
-</article>
+    </div>
+</div>
+       
