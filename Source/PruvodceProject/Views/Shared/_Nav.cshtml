@@ -6,84 +6,106 @@
     string jeAdmin = httpContext.Session.GetString("jeAdmin");
 }
 
-<nav>
-    <a asp-controller="Home" asp-action="Index">Prváku, neztrať se!</a>
-
-    <div class="menu">
-        <a asp-controller="Tutorialy" asp-action="Index">Tutoriály</a>
-    </div>
-
-    <div class="menu">
-        <a asp-controller="Navigace" asp-action="Index">Navigace</a>
-        <ul>
-            <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
-            <li><a asp-controller="Navigace" asp-action="Ucebny">Učebny</a></li>
-            <li><a asp-controller="Navigace" asp-action="Telocvicny">Tělocvičny</a></li>
-            <li><a asp-controller="Navigace" asp-action="Zachody">Záchody</a></li>
-        </ul>
-    </div>
-
-    <div class="menu">
-        <a asp-controller="Jidlo" asp-action="Index">Jídlo</a>
-        <ul>
-            <li><a asp-controller="Jidlo" asp-action="Jidelny">Jídelny</a></li>
-            <li><a asp-controller="Jidlo" asp-action="Automaty">Automaty</a></li>
-            <li><a asp-controller="Jidlo" asp-action="Kafe">Kafe</a></li>
-            <li><a asp-controller="Jidlo" asp-action="Obchody">Obchody</a></li>
-        </ul>
-    </div>
-
-    <div class="menu">
-        <a asp-controller="Odkazy" asp-action="Index">Odkazy</a>
-        <ul>
-            <li><a asp-controller="Odkazy" asp-action="Bakalari" target="_blank">Bakaláři</a></li>
-            <li><a asp-controller="Odkazy" asp-action="Sps" target="_blank">SPŠ Trutnov</a></li>
-            <li><a asp-controller="Odkazy" asp-action="Mail" target="_blank">Mail</a></li>
-            <li><a asp-controller="Odkazy" asp-action="Github" target="_blank">GitHub</a></li>
-        </ul>
-    </div>
-
-    <div class="menu">
-        <a asp-controller="Doprava" asp-action="Index">Doprava</a>
-        <ul>
-            <li><a asp-controller="Doprava" asp-action="JizdniRady">Jízdní řády</a></li>
-            <li><a asp-controller="Doprava" asp-action="Parkoviste">Parkoviště</a></li>
-            <li><a asp-controller="Doprava" asp-action="Chuze">Chůze</a></li>
-            <li><a asp-controller="Doprava" asp-action="Buky">Buky</a></li>
-        </ul>
-    </div>
-
-    @if (uzivatel != null)
-    {
-        <div class="menu">
-            <a asp-controller="CrowdSource" asp-action="NahlasitProblem">Nahlásit</a>
-        </div>
-    }
-
-    @if (uzivatel != null)
-    {
-        <div class="vpravo">
-            <a asp-controller="Prihlaseni" asp-action="Odhlasit">Odhlásit se</a>
-        </div>
-
-        <div class="vpravo">
-            <a asp-controller="Prihlaseni" asp-action="Profil">@uzivatel</a>
-        </div>
-
-        @if (jeAdmin == "True") {
-            <div class="vpravo">
-                <a asp-controller="AdminDashboard" asp-action="Index">Admin</a>
+<nav id="navigaceHlavni">
+        <div id="posunutiHlavy">
+            <div>
+                <a id="UvodniOdkaz" asp-controller="Home" asp-action="Index" id="nazevProjektu">Prváku, neztrať se!</a>
             </div>
-        }
-    }
-    else
-    {
-        <div class="vpravo">
-            <a asp-controller="Prihlaseni" asp-action="Registrace">Registrovat se</a>
         </div>
 
-        <div class="vpravo">
-            <a asp-controller="Prihlaseni" asp-action="Prihlasit">Přihlásit se</a>
-        </div>
-    }
+        <div id="odkazyStranek">
+            <div></div>
+
+
+            <div>
+                <img id="logo" src="../ob/logo.svg" alt="">
+            </div>
+
+
+            <div id="navka">
+                <div class="menu">
+                    <a asp-controller="Home" asp-action="Index">Úvod</a>
+                </div>
+                <div class="menu">
+                    <a asp-controller="Tutorialy" asp-action="Index">Tutoriály</a>
+                </div>
+
+                <div class="menu">
+                    <a asp-controller="Navigace" asp-action="Index">Navigace</a>
+                    <ul>
+                        <li><a asp-controller="Budovy" asp-action="Index">Budovy</a></li>
+                        <li><a asp-controller="Navigace" asp-action="Ucebny">Učebny</a></li>
+                        <li><a asp-controller="Navigace" asp-action="Telocvicny">Tělocvičny</a></li>
+                        <li><a asp-controller="Navigace" asp-action="Zachody">Záchody</a></li>
+                    </ul>
+                </div>
+
+                <div class="menu">
+                    <a asp-controller="Jidlo" asp-action="Index">Jídlo</a>
+                    <ul>
+                        <li><a asp-controller="Jidlo" asp-action="Jidelny">Jídelny</a></li>
+                        <li><a asp-controller="Jidlo" asp-action="Automaty">Automaty</a></li>
+                        <li><a asp-controller="Jidlo" asp-action="Kafe">Kafe</a></li>
+                        <li><a asp-controller="Jidlo" asp-action="Obchody">Obchody</a></li>
+                    </ul>
+                </div>
+
+                <div class="menu">
+                    <a asp-controller="Odkazy" asp-action="Index">Odkazy</a>
+                    <ul>
+                        <li><a asp-controller="Odkazy" asp-action="Bakalari" target="_blank">Bakaláři</a></li>
+                        <li><a asp-controller="Odkazy" asp-action="Sps" target="_blank">SPŠ Trutnov</a></li>
+                        <li><a asp-controller="Odkazy" asp-action="Mail" target="_blank">Mail</a></li>
+                        <li><a asp-controller="Odkazy" asp-action="Github" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+
+                <div class="menu">
+                    <a asp-controller="Doprava" asp-action="Index">Doprava</a>
+                    <ul>
+                        <li><a asp-controller="Doprava" asp-action="JizdniRady">Jízdní řády</a></li>
+                        <li><a asp-controller="Doprava" asp-action="Parkoviste">Parkoviště</a></li>
+                        <li><a asp-controller="Doprava" asp-action="Chuze">Chůze</a></li>
+                        <li><a asp-controller="Doprava" asp-action="Buky">Buky</a></li>
+                    </ul>
+                </div>
+
+                @if (uzivatel != null)
+                {
+                    <div class="menu">
+                        <a asp-controller="CrowdSource" asp-action="NahlasitProblem">Nahlásit</a>
+                    </div>
+                }
+                <div>
+
+                </div>
+                @if (uzivatel != null)
+                {
+                    <div class="vpravo">
+                        <a asp-controller="Prihlaseni" asp-action="Odhlasit">Odhlásit se</a>
+                    </div>
+
+                    <div class="vpravo">
+                        <a asp-controller="Prihlaseni" asp-action="Profil">@uzivatel</a>
+                    </div>
+
+                    @if (jeAdmin == "True") {
+                        <div class="vpravo">
+                            <a asp-controller="AdminDashboard" asp-action="Index">Admin</a>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="vpravo">
+                        <a asp-controller="Prihlaseni" asp-action="Registrace">Registrovat se</a>
+                    </div>
+
+                    <div class="vpravo">
+                        <a asp-controller="Prihlaseni" asp-action="Prihlasit">Přihlásit se</a>
+                    </div>
+                }
+      </div>      
+    </div>
+    </div>
 </nav>
