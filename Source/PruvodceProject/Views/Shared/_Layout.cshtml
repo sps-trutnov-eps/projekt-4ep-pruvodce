@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Prváku, neztrať se!</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" href="~/ob/logo.png">
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
 </head>
 
 <body>
@@ -24,14 +25,16 @@
         else
         {
             <div class="container">
-                <h1>@ViewData["Title"]</h1>
+                <div class="articleNazev">
+                    <h1>@ViewData["Title"]</h1>
+                </div>
                 @RenderBody()
             </div>
         }
     </main>
 
-    <footer class="center">
-        <div class="container">&copy; 2023 - Prváku, neztrať se!</div>
+    <footer>
+        <div>&copy; 2023 - Prváku, neztrať se!</div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
