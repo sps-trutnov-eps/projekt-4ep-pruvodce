@@ -22,12 +22,12 @@
     <h3>Uživatelé:</h3>
 
     <div>
-        @foreach (UserModel uzivatelskeData in Model)
+        @foreach (UzivatelModel uzivatelskeData in Model)
         {
             <div>
                 @*tohle je jeden uživatel v tabulce správy uživatelů*@
-                <h3>@uzivatelskeData.mail</h3>
-                @if (uzivatelskeData.jeAdmin)
+                <h3>@uzivatelskeData.Mail</h3>
+                @if (uzivatelskeData.JeAdmin)
                 {
                     <p>Admin</p>
 
@@ -37,17 +37,17 @@
                     <p>Uživatel</p>
                 }
                 <div>
-                @if(uzivatelskeData.mail != "senkyr@spstrutnov.cz")
+                @if(uzivatelskeData.Mail != "senkyr@spstrutnov.cz")
                 {
-                    <a href="/AdminDashboard/DeleteUzivatele/@uzivatelskeData.ID">Smazat</a>
+                    <a href="/AdminDashboard/DeleteUzivatele/@uzivatelskeData.Id">Smazat</a>
                 }
-                @if (uzivatelskeData.jeAdmin && uzivatelskeData.mail != "senkyr@spstrutnov.cz")
+                @if (uzivatelskeData.JeAdmin && uzivatelskeData.Mail != "senkyr@spstrutnov.cz")
                 {
-                    <a href="/AdminDashboard/OdebratUzivateleAdmina/@uzivatelskeData.ID">Odebrat administrátorská oprávění</a>
+                    <a href="/AdminDashboard/OdebratUzivateleAdmina/@uzivatelskeData.Id">Odebrat administrátorská oprávění</a>
                 }
                 else
                 {                        
-                    <a href="/AdminDashboard/UdelatUzivateleAdminem/@uzivatelskeData.ID">Povýšit na administrátora</a>
+                    <a href="/AdminDashboard/UdelatUzivateleAdminem/@uzivatelskeData.Id">Povýšit na administrátora</a>
                 }
                 </div> @*<-- NA TENHLE DIV SPODNÍ MARGIN!!*@
             </div>

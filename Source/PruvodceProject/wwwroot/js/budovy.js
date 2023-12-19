@@ -255,13 +255,10 @@ function dotek() {
 
 // Přizpůsobení oknu
 function canvasResize() {
-  const height = renderContainer.parentElement.parentElement.clientHeight - 4.3 * Number(window.getComputedStyle(renderContainer).fontSize.replace('px', ''));
+  const height = $('#renderContainer').innerHeight();
   camera.aspect = renderContainer.clientWidth / height;
   camera.updateProjectionMatrix();
   
-  blocker.style.height = height + "px";
-  roomContainer.style.height = height + "px";
-  loadingContainer.style.height = height + "px";
   renderer.setSize(renderContainer.clientWidth, height);
 }
 

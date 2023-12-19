@@ -2,86 +2,92 @@
 @using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "Úvod";
+    ViewData["SubTitle"] = "Vítejte v průvodci";
     HttpContext? httpContext = HttpContextAccessor.HttpContext;
     bool pristupOveren = (httpContext != null) && (httpContext.Session.GetString("prihlasen") == "Ano");
     string prihlasenyUzivatel = httpContext.Session.GetString("uzivatel");
 }
 <article>
-    <section>
-        <div class="budovyIndex">
-            <div class="divobrazekHlavniStranka">
-                <img class="obrazekHlavniStranka" src="ob/skolni-101.jpg" alt="">
-                <h5>Školní 101</h5>
-                <p>
-                   Hlavní budova Střední průmyslové školy, Trutnov, Školní 101 se nachází, poblíž Krakonošova náměstí v Trutnově a kostela Panny Marie. Budova slouží jako ředitelství a sekretariát školy a jsou zde také učebny a laboratoř pro teoretické vyučování.
-                </p>
+    <div class="container">
+        <h2>Přehled budov</h2>
+        <section>
+            <div class="budovyIndex">
+                <div class="divobrazekHlavniStranka">
+                    <img class="obrazekHlavniStranka" src="ob/skolni-101.jpg" alt="">
+                    <h5>Školní 101</h5>
+                    <p>
+                        Hlavní budova Střední průmyslové školy, Trutnov, Školní 101 se nachází, poblíž Krakonošova náměstí v Trutnově a kostela Panny Marie. Budova slouží jako ředitelství a sekretariát školy a jsou zde také učebny a laboratoř pro teoretické vyučování.
+                    </p>
+                </div>
+                <div class="divobrazekHlavniStranka">
+                    <img class="obrazekHlavniStranka" src="ob/horska-59.jpg" alt="">
+                    <h5>Horská 59</h5>
+                    <p>
+                        Odloučené pracoviště Střední průmyslové školy, Trutnov, Školní 101 v ulici Horská 59 se nachází v Trutnově v Dolním Starém Městě, směrem po silnici z centra do Horního Starého Města.
+                    </p>
+                </div>
+                <div class="divobrazekHlavniStranka">
+                    <img class="obrazekHlavniStranka" src="ob/horska-618.jpg" alt="">
+                    <h5>Horská 618</h5>
+                    <p>
+                        Odloučené pracoviště Střední průmyslové školy, Trutnov, Školní 101 v ulici Horská 618 se nachází za viaduktem u sídliště Šestidomí ve Středním předměstí v Trutnově, směrem po silnici z Vnitřního Města do Horního Starého Města.
+                    </p>
+                </div>
+                <div class="divobrazekHlavniStranka">
+                    <img class="obrazekHlavniStranka" src="ob/mlade-buky-5-6.jpg" alt="">
+                    <h5>Mladé Buky 374</h5>
+                    <p>
+                        Odloučené pracoviště praktického vyučování Střední průmyslové školy, Trutnov, Školní 101 se nachází v obci Mladé Buky na adrese č. p. 374 mezi obcemi Trutnov a Svoboda nad Úpou.
+                    </p>
+                </div>
             </div>
-            <div class="divobrazekHlavniStranka">
-                <img class="obrazekHlavniStranka" src="ob/horska-59.jpg" alt="">
-                <h5>Horská 59</h5>
-                <p>
-                    Odloučené pracoviště Střední průmyslové školy, Trutnov, Školní 101 v ulici Horská 59 se nachází v Trutnově v Dolním Starém Městě, směrem po silnici z centra do Horního Starého Města.
-                </p>
-            </div>
-            <div class="divobrazekHlavniStranka">
-                <img class="obrazekHlavniStranka" src="ob/horska-618.jpg" alt="">
-                <h5>Horská 618</h5>
-                <p>
-                    Odloučené pracoviště Střední průmyslové školy, Trutnov, Školní 101 v ulici Horská 618 se nachází za viaduktem u sídliště Šestidomí ve Středním předměstí v Trutnově, směrem po silnici z Vnitřního Města do Horního Starého Města.
-                </p>
-            </div>
-            <div class="divobrazekHlavniStranka">
-                <img class="obrazekHlavniStranka" src="ob/mlade-buky-5-6.jpg" alt="">
-                <h5>Mladé Buky 374</h5>
-                <p>
-                   Odloučené pracoviště praktického vyučování Střední průmyslové školy, Trutnov, Školní 101 se nachází v obci Mladé Buky na adrese č. p. 374 mezi obcemi Trutnov a Svoboda nad Úpou.
-                </p>
-            </div>
+        </section>
+    </div>
+</article>
 
-        </div>
-    </section>
-            <div style="margin-top: 40px; margin-bottom: 20px" class="articleNazev">
-            <h1>Kmenové třídy</h1>
-        </div>
-    <section>
-        <div id="seznamKmenovychTrid">
-            <div>
-                <h6>Školní 101</h6>
-                <ul>1.EP - T</ul>
-                <ul>2.EP - T</ul>
-                <ul>3.EP - T</ul>
-                <ul>4.EP - T</ul>
-                <ul>1.IT - T</ul>
-                <ul>2.IT - T</ul>
-                <ul>3.IT - T</ul>
-                <ul>4.IT - T</ul>
+<article>        
+    <div class="container">
+        <h2>Kmenové třídy</h2>
+        <section>
+            <div id="seznamKmenovychTrid">
+                <div>
+                    <h6>Školní 101</h6>
+                    <ul>1.EP - T</ul>
+                    <ul>2.EP - T</ul>
+                    <ul>3.EP - T</ul>
+                    <ul>4.EP - T</ul>
+                    <ul>1.IT - T</ul>
+                    <ul>2.IT - T</ul>
+                    <ul>3.IT - T</ul>
+                    <ul>4.IT - T</ul>
+                </div>
+                <div>
+                    <h6>Horská 59</h6>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                </div>
+                <div>
+                    <h6>Horská 618</h6>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                </div>
+                <div>
+                    <h6>Mladé Buky 374</h6>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                    <ul>1.EP - T</ul>
+                </div>
             </div>
-            <div>
-                <h6>Horská 59</h6>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-            </div>
-            <div>
-                <h6>Horská 618</h6>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-            </div>
-            <div>
-                <h6>Mladé Buky 374</h6>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-                <ul>1.EP - T</ul>
-            </div>
-        </div>        
-    </section>
+        </section>
+    </div>
 </article>

@@ -8,16 +8,18 @@
 
     
 <div> @*TOHLE JE DIV VŠECH STÍŽNOSTÍ*@
-    @foreach (CrowdSourceModel stiznost in Model)
+    @foreach (StiznostiModel stiznost in Model)
     {
-        <div> @*TOHLE JE INDIVIDUÁLNÍ STÍŽNOST!*@
-            <h2>@stiznost.nadpis</h2>
-            <p>Od: <b>@stiznost.mailUzivatele</b></p>
-            <p>„@stiznost.Text”</p>
-            <p>@stiznost.stav</p>
-            <p>Odpověď administrátora: @stiznost.odpovedAmina</p>
+        <div> @*TOHLE JE INDIVIDUÁLNÍ STÍŽNOST!*@
 
-            <div>
+            <h2>@stiznost.Nadpis</h2>
+            <p>Od: <b>@stiznost.UzivatelMail</b></p>
+            <p>„@stiznost.Text”</p>
+            <p>@stiznost.Stav</p>
+            <p>Odpověď administrátora: @stiznost.AdminOdpoved</p>
+
+            <div>
+
                 <form action="/AdminDashboard/OdpovedetNaStiznost" method="post">
                     <label>Vaše odpověď</label><br />
                     <input required type="text" name="odpoved" placeholder="Odpověď..."><br />
@@ -29,5 +31,6 @@
                 </form>
             </div>
         </div>
-    }
+    }
+
 </div>

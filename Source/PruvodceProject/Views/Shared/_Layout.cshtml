@@ -5,44 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Prváku, neztrať se!</title>
     <link rel="icon" href="~/ob/logo.png">
-    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <partial name="_Nav"/>
-        </div>
-    </header>
 
-    <main>
-        @if ((string)ViewData["Title"]! == "Budovy")
-        {
-            <div class="container budovy">
-                @RenderBody()
-            </div>
-        }
-        else
-        {
-            <div class="container">
-                <div class="articleNazev">
-                    <h1>@ViewData["Title"]</h1>
-                </div>
-                @RenderBody()
-            </div>
-        }
-    </main>
+<partial name="_Nav"/>
 
-    <footer>
-        <div>&copy; 2023 - Prváku, neztrať se!</div>
-    </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+<main>
     @if ((string)ViewData["Title"]! == "Budovy")
     {
-        <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-        <script type="importmap">
+        @RenderBody()
+    }
+    else
+    {
+        <div id="nadpis">
+            <div class="container">
+                <h1>@ViewData["Title"]</h1>
+                @if ((string)ViewData["SubTitle"]! != "")
+                {
+                    <div>@ViewData["SubTitle"]</div>
+                }
+            </div>
+        </div>
+        
+        @RenderBody()
+    }
+</main>
+
+<footer>
+    <div class="container">
+        <div>&copy; 2023 - Prváku, neztrať se!</div>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@if ((string)ViewData["Title"]! == "Budovy")
+{
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
           {
             "imports": {
               "three": "https://unpkg.com/three@v0.149.0/build/three.module.js",
@@ -50,8 +52,8 @@
             }
           }
         </script>
-        <script type="module" src="/js/budovy.js"></script>
-    }
-    @await RenderSectionAsync("Scripts", required: false)
+    <script type="module" src="/js/budovy.js"></script>
+}
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
