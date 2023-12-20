@@ -22,7 +22,7 @@ namespace PruvodceProject.Models
             List<string> odkazy = new List<string>(); 
             List<string> popisy = new List<string>(); 
             List<string> typy = new List<string>(); 
-            using (var soubor = new StreamReader("../../textdata/pokus.csv")) 
+            using (var soubor = new StreamReader("./csvdata/pokus.csv")) 
             { 
                 while (!soubor.EndOfStream) 
                 { 
