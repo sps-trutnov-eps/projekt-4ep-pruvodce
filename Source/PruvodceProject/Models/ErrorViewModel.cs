@@ -7,4 +7,3 @@ namespace PruvodceProject.Models
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
-

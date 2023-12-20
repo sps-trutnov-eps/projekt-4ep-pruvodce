@@ -1,20 +1,20 @@
-﻿@model UserModel
+﻿@model UzivatelModel
 
 @inject IHttpContextAccessor HttpContextAccessor;
 @using Microsoft.AspNetCore.Http;
 
 @{
-    HttpContext? HttpContext = HttpContextAccessor.HttpContext;
-    string uzivatel = HttpContext.Session.GetString("jmeno");
+    HttpContext? httpContext = HttpContextAccessor.HttpContext;
+    string uzivatel = httpContext.Session.GetString("jmeno");
     ViewData["Title"] = "Správa uživatele " + uzivatel;
 }
 
 <article>
     <h2>Informace o profilu</h2>
     <section>
-        <div><b>Třída: <i>@Model.trida</i></b></div>
-        <div><b>E-mail: <i>@Model.mail</i></b></div>
-        <a asp-controller="CrowdSource" asp-action="Stiznosti">Vaše stížnosti.</a>
+        <div><b>Třída: <i>@Model.Trida</i></b></div>
+        <div><b>E-mail: <i>@Model.Mail</i></b></div>
+        <a asp-controller="Stiznosti" asp-action="Stiznosti">Vaše stížnosti.</a>
     </section>
 </article>
 
@@ -22,8 +22,8 @@
     <h2>Nastavení profilu</h2>
     <section>
         <h3>Změna informací</h3>
-        <form action="/Prihlaseni/Profil" method="post">
-            <input value="@Model.trida" name="zmenitTrida" placeholder="Třída" type="text" /><br/><br/>
+        <form asp-action="Profil" asp-controller="Uzivatel" method="post">
+            <input value="@Model.Trida" name="zmenitTrida" placeholder="Třída" type="text" /><br/><br/>
 
             <input value="Uložit" type="submit"/>
         </form>
@@ -32,7 +32,7 @@
 
     <section>
         <h3>Změna hesla</h3>
-        <form action="/Prihlaseni/ZmenitHeslo" method="post">
+        <form asp-action="ZmenitHeslo" asp-controller="Uzivatel" method="post">
             <input name="stareHeslo" placeholder="Staré heslo..." type="password" /><br />
             <input name="zmenitHeslo" placeholder="Nové heslo..." type="password" /><br /><br />
 
@@ -42,7 +42,7 @@
 
     <section>
         <h3>Smazat účet</h3>
-        <form action="/Prihlaseni/SmazatUcet" method="post">
+        <form asp-action="SmazatUcet" asp-controller="Uzivatel" method="post">
             <input name="stareHeslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
 
             <input name="smazat" value="Smazat účet" type="submit" />

@@ -7,12 +7,12 @@
     <section>
         <h3>@Model.Druh @Model.Nazev</h3>
         <div style="text-align: center">
-            <p>Budova: @Model.Budova.kodoveOznaceni</p>
+            <p>Budova: @Model.Budova.KodoveOznaceni</p>
             <p>@Model.Patro</p>
             @if (Model.Poddruh != "Kabinet")
             {
                 <p>Fotografie:</p>
-                <img src="@(Model.fotky.FirstOrDefault().Cesta)">
+                <img src="@(Model.Fotky.FirstOrDefault().Cesta)">
             }
         </div>
     </section>

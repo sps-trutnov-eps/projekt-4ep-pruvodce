@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Přihlášení";
+}
+
+<article>
+   <section id="prihlaseni">
+        <form method="post" asp-action="Prihlaseni" asp-controller="Uzivatel">
+           <input name="mail" placeholder="Zadejte svůj e-mail..." type="email" /><br />
+           <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
+           <input value="Přihlásit se" type="submit" />
+            <p><span>@ViewData["chyba"]</span></p>
+       </form>
+
+        <p>Nemáš ještě účet? <a asp-action="Registrace"><b>Zaregistruj se</b></a></p>
+        <p>Zapomněli ještě heslo? <a asp-action="ZapomenuteHeslo"><b>Obnovte si ho</b></a></p>
+    </section>
+</article>

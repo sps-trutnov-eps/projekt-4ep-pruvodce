@@ -20,12 +20,12 @@ namespace PruvodceProject.Models
             };
 
             return client.SendMailAsync(
-                new MailMessage(from: senderMail,
-                                to: email,
-                                subject,
-                                message
-                                ));
-
+                new MailMessage(
+                    from: senderMail,
+                    to: email,
+                    subject,
+                    message
+            ));
         }
     }
 }

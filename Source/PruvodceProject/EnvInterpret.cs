@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace PruvodceProject
+﻿namespace PruvodceProject
 {
     public class EnvInterpret
     {

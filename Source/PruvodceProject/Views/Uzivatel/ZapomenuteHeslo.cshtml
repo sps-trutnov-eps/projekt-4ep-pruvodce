@@ -4,7 +4,7 @@
 
 <article>
     <section id="forgor">
-        <form action="/Prihlaseni/ZapomenuteHeslo" method="post">
+        <form asp-action="ZapomenuteHeslo" asp-controller="Uzivatel" method="post">
             <input type="email" placeholder="Zadejte e-mail..." name="mail" /><br />
             <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br />
             <input name="hesloZnovu" placeholder="zadejte znovu heslo..." type="password" /><br /><br />

@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Budovy";
+}
+<div id="buildingRequest" style="display: none">@ViewData["Budova"]</div>
+
+<div class="container budovy">
+    <div id="nadpis">
+        <div class="container">
+            <h1>@ViewData["Title"]</h1>
+            
+            <nav>
+                <div>
+                    <a>Možnosti zobrazení</a>
+                    <ul id="optionsContainer"></ul>
+                </div>
+                
+                <div>
+                    <a>Výběr budovy</a>
+                    <ul>
+                        <li><a asp-action="Budovy" asp-route-budova="skolni101">Školní 101</a></li>
+                        <li><a asp-action="Budovy" asp-route-budova="horska618">Horská 618</a></li>
+                        <li><a asp-action="Budovy" asp-route-budova="horska59">Horská 59</a></li>
+                        <li><a asp-action="Budovy" asp-route-budova="mladebuky">Mladé Buky</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div id="renderContainer">
+        <div id="renderer"></div> @* Tady se renderuje canvas *@
+        
+        <div id="crosshair">
+            <div></div>
+            <div></div>
+        </div>
+
+        <div id="loadingContainer">
+            <label for="loadingProgress" id="loadingLabel">Načítání...</label>
+            <progress id="loadingProgress" min="0" max="100" value="0"></progress>
+        </div>
+        
+        <div id="errorContainer">
+            <p style="font-size:36px">Nastala chyba!</p>
+        </div>
+
+        <div id="blocker">
+            <div id="instructions">
+                <p style="font-size:36px">Klikni pro spuštění</p>
+                <p>
+                    Pohyb: WASD<br/>
+                    Nahoru: SPACE<br/>
+                    Dolů: C<br/>
+                    Rozhlížení: MYŠ
+                </p>
+            </div>
+        </div>
+        
+        <div id="roomContainer">
+            <h2>Info o místnosti</h2>
+            <img src="/ob/logo.png" alt="">
+            <p style="word-wrap: break-word;" id="roomInfo"></p>
+        </div>
+    </div>
+</div>

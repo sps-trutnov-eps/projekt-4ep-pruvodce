@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging.Abstractions;
 using PruvodceProject.Data;
 using PruvodceProject.Models;
 
@@ -7,50 +6,48 @@ namespace PruvodceProject.Controllers
 {
     public class ClanekController : Controller
     {
-        public PruvodceData _databaze;
-        public string mail;
-        public Guid uzivatel;
+        PruvodceData Databaze { get; }
+        public string Mail;
+        public Guid Uzivatel;
 
-        public ClanekController(PruvodceData databaze)
-        {
-            _databaze = databaze;
-        }
+        public ClanekController(PruvodceData databaze) => Databaze = databaze;
+        
         [HttpGet]
-        public IActionResult editor()
+        public IActionResult Editor()
         {
             if(HttpContext.Session.GetString("mail") == null || HttpContext.Session.GetString("mail").Length == 0)
             {
-                return RedirectToAction("Prihlasit","prihlaseni", new {chyba = "Musíte se přihlásit!"});
+                return RedirectToAction("Prihlaseni","Uzivatel", new {chyba = "Musíte se přihlásit!"});
             }
             return View();
         }
         [HttpPost]
-        public IActionResult ulozit(string _nadpis, string _text)
+        public IActionResult Ulozit(string nadpis, string text)
         {
-            mail = HttpContext.Session.GetString("mail");
-            UserModel? hledane_udaje = _databaze.PrihlasovaciUdaje.FirstOrDefault(n => n != null && n.mail == mail);
-            uzivatel = (hledane_udaje.ID);
-            _databaze.Clanek.Add(new ClanekModel() { ID_autora = uzivatel, NadpisClanku = _nadpis, ObsahClanku = _text, DatumVytvoreni = DateTime.Now});
-            _databaze.SaveChanges();
-            return RedirectToAction("prehled");
+            Mail = HttpContext.Session.GetString("mail");
+            UzivatelModel? hledaneUdaje = Databaze.Uzivatele.FirstOrDefault(n => n != null && n.Mail == Mail);
+            Uzivatel = (hledaneUdaje.Id);
+            Databaze.Clanek.Add(new ClanekModel() { AutorId = Uzivatel, NadpisClanku = nadpis, ObsahClanku = text, DatumVytvoreni = DateTime.Now});
+            Databaze.SaveChanges();
+            return RedirectToAction("Prehled");
         }
         [HttpGet]
-        public IActionResult upravit(Guid Id)
+        public IActionResult Upravit(Guid id)
         {
-            return RedirectToAction("editor");
+            return RedirectToAction("Editor");
         }
         [HttpPost]
-        public IActionResult smazat(Guid Id)
+        public IActionResult Smazat(Guid id)
         {
-            ClanekModel? hledany_clanek = _databaze.Clanek.FirstOrDefault(n => n != null && n.Id == Id);
-            _databaze.Clanek.Remove(hledany_clanek);
-            _databaze.SaveChanges();
-            return RedirectToAction("prehled");
+            ClanekModel? hledanyClanek = Databaze.Clanek.FirstOrDefault(n => n != null && n.Id == id);
+            Databaze.Clanek.Remove(hledanyClanek);
+            Databaze.SaveChanges();
+            return RedirectToAction("Prehled");
         }
         [HttpGet]
-        public IActionResult prehled() 
+        public IActionResult Prehled() 
         { 
-            return View(_databaze.Clanek.ToList());
+            return View(Databaze.Clanek.ToList());
         }
     }
 }

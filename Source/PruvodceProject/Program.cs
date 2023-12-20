@@ -3,7 +3,6 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.EntityFrameworkCore;
 using PruvodceProject.Interfaces;
 using PruvodceProject.Models;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace PruvodceProject
 {
@@ -39,6 +38,13 @@ namespace PruvodceProject
             });
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                SeedData.Initialize(services);
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

@@ -7,29 +7,21 @@ namespace PruvodceProject.Controllers
 {
     public class NavigaceController : Controller
     {
-        public PruvodceData _databaze;
-        public NavigaceController(PruvodceData databaze)
-        {
-            _databaze = databaze;
-        }
-        
-        public IActionResult Index()
-        {
-            return View();
-        }
-        
+        PruvodceData Databaze { get; }
+        public NavigaceController(PruvodceData databaze) => Databaze = databaze;
+
         public IActionResult Ucebny()
         {
-            return View(_databaze.Ucebna.ToList());
+            return View(Databaze.Ucebny.ToList());
         }
 
         [HttpGet]
         public IActionResult UcebnaDetail(Guid id)
         {
-            UcebnaModel ucebna = _databaze.Ucebna
+            UcebnaModel ucebna = Databaze.Ucebny
                 .Include(u => u.Budova)
-                .ThenInclude(pB => pB.fotky)
-                .Include(u => u.fotky)
+                .ThenInclude(pB => pB.Fotky)
+                .Include(u => u.Fotky)
                 .FirstOrDefault(u => u.Id == id);
             return View(ucebna);
         }
@@ -37,24 +29,20 @@ namespace PruvodceProject.Controllers
         [HttpGet]
         public UcebnaModel? UcebnaData(string id)
         {
-            return _databaze.Ucebna.FirstOrDefault(u => u.Nazev == id);;
+            return Databaze.Ucebny.FirstOrDefault(u => u.Nazev == id);;
+        }
+        
+        [HttpGet]
+        [Route("/Navigace/Budovy/{budova?}")]
+        public IActionResult Budovy(string? budova)
+        {
+            ViewData["Budova"] = budova ?? "skolni101";
+            return View();
         }
         
         // public IActionResult BudovaDetail(Guid id)
         // {
         //     return View(_databaze.Budovy.FirstOrDefault(u => u.IdBudovy == id));
         // }
-
-        public IActionResult Telocvicny()
-        {
-            return View();
-        }
-        
-        public IActionResult Zachody()
-        {
-            return View();
-        }
-        
     }
-
 }
