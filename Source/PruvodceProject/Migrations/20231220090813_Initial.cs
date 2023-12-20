@@ -16,6 +16,7 @@ namespace PruvodceProject.Migrations
                 columns: table => new
                 {
                     IdBudovy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Adresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     KodoveOznaceni = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -76,7 +77,7 @@ namespace PruvodceProject.Migrations
                 name: "StravovaciZarizeni",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nazev = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Adresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OdkazNaMenu = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -85,7 +86,7 @@ namespace PruvodceProject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StravovaciZarizeni", x => x.ID);
+                    table.PrimaryKey("PK_StravovaciZarizeni", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(

@@ -12,7 +12,7 @@ using PruvodceProject.Data;
 namespace PruvodceProject.Migrations
 {
     [DbContext(typeof(PruvodceData))]
-    [Migration("20231216154851_Initial")]
+    [Migration("20231220090813_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -67,6 +67,10 @@ namespace PruvodceProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KodoveOznaceni")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -193,7 +197,7 @@ namespace PruvodceProject.Migrations
 
             modelBuilder.Entity("PruvodceProject.Models.StravovaciZarizeniModel", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -217,7 +221,7 @@ namespace PruvodceProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("StravovaciZarizeni");
                 });
