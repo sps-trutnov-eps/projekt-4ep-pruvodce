@@ -71,8 +71,10 @@ nav > div {
   align-items: center;
 }
 nav > div ul {
-  transition: 1s;
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s, opacity 0.2s ease-in-out;
+  display: flex;
   position: absolute;
   min-width: 10em;
   width: max-content;
@@ -95,12 +97,14 @@ nav > div ul li a {
   color: black;
 }
 nav > div:hover > ul {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Main */
 main {
   min-height: calc(100vh - 7.35rem);
+  padding-bottom: 2rem;
 }
 
 #nadpis {
@@ -123,8 +127,17 @@ h2 {
   padding-block: 1em;
 }
 
-article {
+h3 {
+  margin: 0;
   padding-block: 1em;
+}
+
+article {
+  text-align: center;
+  padding-block: 1em;
+}
+article section {
+  padding-bottom: 1em;
 }
 article:nth-of-type(even) {
   background-color: rgba(128, 128, 128, 0.17);
@@ -132,7 +145,7 @@ article:nth-of-type(even) {
 
 /* Footer */
 footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   height: 2rem;
@@ -150,6 +163,85 @@ footer .container {
 }
 
 /* Přihlášení a registrace */
+form input {
+  min-width: 10rem;
+  font-size: 0.75em;
+  display: block;
+  padding: 0.5rem;
+  margin: 0.5rem auto;
+  border: 1px solid #374e88;
+  border-radius: 2px;
+}
+form input[type=submit] {
+  min-width: 6rem;
+  margin-top: 1rem;
+  color: white;
+  background-color: #374e88;
+}
+form input[type=submit]:hover {
+  background-color: #113388;
+  transition-duration: 0.1s;
+}
+
+.error {
+  font-size: 0.9em;
+  border: 2px #ff3333 solid;
+  background-color: rgba(255, 51, 51, 0.14);
+  border-radius: 2px;
+  width: max-content;
+  margin: 1em auto;
+  padding-right: 0.5em;
+}
+.error::before {
+  font-weight: bold;
+  padding: 0.25em 0.5em;
+  margin-right: 0.5em;
+  content: "CHYBA";
+  display: inline-block;
+  background-color: #ff3333;
+  color: white;
+}
+
+.success {
+  font-size: 0.9em;
+  border: 2px #28c400 solid;
+  background-color: rgba(40, 196, 0, 0.14);
+  border-radius: 2px;
+  width: max-content;
+  margin: 1em auto;
+  padding-right: 0.5em;
+}
+.success::before {
+  font-weight: bold;
+  padding: 0.25em 0.5em;
+  margin-right: 0.5em;
+  content: "Úspěch";
+  display: inline-block;
+  background-color: #28c400;
+}
+
+a.button {
+  font-size: 0.75em;
+  padding: 0.5rem;
+  margin: 0.5rem auto;
+  display: block;
+  border: 1px solid #374e88;
+  border-radius: 2px;
+  background-color: #374e88;
+  min-width: 6rem;
+  width: max-content;
+  color: white;
+  text-decoration: none;
+}
+a.button:hover {
+  background-color: #113388;
+  transition-duration: 0.2s;
+}
+
+.inline {
+  display: inline !important;
+}
+
 /* 3D Zobrazení budov */
 .container.budovy {
   width: 100%;

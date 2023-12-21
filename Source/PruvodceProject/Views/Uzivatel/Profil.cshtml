@@ -5,52 +5,72 @@
 
 @{
     HttpContext? httpContext = HttpContextAccessor.HttpContext;
-    string uzivatel = httpContext.Session.GetString("jmeno");
+    string? uzivatel = httpContext?.Session.GetString("jmeno");
+    string? jeAdmin = httpContext?.Session.GetString("jeAdmin");
     ViewData["Title"] = "Správa uživatele " + uzivatel;
 }
 
 <article>
-    <h2>Informace o profilu</h2>
-    <section>
-        <div><b>Třída: <i>@Model.Trida</i></b></div>
-        <div><b>E-mail: <i>@Model.Mail</i></b></div>
-        <a asp-controller="Stiznosti" asp-action="Stiznosti">Vaše stížnosti.</a>
-    </section>
+    <div class="container">
+        <h2>Informace o profilu</h2>
+        <section>
+            <div><b>Třída: <i>@Model.Trida</i></b></div>
+            <div><b>E-mail: <i>@Model.Mail</i></b></div>
+            <a asp-controller="Stiznosti" asp-action="Stiznosti" class="button">Vaše stížnosti</a>
+        </section>
+    </div>
 </article>
 
+@if (jeAdmin == "True")
+{
+    <article>
+        <div class="container">
+            <h2>Administrátorský panel</h2>
+            <a asp-controller="AdminDashboard" asp-action="SpravovatUzivatele" class="button">Spravovat uživatele</a>
+            <a asp-controller="AdminDashboard" asp-action="SpravaStiznosti" class="button">Spravovat stížnosti</a>
+            <a asp-controller="AdminDashboard" asp-action="PridatClanek" class="button">Přidat článek</a>
+        </div>
+    </article>
+}
+
 <article>
-    <h2>Nastavení profilu</h2>
-    <section>
-        <h3>Změna informací</h3>
-        <form asp-action="Profil" asp-controller="Uzivatel" method="post">
-            <input value="@Model.Trida" name="zmenitTrida" placeholder="Třída" type="text" /><br/><br/>
+    <div class="container">
+        <h2>Nastavení profilu</h2>
+        @if (ViewData["chyba"] != "")
+        {
+            <div class="error">@ViewData["chyba"]</div>
+        }
+        @if (ViewData["hotovo"] != "")
+        {
+            <div class="success">@ViewData["hotovo"]</div>
+        }
+        <section>
+            <h3>Změna informací</h3>
+            <form asp-action="Profil" asp-controller="Uzivatel" method="post">
+                <input value="@Model.Trida" name="zmenitTrida" placeholder="Třída" type="text"/>
 
-            <input value="Uložit" type="submit"/>
-        </form>
+                <input value="Uložit" type="submit"/>
+            </form>
 
-    </section>
+        </section>
 
-    <section>
-        <h3>Změna hesla</h3>
-        <form asp-action="ZmenitHeslo" asp-controller="Uzivatel" method="post">
-            <input name="stareHeslo" placeholder="Staré heslo..." type="password" /><br />
-            <input name="zmenitHeslo" placeholder="Nové heslo..." type="password" /><br /><br />
+        <section>
+            <h3>Změna hesla</h3>
+            <form asp-action="ZmenitHeslo" asp-controller="Uzivatel" method="post">
+                <input name="stareHeslo" placeholder="Staré heslo..." type="password"/>
+                <input name="zmenitHeslo" placeholder="Nové heslo..." type="password"/>
 
-            <input value="Změnit heslo" type="submit" />
-        </form>
-    </section>
+                <input value="Změnit heslo" type="submit"/>
+            </form>
+        </section>
 
-    <section>
-        <h3>Smazat účet</h3>
-        <form asp-action="SmazatUcet" asp-controller="Uzivatel" method="post">
-            <input name="stareHeslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
+        <section>
+            <h3>Smazat účet</h3>
+            <form asp-action="SmazatUcet" asp-controller="Uzivatel" method="post">
+                <input name="stareHeslo" placeholder="Zadejte heslo..." type="password"/>
 
-            <input name="smazat" value="Smazat účet" type="submit" />
-        </form>
-    </section>
-
-    @if(ViewData["chyba"] != "" || ViewData["hotovo"] != "")
-    {
-        <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
-    }
+                <input name="smazat" value="Smazat účet" type="submit"/>
+            </form>
+        </section>
+    </div>
 </article>

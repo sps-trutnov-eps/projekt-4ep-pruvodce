@@ -15,16 +15,18 @@
         <nav>
             @if (uzivatel != null)
             {
-                @if (jeAdmin == "True")
+                if (jeAdmin == "True")
                 {
                     <div>
-                        <a asp-controller="AdminDashboard" asp-action="Index">Admin</a>
+                        <a asp-controller="Uzivatel" asp-action="Profil">@uzivatel (Admin)</a>
                     </div>
                 }
-
-                <div>
-                    <a asp-controller="Uzivatel" asp-action="Profil">@uzivatel</a>
-                </div>
+                else
+                {
+                    <div>
+                        <a asp-controller="Uzivatel" asp-action="Profil">@uzivatel</a>
+                    </div>
+                }
 
                 <div>
                     <a asp-controller="Uzivatel" asp-action="Odhlasit">Odhlásit se</a>

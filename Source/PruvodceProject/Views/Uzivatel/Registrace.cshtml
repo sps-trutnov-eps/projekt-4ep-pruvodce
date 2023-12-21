@@ -3,16 +3,28 @@
 }
 
 <article>
-    <section id="registrace">
-        <form asp-action="Registrace" asp-controller="Uzivatel" method="post">
-            <input name="trida" placeholder="Zadejte třídu..." type="text"/><br/>
-            <input name="mail" placeholder="zadejte svůj e-mail..." type="email" /><br />
-            <input name="heslo" placeholder="Zadejte heslo..." type="password"/><br/>
-            <input name="hesloZnovu" placeholder="zadejte znovu heslo..." type="password"/><br/><br/>
-            <input value="Registrovat se" type="submit"/>
-            <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
-        </form>
+    <div class="container">
+        <h2>Zaregistruj se</h2>
+        <section>
+            <form asp-action="Registrace" asp-controller="Uzivatel" method="post">
+                <input name="trida" placeholder="Zadejte třídu..." type="text"/>
+                <input name="mail" placeholder="zadejte svůj e-mail..." type="email"/>
+                <input name="heslo" placeholder="Zadejte heslo..." type="password"/>
+                <input name="hesloZnovu" placeholder="zadejte znovu heslo..." type="password"/>
+                @if (ViewData["chyba"] != "")
+                {
+                    <div class="error">@ViewData["chyba"]</div>
+                }
+                @if (ViewData["hotovo"] != "")
+                {
+                    <div class="success">@ViewData["hotovo"]</div>
+                }
+                <input value="Registrovat se" type="submit"/>
+            </form>
+        </section>
         
-        <p>Máš už účet? <a asp-action="Prihlaseni"><b>Přihlas se</b></a></p>
-    </section>
+        <section>
+            <a class="inline button" asp-action="Prihlaseni">Přejít na přihlášení</a>
+        </section>
+    </div>
 </article>

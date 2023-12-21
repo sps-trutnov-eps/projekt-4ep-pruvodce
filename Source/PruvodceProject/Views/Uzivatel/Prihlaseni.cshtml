@@ -3,15 +3,22 @@
 }
 
 <article>
-   <section id="prihlaseni">
-        <form method="post" asp-action="Prihlaseni" asp-controller="Uzivatel">
-           <input name="mail" placeholder="Zadejte svůj e-mail..." type="email" /><br />
-           <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br /><br />
-           <input value="Přihlásit se" type="submit" />
-            <p><span>@ViewData["chyba"]</span></p>
-       </form>
-
-        <p>Nemáš ještě účet? <a asp-action="Registrace"><b>Zaregistruj se</b></a></p>
-        <p>Zapomněli ještě heslo? <a asp-action="ZapomenuteHeslo"><b>Obnovte si ho</b></a></p>
-    </section>
+    <div class="container">
+        <h2>Přihlásit se</h2>
+        <section>
+            <form method="post" asp-action="Prihlaseni" asp-controller="Uzivatel">
+                <input name="mail" placeholder="Zadejte svůj e-mail..." type="email"/>
+                <input name="heslo" placeholder="Zadejte heslo..." type="password"/>
+                @if (ViewData["chyba"] != "")
+                {
+                    <div class="error">@ViewData["chyba"]</div>
+                }
+                <input value="Přihlásit se" type="submit"/>
+            </form>
+        </section>
+        <section>
+            <a class="inline button" asp-action="Registrace">Přejít na registraci</a>
+            <a class="inline button" asp-action="ZapomenuteHeslo">Obnovit heslo</a>
+        </section>
+    </div>
 </article>

@@ -3,13 +3,15 @@
 }
 
 <article>
-    <section id="forgor">
-        <form asp-action="ZapomenuteHeslo" asp-controller="Uzivatel" method="post">
-            <input type="email" placeholder="Zadejte e-mail..." name="mail" /><br />
-            <input name="heslo" placeholder="Zadejte heslo..." type="password" /><br />
-            <input name="hesloZnovu" placeholder="zadejte znovu heslo..." type="password" /><br /><br />
-            <input type="submit" value="Obnovit heslo" />
-        </form>
-        <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
-    </section>
+    <div class="container">
+        <section>
+            <form asp-action="ZapomenuteHeslo" asp-controller="Uzivatel" method="post">
+                <input type="email" placeholder="Zadejte e-mail..." name="mail"/><br/>
+                <input name="heslo" placeholder="Zadejte heslo..." type="password"/><br/>
+                <input name="hesloZnovu" placeholder="zadejte znovu heslo..." type="password"/><br/><br/>
+                <input type="submit" value="Obnovit heslo"/>
+            </form>
+            <p><span>@ViewData["chyba"]</span><span>@ViewData["hotovo"]</span></p>
+        </section>
+    </div>
 </article>
