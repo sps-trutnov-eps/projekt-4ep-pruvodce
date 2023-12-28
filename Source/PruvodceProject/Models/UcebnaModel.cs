@@ -56,22 +56,8 @@ namespace PruvodceProject.Models
                 }
                 for (int i = 1; i < budovy.Count; i++)
                 {
-                    BudovyModel? hledanaSkolni = context.Budovy.FirstOrDefault(n => n.name == "Školní 101");
-                    BudovyModel? hledanaHorska59 = context.Budovy.FirstOrDefault(n => n.name == "Horská 59");
-                    BudovyModel? hledanaHorska618 = context.Budovy.FirstOrDefault(n => n.name == "Horská 618");
-
-                    if (budovy[i] == "Školní 101")
-                    {
-                        BudovyId.Add(hledanaSkolni.IdBudovy);
-                    }
-                    if (budovy[i] == "Horská 59")
-                    {
-                        BudovyId.Add(hledanaHorska59.IdBudovy);
-                    }
-                    if (budovy[i] == "Horská 618")
-                    {
-                        BudovyId.Add(hledanaHorska618.IdBudovy);
-                    }
+                    BudovyModel? hledanaBudova = context.Budovy.FirstOrDefault(n => n.name == budovy[i]);
+                    BudovyId.Add(hledanaBudova.IdBudovy);
                 }
 
                 for (int i = 1; i < nazvy.Count; i++)
