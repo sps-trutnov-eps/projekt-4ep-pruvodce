@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using PruvodceProject.Data;
+using System.ComponentModel.DataAnnotations;
 using System.Xml;
 
 namespace PruvodceProject.Models
@@ -35,6 +37,43 @@ namespace PruvodceProject.Models
             using (var soubor = new StreamReader("./csvdata/fotoUcebny.csv"))
             {
                 IdUceben.Add(Guid.NewGuid());
+                while (!soubor.EndOfStream)
+                {
+                    var radek = soubor.ReadLine();
+                    var hodnoty = radek.Split(";");
+
+                    nazvy.Add(hodnoty[0]);
+                    cesty.Add(hodnoty[1]);
+                    pripony.Add(hodnoty[2]);
+                    ucebny.Add(hodnoty[3]);
+                }
+            }
+            using (var context = new PruvodceData(serviceProvider.GetRequiredService<DbContextOptions<PruvodceData>>()))
+            {
+                if (context.FotoUcebny.Any())
+                {
+                    return;
+                }
+                for(int i = 1; i < ucebny.Count; i++)
+                {
+                    UcebnaModel? hledanaUcebna = context.Ucebny.FirstOrDefault(n => n.Nazev == ucebny[i]);
+                    IdUceben.Add(hledanaUcebna.Id);
+                }
+
+                for (int i = 1;i < nazvy.Count; i++)
+                {
+                    context.FotoUcebny.AddRange(
+                        new FotoModelUcebny
+                        {
+                            Id = Guid.NewGuid(),
+                            Nazev = nazvy[i],
+                            Cesta = cesty[i],
+                            Pripona = pripony[i],
+                            UcebnaID = IdUceben[i]
+                        }
+                        );  
+                }
+                context.SaveChanges();
             }
         }
     }

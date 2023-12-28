@@ -46,6 +46,7 @@ namespace PruvodceProject
                 nasaditDataBudov.Initialize(services);
                 nasaditDataStravovacichZarizeni.Initialize(services);
                 nasaditDataUceben.Initialize(services);
+                nasaditDataKFotkamUceben.Initialize(services);
             }
 
             // Configure the HTTP request pipeline.
