@@ -13,7 +13,7 @@ namespace PruvodceProject.Models
         [Required] public string Popis { get; set; }
         public string Typ { get; set; }
     }
-    public static class SeedData 
+    public static class nasaditDataStravovacichZarizeni 
     { 
         public static void Initialize(IServiceProvider serviceProvider) 
         {    

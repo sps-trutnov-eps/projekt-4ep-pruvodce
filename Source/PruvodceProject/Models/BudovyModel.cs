@@ -14,7 +14,7 @@ namespace PruvodceProject.Models
         public ICollection<AutomatyModel> Automaty { get; set; }
         public ICollection<FotoModelBudovy> Fotky { get; set; }
     }
-    public static class nasaditData
+    public static class nasaditDataBudov
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
