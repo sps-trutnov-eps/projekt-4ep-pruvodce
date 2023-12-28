@@ -18,7 +18,7 @@ namespace PruvodceProject.Controllers
         [HttpGet]
         public IActionResult UcebnaDetail(Guid id)
         {
-            UcebnaModel ucebna = Databaze.Ucebny
+            UcebnaModel? ucebna = Databaze.Ucebny
                 .Include(u => u.Budova)
                 .ThenInclude(pB => pB.Fotky)
                 .Include(u => u.Fotky)
@@ -33,7 +33,7 @@ namespace PruvodceProject.Controllers
         }
         
         [HttpGet]
-        [Route("/Navigace/Budovy/{budova?}")]
+        [Route("Budovy/{budova?}")]
         public IActionResult Budovy(string? budova)
         {
             ViewData["Budova"] = budova ?? "skolni101";

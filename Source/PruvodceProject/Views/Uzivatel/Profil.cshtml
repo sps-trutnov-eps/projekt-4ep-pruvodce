@@ -26,9 +26,11 @@
     <article>
         <div class="container">
             <h2>Administrátorský panel</h2>
-            <a asp-controller="AdminDashboard" asp-action="SpravovatUzivatele" class="button">Spravovat uživatele</a>
-            <a asp-controller="AdminDashboard" asp-action="SpravaStiznosti" class="button">Spravovat stížnosti</a>
-            <a asp-controller="AdminDashboard" asp-action="PridatClanek" class="button">Přidat článek</a>
+            <section>
+                <a asp-controller="Admin" asp-action="SpravaUzivatelu" class="button">Spravovat uživatele</a>
+                <a asp-controller="Admin" asp-action="SpravaStiznosti" class="button">Spravovat stížnosti</a>
+                <a asp-controller="Admin" asp-action="PridatClanek" class="button">Přidat článek</a>
+            </section>
         </div>
     </article>
 }

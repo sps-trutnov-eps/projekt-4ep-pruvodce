@@ -4,23 +4,29 @@
 }
 
 <article>
-    <section>
-        @foreach(AutomatyModel automat in Model){
-            <section style ="border-top: #223974 solid 3px">
-                <h3 style="text-align: center">@automat.Budova</h3>
-                <div style="text-align: center">
-                    <p>@automat.Typ</p>
-                    <p>@automat.Bagety</p>
-                    <p>@automat.Patro</p>
+    <div class="container">
+        <section>
+            <h2>Seznam automatů</h2>
+            @foreach (AutomatyModel automat in Model)
+            {
+                <div class="borderBottom">
+                    <h3>@automat.Budova</h3>
+                    <p><b>Typ:</b>@automat.Typ</p>
+                    @if (automat.Bagety)
+                    {
+                        <p>Automat <b>má</b> bagety</p>
+                    }
+                    else
+                    {
+                        <p>Automat <b>nemá</b> bagety</p>
+                    }
+                    <p>Automat se nachází na @automat.Patro. patře</p>
                 </div>
-                <div>
-                    <section style="border-top: #223974 solid 3px"></section>
-                </div>
-            </section>
-        }
-        @if (Model.Count == 0)
-        {
-            <h3>Žádné data</h3>
-        }
-    </section>
+            }
+            @if (Model.Count == 0)
+            {
+                <h3>Žádné data</h3>
+            }
+        </section>
+    </div>
 </article>

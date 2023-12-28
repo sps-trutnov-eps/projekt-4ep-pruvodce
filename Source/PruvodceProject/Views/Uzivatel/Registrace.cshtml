@@ -8,9 +8,9 @@
         <section>
             <form asp-action="Registrace" asp-controller="Uzivatel" method="post">
                 <input name="trida" placeholder="Zadejte třídu..." type="text"/>
-                <input name="mail" placeholder="zadejte svůj e-mail..." type="email"/>
+                <input name="mail" placeholder="Zadejte svůj školní e-mail..." type="email" />
                 <input name="heslo" placeholder="Zadejte heslo..." type="password"/>
-                <input name="hesloZnovu" placeholder="zadejte znovu heslo..." type="password"/>
+                <input name="hesloZnovu" placeholder="Zadejte znovu heslo..." type="password"/>
                 @if (ViewData["chyba"] != "")
                 {
                     <div class="error">@ViewData["chyba"]</div>

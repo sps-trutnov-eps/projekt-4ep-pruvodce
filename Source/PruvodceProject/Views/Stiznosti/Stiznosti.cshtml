@@ -1,22 +1,31 @@
 @model List<StiznostiModel>
-@{ ViewData["Title"] = "Crowd Source"; } 
+@{ ViewData["Title"] = "Moje stížnosti"; } 
 
 <article>
-    <section>
-        <h2>Odeslané stížnosti</h2>
+    <div class="container">
+        <section>
+            <h2>Odeslané stížnosti</h2>
+            @foreach (StiznostiModel stiznost in Model)
+            {
+                <div class="borderBottom">
+                    <h3>@stiznost.Nadpis</h3>
+                    <div class="citace">@stiznost.Text</div>
+                    <p><b>Napsal:</b> <i>@stiznost.UzivatelMail</i></p>
+                    <p><b>Aktuální stav:</b> <i>@stiznost.Stav</i></p>
+                    @if (stiznost.AdminOdpoved == "")
+                    {
+                        <p><i>Žádný admin neodpověděl</i></p>
+                    }
+                    else
+                    {
+                        <p>
+                            Odpověď administrátora:
+                            <div class="citace">@stiznost.AdminOdpoved</div>
+                        </p>
+                    }
+                </div>
+            }
     </section>
-   <section>
-
-
-        @foreach (StiznostiModel stiznost in Model)
-        {
-            <h2>@stiznost.Nadpis</h2>
-            <p>Od uživatele: @stiznost.UzivatelMail</p>
-            <p>Stav: @stiznost.Stav</p>
-            <p>Odpověď administrátora: @stiznost.AdminOdpoved</p>
-            <p>Stížnost: @stiznost.Text</p>
-            <p>------------------------------------------</p>
-        } 
-   </section>
+    </div>
 </article>
 

@@ -7,8 +7,8 @@
         <h2>Přihlásit se</h2>
         <section>
             <form method="post" asp-action="Prihlaseni" asp-controller="Uzivatel">
-                <input name="mail" placeholder="Zadejte svůj e-mail..." type="email"/>
-                <input name="heslo" placeholder="Zadejte heslo..." type="password"/>
+                <input name="mail" placeholder="Zadejte svůj školní e-mail..." type="email" required="required"/>
+                <input name="heslo" placeholder="Zadejte heslo..." type="password" required="required"/>
                 @if (ViewData["chyba"] != "")
                 {
                     <div class="error">@ViewData["chyba"]</div>

@@ -14,8 +14,7 @@ namespace PruvodceProject.Controllers
         {
             if (HttpContext.Session.GetString("jmeno") != null)
                 return View();
-            else
-                return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
         
         [HttpPost]
@@ -32,7 +31,7 @@ namespace PruvodceProject.Controllers
             
             StiznostiModel problem = new StiznostiModel()
             {
-                UzivatelMail = HttpContext.Session.GetString("mail").ToString(),
+                UzivatelMail = HttpContext.Session.GetString("mail"),
                 Nadpis = title,
                 Text = text,
                 Stav = "čeká na vyřízení",
@@ -45,20 +44,11 @@ namespace PruvodceProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Index()
-        {
-            //Membership.GetUser();
-            if (HttpContext.Session.GetString("jeAdmin") == "True")
-                return View(Databaze.Uzivatele.ToList());
-
-            return RedirectToAction("Prihlaseni", "Uzivatel", new { chyba = "Nedostatečná oprávnění!" });
-        }
         [HttpGet]
         public IActionResult Stiznosti()
         {
             if (HttpContext.Session.GetString("mail") == null || HttpContext.Session.GetString("mail").Length == 0)
                 return RedirectToAction("Prihlaseni", "Uzivatel", new { chyba = "Nejste přihlášeni!" });
-
 
             List<StiznostiModel>? crowdSource = Databaze.Stiznosti.ToList();
             var purged = crowdSource.Where(n => n.UzivatelMail == HttpContext.Session.GetString("mail")); // proč tohle nemůže být List<CrowdSourceModel> ????????
