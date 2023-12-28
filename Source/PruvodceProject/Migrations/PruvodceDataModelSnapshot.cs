@@ -67,7 +67,7 @@ namespace PruvodceProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Nazev")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

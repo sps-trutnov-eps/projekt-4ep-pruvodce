@@ -3,18 +3,26 @@
     ViewData["Title"] = "Detail učebny";
 }
 
-<article> @* WIP *@
-    <section>
-        <h3>@Model.Druh @Model.Nazev</h3>
-        <div style="text-align: center">
-            <p>Budova: @Model.Budova.KodoveOznaceni</p>
-            <p>@Model.Patro</p>
-            @if (Model.Poddruh != "Kabinet")
-            {
-                <p>Fotografie:</p>
-                <img src="@(Model.Fotky.FirstOrDefault().Cesta)">
-            }
-        </div>
-    </section>
+<article>
+    <div class="container">
+        <section>
+            <h2>@Model.Druh @Model.Nazev</h2>
+            <div>
+                <p><b>Budova:</b> @Model.Budova.Nazev</p>
+                <p><b>Patro:</b> @Model.Patro</p>
+                @{ var kys = Model; }
+                @if (Model.Poddruh != "Kabinet")
+                {
+                    <p><b>Fotografie:</b></p>
+                    <div class="fotogalerie">
+                        @foreach (var fotka in Model.Fotky.ToList())
+                        {
+                            <img src="@fotka.Cesta" alt="@fotka.Nazev">
+                        }
+                    </div>
+                }
+            </div>
+        </section>
+    </div>
 </article>
 

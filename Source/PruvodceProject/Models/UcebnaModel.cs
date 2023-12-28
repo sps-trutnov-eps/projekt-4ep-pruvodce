@@ -56,7 +56,7 @@ namespace PruvodceProject.Models
                 }
                 for (int i = 1; i < budovy.Count; i++)
                 {
-                    BudovyModel? hledanaBudova = context.Budovy.FirstOrDefault(n => n.name == budovy[i]);
+                    BudovyModel? hledanaBudova = context.Budovy.FirstOrDefault(n => n.Nazev == budovy[i]);
                     BudovyId.Add(hledanaBudova.IdBudovy);
                 }
 

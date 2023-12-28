@@ -8,6 +8,7 @@ html, body {
   position: relative;
 }
 
+/* Barvy */
 /* Container */
 .container {
   width: 1140px;
@@ -380,6 +381,23 @@ a.button:hover {
   right: 0.8rem;
   font-size: 2em;
   content: "“";
+}
+
+/* Seznam učeben */
+.seznamUceben {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+/* Detail učebny */
+.fotogalerie {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+.fotogalerie img {
+  width: 100%;
+  border: 1px solid #374e88;
 }
 
 /* Budovy na úvodní stránce */

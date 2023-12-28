@@ -141,7 +141,7 @@ namespace PruvodceProject.Controllers
 
             if (budovaId == null)
             {
-                BudovyModel? budovaDb = Databaze.Budovy.FirstOrDefault(n => n.name == budova);
+                BudovyModel? budovaDb = Databaze.Budovy.FirstOrDefault(n => n.Nazev == budova);
                 if (budovaDb != null)
                 {
                     Databaze.Automaty.Add(new AutomatyModel() { Budova = budova, Patro = patro, Typ = typ, Bagety = bagety, BudovaId = budovaDb });
@@ -156,7 +156,7 @@ namespace PruvodceProject.Controllers
                 BudovyModel? budovaDb = Databaze.Budovy.FirstOrDefault(n => n.IdBudovy.ToString() == budovaId);
                 if (budovaDb != null)
                 {
-                    Databaze.Automaty.Add(new AutomatyModel() { Budova = budovaDb.name, Patro = patro, Typ = typ, Bagety = bagety, BudovaId = budovaDb });
+                    Databaze.Automaty.Add(new AutomatyModel() { Budova = budovaDb.Nazev, Patro = patro, Typ = typ, Bagety = bagety, BudovaId = budovaDb });
                     Databaze.SaveChanges();
                     return RedirectToAction("PridatClanek", new { chyba = "Budova neexistuje." });
                 }

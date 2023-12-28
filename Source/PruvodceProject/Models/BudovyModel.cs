@@ -7,7 +7,7 @@ namespace PruvodceProject.Models
     public class BudovyModel
     {
         [Key] public Guid IdBudovy { get; set; }
-        public string name { get; set; }
+        public string Nazev { get; set; }
         [Required] public string Adresa { get; set; }
         [Required] public string KodoveOznaceni { get; set; }
         public ICollection<UcebnaModel> Ucebny { get; set; }
@@ -47,7 +47,7 @@ namespace PruvodceProject.Models
                         new BudovyModel
                         {
                             IdBudovy = Guid.NewGuid(),
-                            name = nazvy[i],
+                            Nazev = nazvy[i],
                             Adresa = adresy[i],
                             KodoveOznaceni = kodovaOznaceni[i]
                         }

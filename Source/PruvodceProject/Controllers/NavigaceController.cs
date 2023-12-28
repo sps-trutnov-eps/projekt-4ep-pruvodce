@@ -12,7 +12,12 @@ namespace PruvodceProject.Controllers
 
         public IActionResult Ucebny()
         {
-            return View(Databaze.Ucebny.ToList());
+            List<UcebnaModel>? ucebna = Databaze.Ucebny
+                .Include(u => u.Budova)
+                .ThenInclude(pB => pB.Fotky)
+                .Include(u => u.Fotky)
+                .ToList();
+            return View(ucebna);
         }
 
         [HttpGet]

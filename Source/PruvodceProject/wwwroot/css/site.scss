@@ -7,6 +7,11 @@ html, body {
   position: relative;
 }
 
+/* Barvy */
+$svModra: #374e88;
+$modra: #223974;
+$tmModra: #10265D;
+
 
 /* Container */
 .container {
@@ -17,7 +22,7 @@ html, body {
 
 /* Header */
 #horniHeader {
-  background-color: #374e88;
+  background-color: $svModra;
   
   .container {
     padding: .5em;
@@ -39,7 +44,7 @@ html, body {
 }
 
 #hlavniHeader {
-  background-color: #223974;
+  background-color: $modra;
   position: sticky;
   top: 0;
   
@@ -95,7 +100,7 @@ nav {
       text-decoration: none;
       flex-direction: column;
       z-index: 500;
-      border: #223974 solid 1px;
+      border: $modra solid 1px;
       
       li {
         background-color: white;
@@ -123,7 +128,7 @@ main {
 }
 
 #nadpis {
-  background-color: #10265D;
+  background-color: $tmModra;
   color: whitesmoke;
   
   .container {
@@ -171,7 +176,7 @@ footer {
   left: 0;
   height: 2rem;
   font-size: .8rem;
-  background-color: #223974;
+  background-color: $modra;
   text-align: center;
   color: whitesmoke;
   width: 100%;
@@ -193,17 +198,17 @@ form {
     display: block;
     padding: .5rem;
     margin: .5rem auto;
-    border: 1px solid #374e88;
+    border: 1px solid $svModra;
     border-radius: 2px;
     
     &[type="submit"] {
       min-width: 6rem;
       margin-top: 1rem;
       color: white;
-      background-color: #374e88;
+      background-color: $svModra;
       
       &:hover {
-        background-color: adjust-color(#374e88, $whiteness: -15%);
+        background-color: adjust-color($svModra, $whiteness: -15%);
         transition-duration: .1s;
       }
     }
@@ -212,7 +217,7 @@ form {
   .checkbox {
     font-size: .75em;
     padding: .5rem;
-    border: 1px solid #374e88;
+    border: 1px solid $svModra;
     border-radius: 2px;
     min-width: 10rem;
     width: max-content;
@@ -274,16 +279,16 @@ a.button {
   padding: .5rem;
   margin: .5rem auto;
   display: block;
-  border: 1px solid #374e88;
+  border: 1px solid $svModra;
   border-radius: 2px;
-  background-color: #374e88;
+  background-color: $svModra;
   min-width: 6rem;
   width: max-content;
   color: white;
   text-decoration: none;
   
   &:hover {
-    background-color: adjust-color(#374e88, $whiteness: -15%);
+    background-color: adjust-color($svModra, $whiteness: -15%);
     transition-duration: .2s;
   }
 }
@@ -386,7 +391,7 @@ a.button {
 
 /* Správa uživatelů */
 .borderBottom {
-  border-bottom: 1px solid #374e88;
+  border-bottom: 1px solid $svModra;
   
   &:last-child {
     border-bottom: none !important;
@@ -436,6 +441,26 @@ a.button {
     right: .8rem;
     font-size: 2em;
     content: '“';
+  }
+}
+
+
+/* Seznam učeben */
+.seznamUceben {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+
+/* Detail učebny */
+.fotogalerie {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  
+  img {
+    width: 100%;
+    border: 1px solid $svModra;
   }
 }
 
@@ -498,6 +523,7 @@ h6 {
   padding-top: 4px;
   padding-bottom: 0;
 }
+
 
 
 /* Mobilní zobrazení */

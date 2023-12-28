@@ -16,7 +16,7 @@ namespace PruvodceProject.Migrations
                 columns: table => new
                 {
                     IdBudovy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nazev = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Adresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     KodoveOznaceni = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
