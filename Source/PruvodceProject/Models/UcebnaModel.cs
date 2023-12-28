@@ -31,8 +31,11 @@ namespace PruvodceProject.Models
             List<string> budovy = new List<string>();
             List<Guid> BudovyId = new List<Guid>();
 
+            
+
             using (var soubor = new StreamReader("./csvdata/ucebny.csv"))
             {
+                BudovyId.Add(Guid.NewGuid());
                 while(!soubor.EndOfStream)
                 {
                     var radek = soubor.ReadLine();
@@ -51,11 +54,24 @@ namespace PruvodceProject.Models
                 {
                     return;
                 }
-                for (int i = 1; i < nazvy.Count; i++)
+                for (int i = 1; i < budovy.Count; i++)
                 {
-                    BudovyModel? hledanaBudova = context.Budovy.FirstOrDefault(n => n.name == budovy[i]);
+                    BudovyModel? hledanaSkolni = context.Budovy.FirstOrDefault(n => n.name == "Školní 101");
+                    BudovyModel? hledanaHorska59 = context.Budovy.FirstOrDefault(n => n.name == "Horská 59");
+                    BudovyModel? hledanaHorska618 = context.Budovy.FirstOrDefault(n => n.name == "Horská 618");
 
-                    BudovyId.Add(hledanaBudova.IdBudovy);
+                    if (budovy[i] == "Školní 101")
+                    {
+                        BudovyId.Add(hledanaSkolni.IdBudovy);
+                    }
+                    if (budovy[i] == "Horská 59")
+                    {
+                        BudovyId.Add(hledanaHorska59.IdBudovy);
+                    }
+                    if (budovy[i] == "Horská 618")
+                    {
+                        BudovyId.Add(hledanaHorska618.IdBudovy);
+                    }
                 }
 
                 for (int i = 1; i < nazvy.Count; i++)
