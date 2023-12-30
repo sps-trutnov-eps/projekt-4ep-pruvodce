@@ -4,24 +4,23 @@
 }
 
 <article>
-    <div class="container">
+    <div class="container trida">
+        <h2>@Model.Druh @Model.Nazev</h2>
         <section>
-            <h2>@Model.Druh @Model.Nazev</h2>
-            <div>
-                <p><b>Budova:</b> @Model.Budova.Nazev</p>
-                <p><b>Patro:</b> @Model.Patro</p>
-                @{ var kys = Model; }
+            <h3>Informace o učebně</h3>
+            <p><b>Budova:</b> @Model.Budova.Nazev</p>
+            <p><b>Patro:</b> @Model.Patro</p>
+        </section>
+            
+        <section>
                 @if (Model.Poddruh != "Kabinet")
                 {
-                    <p><b>Fotografie:</b></p>
-                    <div class="fotogalerie">
-                        @foreach (var fotka in Model.Fotky.ToList())
-                        {
-                            <img src="@fotka.Cesta" alt="@fotka.Nazev">
-                        }
-                    </div>
+                    <h3>Fotografie učebny</h3>
+                    foreach (var fotka in Model.Fotky.ToList().Where(n => Model.Fotky.ToList().IndexOf(n) % 2 == 0))
+                    {
+                        <img src="@fotka.Cesta" alt="@fotka.Nazev">
+                    }
                 }
-            </div>
         </section>
     </div>
 </article>

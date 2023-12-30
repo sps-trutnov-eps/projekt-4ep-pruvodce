@@ -453,14 +453,21 @@ a.button {
 
 
 /* Detail učebny */
-.fotogalerie {
+.trida {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1em;
+
+  h2 {
+    grid-column: 1 / 3;
+  }
   
   img {
-    width: 100%;
     border: 1px solid $svModra;
+    width: calc(100% - 4px);
+    
+    &:not(:last-of-type) {
+      margin-bottom: 1em;
+    }
   }
 }
 
