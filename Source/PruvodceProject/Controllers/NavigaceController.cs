@@ -16,7 +16,12 @@ namespace PruvodceProject.Controllers
                 .Include(u => u.Budova)
                 .ThenInclude(pB => pB.Fotky)
                 .Include(u => u.Fotky)
+                .Where(n => n.Druh == "uèebna")
                 .ToList();
+            foreach(UcebnaModel ucebnicka in ucebna)
+            {
+                ucebnicka.Nazev = ucebnicka.Nazev.Replace("Uèebna_", "");
+            }
             return View(ucebna);
         }
 

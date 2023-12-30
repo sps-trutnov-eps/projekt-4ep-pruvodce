@@ -244,7 +244,10 @@ function dotek() {
             roomInfo.innerHTML += `<div>Data nejsou k dispozici</div>`;
           } else {
            roomInfo.innerHTML = `<div><b> ${data.nazev.replaceAll('_', ' ')}</b></div>`;
-           roomInfo.innerHTML += `<div><b>Druh učebny:</b> ${data.druh}</div>`;
+           roomInfo.innerHTML += `<div><b>Druh místnosti:</b> ${data.druh}</div>`;
+           if (data.poddruh != "") {
+               roomInfo.innerHTML += `<div><b>Druh místnosti:</b> ${data.poddruh}</div>`;
+           }
            roomInfo.innerHTML += `<div><b><a href="/Navigace/UcebnaDetail/${data.id}">Více informací</a></b></div>`
           }
          roomContainer.style.display = 'block';

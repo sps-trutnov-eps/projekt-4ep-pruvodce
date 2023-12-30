@@ -17,9 +17,9 @@
         <section>
             <h2>@budova</h2>
             <div class="seznamUceben">
-                @foreach (UcebnaModel ucebna in Model.OrderBy(n => n.Nazev.Substring(0, 1)).ThenBy(n => Int32.Parse(n.Nazev.Substring(1))).Where(n => n.Budova.Nazev == budova).ToList())
+                    @foreach (UcebnaModel ucebna in Model.OrderBy(n => n.Nazev.Replace("Učebna_", "").Substring(0, 1)).ThenBy(n => Int32.Parse(n.Nazev.Substring(1))).Where(n => n.Budova.Nazev == budova && n.Druh == "učebna").ToList())
                 {
-                    <a asp-controller="Navigace" asp-action="UcebnaDetail" asp-route-id="@ucebna.Id" class="button inline"><b>@ucebna.Nazev</b></a>
+                    <a asp-controller="Navigace" asp-action="UcebnaDetail" asp-route-id="@ucebna.Id" class="button inline"><b>@ucebna.Nazev.Replace("_", " ")</b></a>
                 }
             </div>
         </section>
