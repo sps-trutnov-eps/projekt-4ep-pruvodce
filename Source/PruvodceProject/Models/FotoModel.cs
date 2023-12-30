@@ -56,11 +56,15 @@ namespace PruvodceProject.Models
                 }
                 for(int i = 1; i < ucebny.Count; i++)
                 {
-                    UcebnaModel? hledanaUcebna = context.Ucebny.FirstOrDefault(n => n.Nazev == ucebny[i]);
+                    UcebnaModel? hledanaUcebna = context.Ucebny.FirstOrDefault(n => (n.Nazev) == "Učebna_" + ucebny[i]);
+                    if(hledanaUcebna == null)
+                    {
+                        continue;
+                    }
                     IdUceben.Add(hledanaUcebna.Id);
                 }
 
-                for (int i = 1;i < nazvy.Count; i++)
+                for (int i = 1;i < nazvy.Count-1 ; i++)
                 {
                     context.FotoUcebny.AddRange(
                         new FotoModelUcebny

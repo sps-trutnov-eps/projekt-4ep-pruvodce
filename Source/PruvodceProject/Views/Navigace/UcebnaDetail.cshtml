@@ -5,7 +5,7 @@
 
 <article>
     <div class="container trida">
-        <h2>@Model.Druh @Model.Nazev</h2>
+        <h2>@Model.Nazev.Replace("_", " ")</h2>
         <section>
             <h3>Informace o učebně</h3>
             <p><b>Budova:</b> @Model.Budova.Nazev</p>
