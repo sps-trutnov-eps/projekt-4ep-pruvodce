@@ -20,7 +20,13 @@ namespace PruvodceProject.Controllers
         [HttpGet]
         public IActionResult Prihlaseni(string chyba = "")
         {
-            ViewData["chyba"] = chyba;
+            if (chyba.Length > 0 && chyba[0].ToString() == "$")
+            {
+                ViewData["hotovo"] = chyba.Substring(1);
+                ViewData["chyba"] = String.Empty;
+            }
+            else
+                ViewData["chyba"] = chyba;
             return View();
         }
         
@@ -255,7 +261,7 @@ namespace PruvodceProject.Controllers
             Databaze.OverovaciUdaje.Remove(uzivatel);
             Databaze.SaveChanges();
 
-            return RedirectToAction("Prihlaseni", new { chyba = "Úspěšně ověřeno, účet vytvořen" });
+            return RedirectToAction("Prihlaseni", new { chyba = "$Úspěšně ověřeno, účet vytvořen" });
         }
 
         [HttpGet]

@@ -13,6 +13,10 @@
                 {
                     <div class="error">@ViewData["chyba"]</div>
                 }
+                @if (ViewData["hotovo"] != "")
+                {
+                    <div class="success">@ViewData["hotovo"]</div>
+                }
                 <input value="Přihlásit se" type="submit"/>
             </form>
         </section>
