@@ -1,3 +1,4 @@
+Nazev;patro;druh;poddruh;budova
 T1;přízemí;učebna;výpočetní technika;Školní 101
 T2;přízemí;učebna;kmenová;Školní 101
 T5;přízemí;učebna;kmenová;Školní 101
@@ -35,7 +36,7 @@ WC Chlapci;0;WC;;Školní 101
 WC Dívky;0;WC;;Školní 101
 Sklad;0;Sklad;;Školní 101
 Sklad Časopisů;0;sklad;;Školní 101
-WC Chlapci;1;WC;;Školní 101 
+WC Chlapci;1;WC;;Školní 101
 kancelář zástupce ředitele;2;kancelář;;Školní 101
 Sekretariát;2;kancelář;;Školní 101
 Kuchyňka;2;ostatní;;Školní 101

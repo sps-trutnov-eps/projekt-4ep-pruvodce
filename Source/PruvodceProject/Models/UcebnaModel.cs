@@ -33,7 +33,7 @@ namespace PruvodceProject.Models
 
             
 
-            using (var soubor = new StreamReader("./csvdata/ucebny.csv"))
+            using (var soubor = new StreamReader("./csvdata/ucebny.csv", System.Text.Encoding.UTF8))
             {
                 BudovyId.Add(Guid.NewGuid());
                 while(!soubor.EndOfStream)
