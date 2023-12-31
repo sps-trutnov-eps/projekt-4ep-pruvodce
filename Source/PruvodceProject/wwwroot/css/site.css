@@ -144,6 +144,12 @@ article:nth-of-type(even) {
   background-color: rgba(128, 128, 128, 0.17);
 }
 
+ul {
+  width: max-content;
+  margin: 0 auto;
+  text-align: left;
+}
+
 /* Footer */
 footer {
   position: absolute;

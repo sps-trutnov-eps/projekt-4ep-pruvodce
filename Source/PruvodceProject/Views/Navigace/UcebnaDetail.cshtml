@@ -16,7 +16,7 @@
                 @if (Model.Poddruh != "Kabinet")
                 {
                     <h3>Fotografie učebny</h3>
-                    foreach (var fotka in Model.Fotky.ToList().Where(n => Model.Fotky.ToList().IndexOf(n) % 2 == 0))
+                    foreach (var fotka in Model.Fotky.ToList())
                     {
                         <img src="@fotka.Cesta" alt="@fotka.Nazev">
                     }
