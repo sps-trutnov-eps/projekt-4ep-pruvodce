@@ -56,7 +56,7 @@ namespace PruvodceProject.Models
                 }
                 for(int i = 1; i < ucebny.Count; i++)
                 {
-                    UcebnaModel? hledanaUcebna = context.Ucebny.FirstOrDefault(n => (n.Nazev) == "Učebna_" + ucebny[i]);
+                    UcebnaModel? hledanaUcebna = context.Ucebny.FirstOrDefault(n => n.Nazev == ucebny[i]); 
                     if(hledanaUcebna == null)
                     {
                         continue;

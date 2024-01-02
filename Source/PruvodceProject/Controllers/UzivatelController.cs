@@ -20,11 +20,9 @@ namespace PruvodceProject.Controllers
         [HttpGet]
         public IActionResult Prihlaseni(string chyba = "")
         {
+            ViewData["chyba"] = string.Empty;
             if (chyba.Length > 0 && chyba[0].ToString() == "$")
-            {
-                ViewData["hotovo"] = chyba.Substring(1);
-                ViewData["chyba"] = String.Empty;
-            }
+                ViewData["hotovo"] = chyba[1..];
             else
                 ViewData["chyba"] = chyba;
             return View();

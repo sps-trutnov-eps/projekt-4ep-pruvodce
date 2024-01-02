@@ -1,46 +1,46 @@
-Nazev;patro;druh;poddruh;budova
-T1;přízemí;učebna;výpočetní technika;Školní 101
-T2;přízemí;učebna;kmenová;Školní 101
-T5;přízemí;učebna;kmenová;Školní 101
-T6;1. patro;učebna;kmenová;Školní 101
-T7;1. patro;učebna;kmenová;Školní 101
-T8;1. patro;učebna;kmenová;Školní 101
-T9;1. patro;učebna;kmenová;Školní 101
-T10;1. patro;učebna;kmenová;Školní 101
-T11;1. patro;učebna;výpočetní technika;Školní 101
-T15;2. patro;učebna;výpočetní technika;Školní 101
-T16;2. patro;učebna;výpočetní technika;Školní 101
-T17;2. patro;učebna;kmenová;Školní 101
-E1;přízemí;učebna;kmenová;Horská 59
-E2;přízemí;učebna;kmenová;Horská 59
-E3;přízemí;učebna;kmenová;Horská 59
-E4;přízemí;učebna;kmenová;Horská 59
-F1;1. patro;učebna;kmenová;Horská 59
-F2;1. patro;učebna;kmenová;Horská 59
-F5;1. patro;učebna;výpočetní technika;Horská 59
-F6;1. patro;učebna;kmenová;Horská 59
-F14;1. patro;učebna;výpočetní technika;Horská 59
-G1;2. patro;učebna;dílna;Horská 59
-G4;2. patro;učebna;kmenová;Horská 59
-G5;2. patro;učebna;kmenová;Horská 59
-G7;2. patro;učebna;kmenová;Horská 59
-B7;přízemí;učebna;kmenová;Horská 618
-B9;přízemí;učebna;kmenová;Horská 618
-B25;1. patro;učebna;kmenová;Horská 618
-C7;přízemí;učebna;kmenová;Horská 618
-C8;přízemí;učebna;kmenová;Horská 618
-C25;1. patro;učebna;kmenová;Horská 618
-C27;1. patro;učebna;výpočetní technika;Horská 618
-Učitelská kolárna;0;ostatní;;Školní 101
+Nazev;Patro;druh;poddruh;budova
+T1;Přízemí;Učebna;Učebna výpočetní techniky;Školní 101
+T2;Přízemí;Učebna;Jazyková učebna;Školní 101
+T5;Přízemí;Učebna;Kmenová učebna;Školní 101
+T6;1. Patro;Učebna;Kmenová učebna;Školní 101
+T7;1. Patro;Učebna;Kmenová učebna;Školní 101
+T8;1. Patro;Učebna;Kmenová učebna;Školní 101
+T9;1. Patro;Učebna;Kmenová učebna;Školní 101
+T10;1. Patro;Učebna;Kmenová učebna;Školní 101
+T11;1. Patro;Učebna;Učebna výpočetní techniky;Školní 101
+T15;2. Patro;Učebna;Učebna výpočetní techniky;Školní 101
+T16;2. Patro;Učebna;Učebna výpočetní techniky;Školní 101
+T17;2. Patro;Učebna;Kmenová učebna;Školní 101
+E1;Přízemí;Učebna;Kmenová učebna;Horská 59
+E2;Přízemí;Učebna;Kmenová učebna;Horská 59
+E3;Přízemí;Učebna;Kmenová učebna;Horská 59
+E4;Přízemí;Učebna;Kmenová učebna;Horská 59
+F1;1. Patro;Učebna;Kmenová učebna;Horská 59
+F2;1. Patro;Učebna;Kmenová učebna;Horská 59
+F5;1. Patro;Učebna;Učebna výpočetní techniky;Horská 59
+F6;1. Patro;Učebna;Kmenová učebna;Horská 59
+F14;1. Patro;Učebna;Učebna výpočetní techniky;Horská 59
+G1;2. Patro;Učebna;Dílna;Horská 59
+G4;2. Patro;Učebna;Kmenová učebna;Horská 59
+G5;2. Patro;Učebna;Kmenová učebna;Horská 59
+G7;2. Patro;Učebna;Kmenová učebna;Horská 59
+B7;Přízemí;Učebna;Kmenová učebna;Horská 618
+B9;Přízemí;Učebna;Kmenová učebna;Horská 618
+B25;1. Patro;Učebna;Kmenová učebna;Horská 618
+C7;Přízemí;Učebna;Kmenová učebna;Horská 618
+C8;Přízemí;Učebna;Kmenová učebna;Horská 618
+C25;1. Patro;Učebna;Kmenová učebna;Horská 618
+C27;1. Patro;Učebna;Učebna výpočetní techniky;Horská 618
+Učitelská kolárna;0;Ostatní;;Školní 101
 WC Chlapci;0;WC;;Školní 101
 WC Dívky;0;WC;;Školní 101
 Sklad;0;Sklad;;Školní 101
 Sklad Časopisů;0;sklad;;Školní 101
 WC Chlapci;1;WC;;Školní 101
-kancelář zástupce ředitele;2;kancelář;;Školní 101
-Sekretariát;2;kancelář;;Školní 101
-Kuchyňka;2;ostatní;;Školní 101
-kancelář ředitele;2;kancelář;;Školní 101
+Kancelář zástupce ředitele;2;Kancelář;;Školní 101
+Sekretariát;2;Kancelář;;Školní 101
+Kuchyňka;2;Ostatní;;Školní 101
+Kancelář ředitele;2;Kancelář;;Školní 101
 Kabinet 215;2;Kabinet;;Školní 101
 Kabinet 214;2;Kabinet;;Školní 101
 Kabinet 213;2;Kabinet;;Školní 101
@@ -52,4 +52,4 @@ WC;3;WC;;Školní 101
 Kabinet 306;3;Kabinet;;Školní 101
 Kabinet 307;3;Kabinet;;Školní 101
 Kabinet 308;3;Kabinet;;Školní 101
-Sklad;3;ostatní;Serverovna;Školní 101
+Sklad;3;Ostatní;Serverovna;Školní 101

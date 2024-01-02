@@ -62,15 +62,11 @@ namespace PruvodceProject.Models
 
                 for (int i = 1; i < nazvy.Count; i++)
                 {
-                    if (druhy[i] == "učebna")
-                    {
-                        nazvy[i] = "Učebna " + nazvy[i];
-                    }
                     context.Ucebny.AddRange(
                         new UcebnaModel
                         {
                             Id = Guid.NewGuid(),
-                            Nazev = nazvy[i].Replace(" ", "_"),
+                            Nazev = nazvy[i],
                             Patro = patra[i],
                             Druh = druhy[i],
                             Poddruh = podDruhy[i],

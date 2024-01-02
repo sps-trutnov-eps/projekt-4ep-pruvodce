@@ -5,20 +5,28 @@
 
 <article>
     <div class="container trida">
-        <h2>@Model.Nazev.Replace("_", " ")</h2>
+        <h2>@Model.Druh @Model.Nazev.Replace("_", " ")</h2>
         <section>
             <h3>Informace o učebně</h3>
-            <p><b>Budova:</b> @Model.Budova.Nazev</p>
-            <p><b>Patro:</b> @Model.Patro</p>
+            <p>Nachází se v <b>@Model.Patro</b> budovy <b>@Model.Budova.Nazev</b></p>
+            @if (Model.Poddruh != "")
+            {
+                <p><b>Dodatečné informace:</b> @Model.Poddruh</p>
+            }
         </section>
             
         <section>
-                @if (Model.Poddruh != "Kabinet")
+                @if (Model.Druh == "Učebna")
                 {
                     <h3>Fotografie učebny</h3>
                     foreach (var fotka in Model.Fotky.ToList())
                     {
                         <img src="@fotka.Cesta" alt="@fotka.Nazev">
+                    }
+
+                    if (Model.Fotky.ToList().Count == 0)
+                    {
+                        <p>Fotografie nejsou k dispozici</p>
                     }
                 }
         </section>
