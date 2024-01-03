@@ -21,6 +21,7 @@ namespace PruvodceProject.Controllers
         public IActionResult Prihlaseni(string chyba = "")
         {
             ViewData["chyba"] = string.Empty;
+            ViewData["hotovo"] = string.Empty;
             if (chyba.Length > 0 && chyba[0].ToString() == "$")
                 ViewData["hotovo"] = chyba[1..];
             else
