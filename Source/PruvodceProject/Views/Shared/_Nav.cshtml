@@ -15,16 +15,18 @@
         <nav>
             @if (uzivatel != null)
             {
-                @if (jeAdmin == "True")
+                if (jeAdmin == "True")
                 {
                     <div>
-                        <a asp-controller="AdminDashboard" asp-action="Index">Admin</a>
+                        <a asp-controller="Uzivatel" asp-action="Profil">@uzivatel (Admin)</a>
                     </div>
                 }
-
-                <div>
-                    <a asp-controller="Uzivatel" asp-action="Profil">@uzivatel</a>
-                </div>
+                else
+                {
+                    <div>
+                        <a asp-controller="Uzivatel" asp-action="Profil">@uzivatel</a>
+                    </div>
+                }
 
                 <div>
                     <a asp-controller="Uzivatel" asp-action="Odhlasit">Odhlásit se</a>
@@ -81,16 +83,6 @@
                     <li><a asp-controller="Odkazy" asp-action="Sps" target="_blank">SPŠ Trutnov</a></li>
                     <li><a asp-controller="Odkazy" asp-action="Mail" target="_blank">Mail</a></li>
                     <li><a asp-controller="Odkazy" asp-action="Github" target="_blank">GitHub</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <a asp-controller="Doprava" asp-action="Index">Doprava</a>
-                <ul>
-                    <li><a asp-controller="Doprava" asp-action="JizdniRady">Jízdní řády</a></li>
-                    <li><a asp-controller="Doprava" asp-action="Parkoviste">Parkoviště</a></li>
-                    <li><a asp-controller="Doprava" asp-action="Chuze">Chůze</a></li>
-                    <li><a asp-controller="Doprava" asp-action="Buky">Buky</a></li>
                 </ul>
             </div>
 

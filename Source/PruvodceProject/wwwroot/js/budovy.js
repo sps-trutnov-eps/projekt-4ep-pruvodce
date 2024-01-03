@@ -4,7 +4,7 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
 
 THREE.Cache.enabled = true;
 
-let renderContainer, blocker, instructions, loadingContainer, loadingProgress, roomContainer, roomInfo, errorContainer,
+let renderContainer, blocker, instructions, loadingContainer, loadingProgress, loadingProgressLabel, roomContainer, roomInfo, errorContainer,
     optionsContainer;
 let camera, controls, scene, renderer, raycaster, loader;
 let hasFocus, selectedBuilding;
@@ -37,6 +37,7 @@ function init() {
   instructions = document.getElementById( 'instructions' );
   loadingContainer = document.getElementById('loadingContainer');
   loadingProgress = document.getElementById('loadingProgress');
+  loadingProgressLabel = document.getElementById('loadingProgressLabel');
   roomContainer = document.getElementById('roomContainer');
   roomInfo = document.getElementById('roomInfo');
   errorContainer = document.getElementById('errorContainer');
@@ -161,10 +162,10 @@ function init() {
 
     function (gltf) {
       scene.add( gltf.scene );
-      gltf.animations; // Array<THREE.AnimationClip>
-      gltf.scene; // THREE.Group
-      gltf.scenes; // Array<THREE.Group>
-      gltf.cameras; // Array<THREE.Camera>
+      // gltf.animations; // Array<THREE.AnimationClip>
+      // gltf.scene; // THREE.Group
+      // gltf.scenes; // Array<THREE.Group>
+      // gltf.cameras; // Array<THREE.Camera>
       
       gltf.scene.children.forEach(e => {
         if (e.name.split('-')[1] === 'patro') {
@@ -197,6 +198,7 @@ function init() {
     function (xhr) {
       selectedBuilding = ( xhr.loaded / xhr.total * 100 )
       loadingProgress.value = xhr.loaded / xhr.total * 100;
+      loadingProgressLabel.innerHTML = `${(Math.round(xhr.loaded / 100000) / 10).toString()} MB / ${(Math.round(xhr.total / 100000) / 10).toString()} MB`
       if (xhr.loaded / xhr.total === 1) {
         loadingContainer.style.display = 'none';
         blocker.style.display = 'block';
@@ -219,6 +221,8 @@ function init() {
   window.addEventListener( 'resize', canvasResize );
   renderContainer.addEventListener('mouseover', () => { hasFocus = true });
   renderContainer.addEventListener('mouseleave', () => { hasFocus = false });
+  
+  console.log('Initialization done 😎');
 }
 
 // Už vím, co to dělá
@@ -232,7 +236,7 @@ function dotek() {
   if (intersect != null && intersect.object.name !== "" && intersect.object.name !== undefined) {
     if (intersect.object.name.split('-')[1] === "info" && intersect.object.visible) {
       //Vyplnění info panelu v html
-      $.ajax(`/Navigace/UcebnaData/${intersect.object.name.split('-')[2]}`)
+      $.ajax(`/Navigace/UcebnaData/${intersect.object.name.split('-')[2].replaceAll("_", " ")}`)
         .fail(function() {
           roomInfo.innerHTML = `<div><b>${intersect.object.name.split('-')[2].replaceAll('_', ' ')}</b></div>`;
           roomInfo.innerHTML += `<div>Data nejsou k dispozici</div>`;
@@ -240,15 +244,17 @@ function dotek() {
         })
         .done(function(data) {
           if (data === undefined) {
-            roomInfo.innerHTML = `<div><b>${intersect.object.name.split('-')[2].replaceAll('_', ' ')}</b></div>`;
+            roomInfo.innerHTML = `<h3><b><i>${intersect.object.name.split('-')[2].replaceAll('_', ' ')}</i></b></h3>`;
             roomInfo.innerHTML += `<div>Data nejsou k dispozici</div>`;
           } else {
-           roomInfo.innerHTML = `<div><b> ${data.nazev.replaceAll('_', ' ')}</b></div>`;
-           roomInfo.innerHTML += `<div><b>Druh učebny:</b> ${data.druh}</div>`;
-           roomInfo.innerHTML += `<div><b><a href="/Navigace/UcebnaDetail/${data.id}">Více informací</a></b></div>`
+           roomInfo.innerHTML = `<h3><b>${data.druh === 'Učebna' ? data.druh + ' ' : ''}${data.nazev.replaceAll('_', ' ')}</b></h3>`;
+           roomInfo.innerHTML += data.druh !== 'Učebna' ? `<div><b>Druh místnosti:</b> ${data.druh}</div>` : '';
+           roomInfo.innerHTML += data.poddruh !== '' ? `<div><b>Dodatečné informace:</b> ${data.poddruh}</div>` : '';
+           roomInfo.innerHTML += `<div><b><a class="button" href="/Navigace/UcebnaDetail/${data.id}">Více informací</a></b></div>`
           }
          roomContainer.style.display = 'block';
-        });
+        }
+      );
     }
   }
 }

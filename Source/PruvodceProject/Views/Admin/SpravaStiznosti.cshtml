@@ -1,0 +1,44 @@
+@model List<StiznostiModel>
+@{
+    ViewData["Title"] = "Správa stížností";
+}
+
+<article>
+    <div class="container">
+        <h2>Správa stížností</h2>
+        <section>
+            @foreach (StiznostiModel stiznost in Model)
+            {
+                <div class="stiznostDiv borderBottom">
+                    <h3>@stiznost.Nadpis</h3>
+                    <div>
+                        <h4>Originál</h4>
+                        <div class="citace">@stiznost.Text</div>
+                        <p><b>Napsal:</b> <i>@stiznost.UzivatelMail</i></p>
+                        <p><b>Aktuální stav:</b> <i>@stiznost.Stav</i></p>
+                        @if (stiznost.AdminOdpoved == "")
+                        {
+                            <p><i>Žádný admin neodpověděl</i></p>
+                        }
+                        else
+                        {
+                            <p>
+                                <b>Odpověď administrátora:</b>
+                                <div class="citace">@stiznost.AdminOdpoved</div>
+                            </p>
+                        }
+                    </div>
+                    
+                    <div>
+                        <h4>Odpovědět</h4>
+                        <form asp-controller="Admin" asp-action="OdpovedetNaStiznost" asp-route-id="@stiznost.Id" method="post">
+                            <input required type="text" name="odpoved" placeholder="Odpověď...">
+                            <input type="text" name="stav" placeholder="Stav...">
+                            <input type="submit" value="Upravit" />
+                        </form>
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</article>

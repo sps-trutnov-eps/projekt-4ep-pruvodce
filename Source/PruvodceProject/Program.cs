@@ -43,7 +43,10 @@ namespace PruvodceProject
             {
                 var services = scope.ServiceProvider;
 
-                SeedData.Initialize(services);
+                nasaditDataBudov.Initialize(services);
+                nasaditDataStravovacichZarizeni.Initialize(services);
+                nasaditDataUceben.Initialize(services);
+                nasaditDataKFotkamUceben.Initialize(services);
             }
 
             // Configure the HTTP request pipeline.

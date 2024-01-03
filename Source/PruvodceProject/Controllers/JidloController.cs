@@ -8,11 +8,6 @@ namespace PruvodceProject.Controllers
         PruvodceData Databaze { get; }
         public JidloController(PruvodceData databaze) => Databaze = databaze;
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult Automaty()
         {
             return View(Databaze.Automaty.ToList());

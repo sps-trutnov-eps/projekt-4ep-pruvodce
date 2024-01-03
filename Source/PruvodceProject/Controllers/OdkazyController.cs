@@ -21,5 +21,7 @@ namespace PruvodceProject.Controllers
         public IActionResult Github() => Redirect("https://github.com/enterprises/sps-trutnov");
 
         public IActionResult GithubStudent() => Redirect("https://education.github.com/pack");
+
+        public IActionResult Data() => Redirect("https://data.spstrutnov.cz");
     }
 }

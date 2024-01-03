@@ -12,13 +12,23 @@ namespace PruvodceProject.Controllers
 
         public IActionResult Ucebny()
         {
-            return View(Databaze.Ucebny.ToList());
+            List<UcebnaModel>? ucebna = Databaze.Ucebny
+                .Include(u => u.Budova)
+                .ThenInclude(pB => pB.Fotky)
+                .Include(u => u.Fotky)
+                .Where(n => n.Druh == "uèebna")
+                .ToList();
+            foreach(UcebnaModel ucebnicka in ucebna)
+            {
+                ucebnicka.Nazev = ucebnicka.Nazev.Replace("Uèebna_", "");
+            }
+            return View(ucebna);
         }
 
         [HttpGet]
         public IActionResult UcebnaDetail(Guid id)
         {
-            UcebnaModel ucebna = Databaze.Ucebny
+            UcebnaModel? ucebna = Databaze.Ucebny
                 .Include(u => u.Budova)
                 .ThenInclude(pB => pB.Fotky)
                 .Include(u => u.Fotky)
@@ -33,7 +43,7 @@ namespace PruvodceProject.Controllers
         }
         
         [HttpGet]
-        [Route("/Navigace/Budovy/{budova?}")]
+        [Route("Budovy/{budova?}")]
         public IActionResult Budovy(string? budova)
         {
             ViewData["Budova"] = budova ?? "skolni101";

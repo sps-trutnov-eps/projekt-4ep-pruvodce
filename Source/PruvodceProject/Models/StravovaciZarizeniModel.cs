@@ -13,7 +13,7 @@ namespace PruvodceProject.Models
         [Required] public string Popis { get; set; }
         public string Typ { get; set; }
     }
-    public static class SeedData 
+    public static class nasaditDataStravovacichZarizeni 
     { 
         public static void Initialize(IServiceProvider serviceProvider) 
         {    
@@ -22,7 +22,7 @@ namespace PruvodceProject.Models
             List<string> odkazy = new List<string>(); 
             List<string> popisy = new List<string>(); 
             List<string> typy = new List<string>(); 
-            using (var soubor = new StreamReader("./csvdata/pokus.csv")) 
+            using (var soubor = new StreamReader("./csvdata/stravovaciZarizeni.csv")) 
             { 
                 while (!soubor.EndOfStream) 
                 { 
@@ -33,7 +33,7 @@ namespace PruvodceProject.Models
                     adresy.Add(hodnoty[1]); 
                     odkazy.Add(hodnoty[2]); 
                     popisy.Add(hodnoty[3]); 
-                    typy.Add(hodnoty[4]); 
+                    typy.Add(hodnoty[5]); 
                 } 
             } 
  
@@ -41,7 +41,7 @@ namespace PruvodceProject.Models
             { 
                 if(context.StravovaciZarizeni.Any()) 
                     return; 
-                for (int i = 0;i < nazvy.Count(); i++) 
+                for (int i = 1;i < nazvy.Count(); i++) 
                 { 
                     context.StravovaciZarizeni.AddRange( 
                         new StravovaciZarizeniModel {  

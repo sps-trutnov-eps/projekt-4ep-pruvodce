@@ -1,18 +1,39 @@
 ﻿@model List<UcebnaModel>
 @{
     ViewData["Title"] = "Seznam učeben";
+    List<string> budovy = new List<string>();
+    
+    foreach (UcebnaModel ucebna in Model)
+    {
+        if (!budovy.Contains(ucebna.Budova.Nazev))
+            budovy.Add(ucebna.Budova.Nazev);
+    }
 }
 
-<article> @* WIP *@
-    @foreach (UcebnaModel ucebna in Model)
-    {
+@foreach (string budova in budovy)
+{
+<article>
+    <div class="container">
         <section>
-            <h3>@ucebna.Nazev</h3>
-            <a href="/Navigace/UcebnaDetail/@ucebna.Id">Zobrazit podrobné informace</a>
+            <h2>@budova</h2>
+            <div class="seznamUceben">
+                @foreach (UcebnaModel ucebna in Model.OrderBy(n => n.Nazev.Substring(0, 1)).ThenBy(n => Int32.Parse(n.Nazev.Substring(1))).Where(n => n.Budova.Nazev == budova && n.Druh == "Učebna").ToList())
+                {
+                    <a asp-controller="Navigace" asp-action="UcebnaDetail" asp-route-id="@ucebna.Id" class="button inline"><b>@ucebna.Nazev</b></a>
+                }
+            </div>
         </section>
-    }
-    @if (Model.Count == 0)
-    {
-        <h3>Žádné data</h3>
-    }
+    </div>
 </article>
+}
+
+@if (Model.Count == 0)
+{
+    <article>
+        <div class="container">
+            <section>
+                <h2>Žádné data</h2>
+            </section>
+        </div>
+    </article>
+}

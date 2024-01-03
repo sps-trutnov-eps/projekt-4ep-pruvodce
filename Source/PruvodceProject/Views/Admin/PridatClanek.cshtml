@@ -1,0 +1,75 @@
+@{
+    ViewData["Title"] = "Administrátorský panel";
+}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+
+<article>
+    <div class="container">
+        <h2>Editor článků</h2>
+        <section>
+            <div id="editor">
+                <p>Článek</p>
+                <p><br></p>
+            </div>
+        </section>
+    </div>
+</article>
+
+<article>
+    <div class="container">
+        <h2>Vytvořit stravovací zařízení</h2>
+        <section>
+            <form asp-controller="Admin" asp-action="PridatStravovaciZarizeni" method="post">
+                <input required name="nazev" placeholder="Zadejte název..." type="text" />
+                <input required name="adresa" placeholder="Zadejte adresu..." type="text" />
+                <input required name="odkazNaMenu" placeholder="Zadejte odkaz na menu..." type="text" />
+                <input id="delta" name="popis" style="display:none" type="text" />
+                <input onclick="saveToDb()" value="Uložit čkánek" type="submit" />
+            </form>
+        </section>
+    </div>
+</article>
+
+<article>
+    <div class="container">
+        <h2>Vytvořit automat</h2>
+        <section>
+            <form asp-controller="Admin" asp-action="PridatAutomat" method="post">
+                <input required name="budova" placeholder="Zadejte budovu..." type="text" />
+                <input required name="patro" placeholder="Zadejte patro..." type="text" />
+                <input required name="typ" placeholder="Zadejte typ..." type="text" />
+                <label class="checkbox">
+                    <input name="bagety" type="checkbox" value="true" />
+                    Bagety jsou v automatu
+                </label>
+                <input required name="bagety" placeholder="Zadejte odkaz na menu..." type="text" />
+                <input name="budovaID" placeholder="Zadejte id budovy jenom pokuď více budov mají identické jméno..." type="text" />
+                <input onclick="saveToDb()" value="Uložit čkánek" type="submit" />
+            </form>
+        </section>
+    </div>
+</article>
+
+<article>
+    <div class="container"></div>
+</article>
+
+
+
+
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+    
+    function saveToDb(){
+        var delta = quill.getContents()
+        var html = JSON.stringify(delta);
+        var url = window.location.origin;
+        document.getElementById("delta").value = html;
+        console.log(document.getElementById("delta").value);
+    }
+</script>

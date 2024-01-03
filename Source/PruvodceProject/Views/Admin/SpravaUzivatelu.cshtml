@@ -1,0 +1,59 @@
+@model List<UzivatelModel>
+@{
+    ViewData["Title"] = "Správa uživatelů";
+}
+
+
+<article>
+    <div class="container">
+        <h2>Vytvoření nového uživatele</h2>
+        
+        <section>
+            <form asp-controller="Admin" asp-action="VytvoritUzivatele" method="post">
+                <input required name="mail" placeholder="Zadejte e-mail..." type="email" />
+                <input name="trida" placeholder="Zadejte tridu..." type="text" />
+                <input required name="heslo" placeholder="Zadejte heslo..." type="text" />
+                <label class="checkbox">
+                    <input name="jeAdmin" type="checkbox" value="true" title="Administrátor"/>
+                    Administrátor
+                </label>
+                <input value="Vytvořit uživatele" type="submit" />
+            </form>
+        </section>
+    </div>
+</article>
+
+<article>
+    <div class="container">
+        <h2>Uživatelé:</h2>
+        
+        <section>
+            @foreach (UzivatelModel uzivatel in Model)
+            {
+                <div class="borderBottom">
+                    <div>
+                        @uzivatel.Mail
+                        @if (uzivatel.JeAdmin)
+                        {
+                            <b>(Admin)</b>
+                        }
+                    </div>
+                    <div>
+                        @if(uzivatel.Mail != "senkyr@spstrutnov.cz")
+                        {
+                            <a class="inline button" asp-controller="Admin" asp-action="OdebratUzivatele" asp-route-id="@uzivatel.Id">Smazat uživatele</a>
+                            if (uzivatel.JeAdmin)
+                            {
+                                <a class="inline button" asp-controller="Admin" asp-action="PonizitUzivatele" asp-route-id="@uzivatel.Id">Odebrat administrátorská oprávění</a>
+                            }
+                            else
+                            {                        
+                                <a class="inline button" asp-controller="Admin" asp-action="PovysitUzivatele" asp-route-id="@uzivatel.Id">Povýšit na administrátora</a>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</article>

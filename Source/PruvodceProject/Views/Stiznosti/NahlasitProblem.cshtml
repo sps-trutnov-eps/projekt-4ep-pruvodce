@@ -3,17 +3,14 @@
 }
 
 <article>
-    <section>
-        <form asp-action="NahlasitProblem" asp-controller="Stiznosti" method="post">
-            <label>Nadpis</label><br />
-
-            <input required type="text" name="title" placeholder="Nadpis..." /><br />
-
-            <label>Text</label><br />
-
-            <input required type="text" name="text" placeholder="Text..."><br />
-
-            <button type="submit">Vytvořit</button>
-        </form>
-    </section>
+    <div class="container">
+        <section>
+            <h2>Napsat stížnost</h2>
+            <form asp-action="NahlasitProblem" asp-controller="Stiznosti" method="post">
+                <input required type="text" name="title" placeholder="Nadpis..."/>
+                <input required type="text" name="text" placeholder="Text...">
+                <input type="submit" value="Odeslat"/>
+            </form>
+        </section>
+    </div>
 </article>
