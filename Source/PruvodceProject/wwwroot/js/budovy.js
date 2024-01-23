@@ -52,6 +52,7 @@ function init() {
   
   // Nastavení scény
   scene = new THREE.Scene();
+  //Světlo pak přidám do modelů samostatně) - Pam
   scene.add(light);
   scene.background = textures['pozadi'];
 
